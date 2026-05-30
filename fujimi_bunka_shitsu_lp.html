@@ -1214,6 +1214,118 @@
   .hero, section[id] {
     scroll-margin-top: 56px;
   }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--dark);
+    padding: 80px 24px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact::before {
+    content: 'CONTACT';
+    position: absolute;
+    font-size: 160px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    right: -10px;
+    bottom: -20px;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .contact-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .contact-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .contact-sub {
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.6;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .contact-card {
+    background: var(--cream);
+    border: 2.5px solid var(--cream);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 6px 6px 0 rgba(255,255,255,0.12);
+  }
+  .contact-card .form-label { color: var(--dark); }
+  .contact-select {
+    width: 100%;
+    border: 2.5px solid var(--dark);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    background: white;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a1a1a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .contact-select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(107,203,119,0.2);
+  }
+  .contact-textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+  .contact-submit {
+    width: 100%;
+    background: var(--green);
+    color: var(--dark);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 14px;
+    border: 2.5px solid var(--dark);
+    border-radius: 100px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.12s, box-shadow 0.12s;
+    margin-top: 8px;
+  }
+  .contact-submit:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+  .contact-success {
+    text-align: center;
+    padding: 24px 0;
+  }
+  .contact-success h4 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+  .contact-success p {
+    font-size: 14px;
+    opacity: 0.65;
+    line-height: 1.9;
+    color: var(--dark);
+  }
 </style>
 </head>
 <body>
@@ -1230,6 +1342,7 @@
     <a href="#news">ニュース</a>
     <a href="#venue">会場</a>
     <a href="#info">概要</a>
+    <a href="#contact">お問い合わせ</a>
   </nav>
   <button class="nav-burger" id="nav-burger" aria-label="メニューを開く" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -1241,6 +1354,7 @@
   <a href="#news">📰 ニュース</a>
   <a href="#venue">📍 会場</a>
   <a href="#info">ℹ️ 概要</a>
+  <a href="#contact">✉️ お問い合わせ</a>
 </nav>
 
 <!-- HERO -->
@@ -1986,6 +2100,50 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-label">Contact / Inquiry</div>
+    <h2 class="contact-title">出展・お問い合わせ</h2>
+    <p class="contact-sub">
+      出展のご相談、取材・その他のお問い合わせはこちらからどうぞ。<br>
+      確認後、担当者よりご連絡いたします。
+    </p>
+    <div class="contact-card">
+      <form id="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="c-name">お名前 <span class="required">*</span></label>
+          <input type="text" class="form-input" id="c-name" placeholder="山田 花子" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-email">メールアドレス <span class="required">*</span></label>
+          <input type="email" class="form-input" id="c-email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-type">お問い合わせ種別 <span class="required">*</span></label>
+          <select class="contact-select" id="c-type" required>
+            <option value="">選択してください</option>
+            <option value="exhibit">出展希望</option>
+            <option value="press">取材・メディア</option>
+            <option value="sponsor">協賛・協力</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-message">メッセージ <span class="required">*</span></label>
+          <textarea class="form-input contact-textarea" id="c-message" placeholder="ご相談内容をお書きください" required></textarea>
+        </div>
+        <button type="submit" class="contact-submit">送信する →</button>
+      </form>
+      <div id="contact-success" style="display:none;" class="contact-success">
+        <div style="font-size:52px; margin-bottom:16px;">✉️</div>
+        <h4>送信しました！</h4>
+        <p>お問い合わせありがとうございます。<br>内容を確認し、折り返しご連絡いたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-name">富士見文化室</div>
@@ -2077,7 +2235,7 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
     });
 
     // アクティブリンク更新
-    var sectionIds = ['artists', 'works', 'news', 'venue', 'info'];
+    var sectionIds = ['artists', 'works', 'news', 'venue', 'info', 'contact'];
     function updateActiveLink() {
       var current = '';
       var offset = 80;
@@ -2092,6 +2250,43 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
         a.classList.toggle('active', href === current);
       });
     }
+  })();
+</script>
+
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var success = document.getElementById('contact-success');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('.contact-submit');
+      btn.disabled = true;
+      btn.textContent = '送信中…';
+
+      var payload = {
+        type: 'contact',
+        name: document.getElementById('c-name').value.trim(),
+        email: document.getElementById('c-email').value.trim(),
+        inquiryType: document.getElementById('c-type').value,
+        message: document.getElementById('c-message').value.trim(),
+        submittedAt: new Date().toISOString()
+      };
+
+      var send = (typeof APPS_SCRIPT_URL !== 'undefined' && APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL')
+        ? fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'data=' + encodeURIComponent(JSON.stringify(payload))
+          }).catch(function () {})
+        : Promise.resolve();
+
+      send.finally(function () {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      });
+    });
   })();
 </script>
 </body>
