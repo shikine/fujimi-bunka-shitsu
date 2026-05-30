@@ -708,31 +708,64 @@
     <p class="section-label" style="opacity:0.4;">News</p>
     <h2 class="news-title">📢 お知らせ</h2>
     <p class="news-sub">最新の情報をお届けします</p>
-    <div class="news-list">
-      <div class="news-item">
-        <div class="news-meta">
-          <span class="news-date">2025.05.01</span>
-          <span class="news-tag tag-info">お知らせ</span>
-        </div>
-        <div class="news-text">富士見文化室のウェブサイトをオープンしました！</div>
-      </div>
-      <div class="news-item">
-        <div class="news-meta">
-          <span class="news-date">2025.05.10</span>
-          <span class="news-tag tag-event">イベント</span>
-        </div>
-        <div class="news-text">開催日程・会場の詳細を近日公開予定です。SNSをフォローしてお待ちください。</div>
-      </div>
-      <div class="news-item">
-        <div class="news-meta">
-          <span class="news-date">2025.05.20</span>
-          <span class="news-tag tag-art">作品募集</span>
-        </div>
-        <div class="news-text">出展アーティスト募集開始。素人・プロ問わず、ぜひご応募ください！</div>
-      </div>
-    </div>
+    <div class="news-list" id="news-list"></div>
   </div>
 </section>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'fujimi_news';
+  var TAG_META = {
+    info:  { label: 'お知らせ', cls: 'tag-info' },
+    event: { label: 'イベント',  cls: 'tag-event' },
+    art:   { label: '作品募集', cls: 'tag-art' },
+    other: { label: 'その他',   cls: 'tag-other' },
+  };
+  var DEFAULT_POSTS = [
+    { id: 1, date: '2025-05-01', tag: 'info',  text: '富士見文化室のウェブサイトをオープンしました！' },
+    { id: 2, date: '2025-05-10', tag: 'event', text: '開催日程・会場の詳細を近日公開予定です。SNSをフォローしてお待ちください。' },
+    { id: 3, date: '2025-05-20', tag: 'art',   text: '出展アーティスト募集開始。素人・プロ問わず、ぜひご応募ください！' },
+  ];
+
+  function loadPosts() {
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      var posts = stored ? JSON.parse(stored) : null;
+      return (posts && posts.length > 0) ? posts : DEFAULT_POSTS;
+    } catch (e) {
+      return DEFAULT_POSTS;
+    }
+  }
+
+  function formatDate(iso) {
+    return iso.replace(/-/g, '.');
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  var posts = loadPosts();
+  var list = document.getElementById('news-list');
+
+  if (posts.length === 0) {
+    list.innerHTML = '<div class="news-empty">現在お知らせはありません。</div>';
+    return;
+  }
+
+  var sorted = posts.slice().sort(function(a, b) { return b.date.localeCompare(a.date); });
+  list.innerHTML = sorted.map(function(p) {
+    var meta = TAG_META[p.tag] || TAG_META.other;
+    return '<div class="news-item">'
+      + '<div class="news-meta">'
+      + '<span class="news-date">' + formatDate(p.date) + '</span>'
+      + '<span class="news-tag ' + meta.cls + '">' + meta.label + '</span>'
+      + '</div>'
+      + '<div class="news-text">' + escHtml(p.text) + '</div>'
+      + '</div>';
+  }).join('');
+})();
+</script>
 
 <!-- INFO -->
 <section class="info">

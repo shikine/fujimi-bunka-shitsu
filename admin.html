@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理画面 | 富士見文化室</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+
+  :root {
+    --yellow: #FFE135;
+    --pink: #FF6B9D;
+    --blue: #4ECDC4;
+    --orange: #FF8C42;
+    --purple: #A855F7;
+    --green: #6BCB77;
+    --red: #FF4444;
+    --cream: #FFFDF5;
+    --dark: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: #f0ede4;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--yellow);
+  }
+
+  .header-logo {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--yellow);
+    letter-spacing: 0.03em;
+  }
+
+  .header-badge {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--yellow);
+    color: var(--dark);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* ===== LAYOUT ===== */
+  .layout {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 28px 28px;
+    box-shadow: 5px 5px 0 var(--dark);
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== FORM ===== */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    gap: 12px;
+    align-items: end;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group.full {
+    grid-column: 1 / -1;
+  }
+
+  label {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+  }
+
+  input, select, textarea {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 14px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: var(--cream);
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--dark);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .btn {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 100px;
+    border: 2.5px solid var(--dark);
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 0 var(--dark);
+  }
+
+  .btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--dark);
+  }
+
+  .btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--dark);
+  }
+
+  .btn-primary { background: var(--dark); color: var(--yellow); }
+  .btn-danger  { background: var(--red);  color: white; border-color: var(--red); box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
+  .btn-edit    { background: var(--yellow); color: var(--dark); }
+  .btn-sm { font-size: 12px; padding: 7px 14px; box-shadow: 2px 2px 0 var(--dark); }
+  .btn-sm:hover { box-shadow: 3px 3px 0 var(--dark); }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
+  /* ===== NEWS LIST ===== */
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .news-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--cream);
+    border: 2px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+  }
+
+  .news-row:hover { border-color: rgba(0,0,0,0.25); }
+
+  .news-row-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 100px;
+  }
+
+  .news-row-date {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.45;
+  }
+
+  .news-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .tag-info   { background: var(--yellow); }
+  .tag-event  { background: var(--pink); }
+  .tag-art    { background: var(--blue); }
+  .tag-other  { background: var(--green); }
+
+  .news-row-text {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .news-row-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ===== EMPTY ===== */
+  .empty {
+    text-align: center;
+    padding: 40px 24px;
+    color: rgba(0,0,0,0.3);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--dark);
+    color: var(--yellow);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 100px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 150;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 6px 6px 0 var(--dark);
+    max-width: 540px;
+    width: 100%;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .btn-cancel {
+    background: var(--cream);
+    color: var(--dark);
+  }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">富士見文化室 管理画面</div>
+  <span class="header-badge">お知らせ管理</span>
+</header>
+
+<div class="layout">
+
+  <!-- 投稿フォーム -->
+  <div class="card">
+    <div class="card-title">✏️ 新しいお知らせを投稿</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>日付</label>
+        <input type="date" id="input-date">
+      </div>
+      <div class="form-group">
+        <label>カテゴリ</label>
+        <select id="input-tag">
+          <option value="info">📢 お知らせ</option>
+          <option value="event">🎉 イベント</option>
+          <option value="art">🎨 作品募集</option>
+          <option value="other">📌 その他</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>本文</label>
+        <textarea id="input-text" placeholder="お知らせの内容を入力してください…"></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="addPost()">投稿する →</button>
+    </div>
+  </div>
+
+  <!-- 投稿一覧 -->
+  <div class="card">
+    <div class="section-header">
+      <div class="card-title" style="margin-bottom:0;">📋 投稿一覧</div>
+      <span id="post-count" style="font-size:13px; opacity:0.4; font-weight:700;"></span>
+    </div>
+    <div class="news-list" id="news-list"></div>
+  </div>
+
+</div>
+
+<!-- 編集モーダル -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal-title">✏️ お知らせを編集</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>日付</label>
+        <input type="date" id="edit-date">
+      </div>
+      <div class="form-group">
+        <label>カテゴリ</label>
+        <select id="edit-tag">
+          <option value="info">📢 お知らせ</option>
+          <option value="event">🎉 イベント</option>
+          <option value="art">🎨 作品募集</option>
+          <option value="other">📌 その他</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>本文</label>
+        <textarea id="edit-text"></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">キャンセル</button>
+      <button class="btn btn-primary" onclick="saveEdit()">保存する</button>
+    </div>
+  </div>
+</div>
+
+<!-- トースト通知 -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const STORAGE_KEY = 'fujimi_news';
+
+  const TAG_META = {
+    info:  { label: 'お知らせ', cls: 'tag-info' },
+    event: { label: 'イベント',  cls: 'tag-event' },
+    art:   { label: '作品募集', cls: 'tag-art' },
+    other: { label: 'その他',   cls: 'tag-other' },
+  };
+
+  // 日付の初期値を今日に設定
+  document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
+
+  function loadPosts() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function savePosts(posts) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  }
+
+  function formatDateDisplay(iso) {
+    // "2025-05-01" → "2025.05.01"
+    return iso.replace(/-/g, '.');
+  }
+
+  function renderList() {
+    const posts = loadPosts();
+    const list = document.getElementById('news-list');
+    const count = document.getElementById('post-count');
+
+    count.textContent = `${posts.length} 件`;
+
+    if (posts.length === 0) {
+      list.innerHTML = '<div class="empty">まだお知らせがありません。<br>上のフォームから投稿してみましょう！</div>';
+      return;
+    }
+
+    list.innerHTML = [...posts].reverse().map((p, revIdx) => {
+      const idx = posts.length - 1 - revIdx;
+      const meta = TAG_META[p.tag] || TAG_META.other;
+      return `
+        <div class="news-row">
+          <div class="news-row-meta">
+            <span class="news-row-date">${formatDateDisplay(p.date)}</span>
+            <span class="news-tag ${meta.cls}">${meta.label}</span>
+          </div>
+          <div class="news-row-text">${escHtml(p.text)}</div>
+          <div class="news-row-actions">
+            <button class="btn btn-edit btn-sm" onclick="openEdit(${idx})">編集</button>
+            <button class="btn btn-danger btn-sm" onclick="deletePost(${idx})">削除</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function addPost() {
+    const date = document.getElementById('input-date').value.trim();
+    const tag  = document.getElementById('input-tag').value;
+    const text = document.getElementById('input-text').value.trim();
+
+    if (!date || !text) { showToast('日付と本文を入力してください'); return; }
+
+    const posts = loadPosts();
+    posts.push({ id: Date.now(), date, tag, text });
+    savePosts(posts);
+    renderList();
+
+    document.getElementById('input-text').value = '';
+    document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
+    showToast('投稿しました！');
+  }
+
+  function deletePost(idx) {
+    if (!confirm('このお知らせを削除しますか？')) return;
+    const posts = loadPosts();
+    posts.splice(idx, 1);
+    savePosts(posts);
+    renderList();
+    showToast('削除しました');
+  }
+
+  let editingIdx = null;
+
+  function openEdit(idx) {
+    const posts = loadPosts();
+    const p = posts[idx];
+    document.getElementById('edit-date').value = p.date;
+    document.getElementById('edit-tag').value  = p.tag;
+    document.getElementById('edit-text').value = p.text;
+    editingIdx = idx;
+    document.getElementById('edit-modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('edit-modal').classList.remove('open');
+    editingIdx = null;
+  }
+
+  function saveEdit() {
+    if (editingIdx === null) return;
+    const date = document.getElementById('edit-date').value.trim();
+    const tag  = document.getElementById('edit-tag').value;
+    const text = document.getElementById('edit-text').value.trim();
+
+    if (!date || !text) { showToast('日付と本文を入力してください'); return; }
+
+    const posts = loadPosts();
+    posts[editingIdx] = { ...posts[editingIdx], date, tag, text };
+    savePosts(posts);
+    closeModal();
+    renderList();
+    showToast('保存しました！');
+  }
+
+  document.getElementById('edit-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  let toastTimer;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  renderList();
+</script>
+</body>
+</html>
