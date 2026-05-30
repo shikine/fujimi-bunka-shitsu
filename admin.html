@@ -5,29 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>管理画面 | 富士見文化室</title>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script>
   // ============================================================
-  //  ★ Firebase の設定をここに貼り付けてください
-  //    Firebase Console → プロジェクト設定 → マイアプリ → SDK の設定と構成
+  //  ★ デプロイした Apps Script の URL を貼り付けてください
   // ============================================================
-  const firebaseConfig = {
-    apiKey:            "YOUR_API_KEY",
-    authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId:         "YOUR_PROJECT_ID",
-    storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId:             "YOUR_APP_ID"
-  };
+  var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
   // ============================================================
-
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db   = firebase.firestore();
 </script>
 
 <style>
@@ -366,11 +349,7 @@
     <div class="login-error" id="login-error"></div>
     <div style="display:flex;flex-direction:column;gap:12px;">
       <div class="form-group">
-        <label>メールアドレス</label>
-        <input type="email" id="login-email" placeholder="admin@example.com" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label>パスワード</label>
+        <label>管理者パスワード</label>
         <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
       </div>
       <div style="margin-top:8px;">
@@ -467,160 +446,167 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  const TAG_META = {
+  var ADMIN_KEY    = '';
+  var currentPosts = [];
+
+  var TAG_META = {
     info:  { label: 'お知らせ', cls: 'tag-info' },
     event: { label: 'イベント',  cls: 'tag-event' },
     art:   { label: '作品募集', cls: 'tag-art' },
     other: { label: 'その他',   cls: 'tag-other' },
   };
 
-  // ===== AUTH =====
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('admin-screen').style.display = 'block';
-      document.getElementById('header-user').textContent = user.email;
-      startListener();
-      document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
-    } else {
-      document.getElementById('login-screen').style.display = 'flex';
-      document.getElementById('admin-screen').style.display = 'none';
-    }
-  });
+  // ページ読み込み時：セッションが残っていれば自動ログイン
+  (function () {
+    var saved = sessionStorage.getItem('fujimi_admin_key');
+    if (saved) { ADMIN_KEY = saved; showAdmin(); }
+  })();
 
+  // ===== AUTH =====
   async function doLogin() {
-    const email    = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    const errEl    = document.getElementById('login-error');
+    var pw    = document.getElementById('login-password').value.trim();
+    var errEl = document.getElementById('login-error');
     errEl.classList.remove('show');
+    if (!pw) return;
+
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+      ADMIN_KEY = pw; showAdmin(); return;
+    }
+
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      var res  = await fetch(APPS_SCRIPT_URL + '?type=auth&key=' + encodeURIComponent(pw));
+      var data = await res.json();
+      if (data.ok) {
+        ADMIN_KEY = pw; showAdmin();
+      } else {
+        errEl.textContent = 'パスワードが正しくありません。';
+        errEl.classList.add('show');
+      }
     } catch (e) {
-      errEl.textContent = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
+      errEl.textContent = '接続に失敗しました。Apps Script URLを確認してください。';
       errEl.classList.add('show');
     }
   }
 
-  function doLogout() {
-    if (unsubscribe) unsubscribe();
-    auth.signOut();
+  function showAdmin() {
+    sessionStorage.setItem('fujimi_admin_key', ADMIN_KEY);
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+    document.getElementById('header-user').textContent = '管理者';
+    document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
+    loadNews();
   }
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
-      doLogin();
-    }
+  function doLogout() {
+    sessionStorage.removeItem('fujimi_admin_key');
+    ADMIN_KEY = '';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('admin-screen').style.display = 'none';
+    document.getElementById('login-password').value = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') doLogin();
   });
 
-  // ===== FIRESTORE LISTENER =====
-  let unsubscribe = null;
+  // ===== API =====
+  function apiPost(payload) {
+    return fetch(APPS_SCRIPT_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body:    'data=' + encodeURIComponent(JSON.stringify(Object.assign({ adminKey: ADMIN_KEY }, payload)))
+    }).then(function(r) { return r.json(); });
+  }
 
-  function startListener() {
-    unsubscribe = db.collection('news')
-      .orderBy('date', 'desc')
-      .onSnapshot(snap => {
-        const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        renderList(posts);
-      }, err => {
-        console.error(err);
-        showToast('データの取得に失敗しました');
-      });
+  // ===== LOAD =====
+  async function loadNews() {
+    var list = document.getElementById('news-list');
+    list.innerHTML = '<div class="loading">読み込み中…</div>';
+    try {
+      var res   = await fetch(APPS_SCRIPT_URL + '?type=news');
+      var posts = await res.json();
+      currentPosts = Array.isArray(posts) ? posts : [];
+      renderList(currentPosts);
+    } catch (e) {
+      list.innerHTML = '<div class="empty">取得に失敗しました。<br>Apps Script URLを確認してください。</div>';
+    }
   }
 
   // ===== RENDER =====
   function renderList(posts) {
-    const list  = document.getElementById('news-list');
-    const count = document.getElementById('post-count');
-    count.textContent = `${posts.length} 件`;
-
+    var list  = document.getElementById('news-list');
+    var count = document.getElementById('post-count');
+    count.textContent = posts.length + ' 件';
     if (posts.length === 0) {
       list.innerHTML = '<div class="empty">まだお知らせがありません。<br>上のフォームから投稿してみましょう！</div>';
       return;
     }
-
-    list.innerHTML = posts.map(p => {
-      const meta = TAG_META[p.tag] || TAG_META.other;
-      return `
-        <div class="news-row">
-          <div class="news-row-meta">
-            <span class="news-row-date">${formatDate(p.date)}</span>
-            <span class="news-tag ${meta.cls}">${meta.label}</span>
-          </div>
-          <div class="news-row-text">${escHtml(p.text)}</div>
-          <div class="news-row-actions">
-            <button class="btn btn-edit btn-sm" onclick="openEdit('${p.id}')">編集</button>
-            <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">削除</button>
-          </div>
-        </div>`;
+    list.innerHTML = posts.map(function(p) {
+      var meta = TAG_META[p.tag] || TAG_META.other;
+      return '<div class="news-row">'
+        + '<div class="news-row-meta">'
+        + '<span class="news-row-date">' + formatDate(p.date) + '</span>'
+        + '<span class="news-tag ' + meta.cls + '">' + meta.label + '</span>'
+        + '</div>'
+        + '<div class="news-row-text">' + escHtml(p.text) + '</div>'
+        + '<div class="news-row-actions">'
+        + '<button class="btn btn-edit btn-sm" onclick="openEdit(\'' + p.id + '\')">編集</button>'
+        + '<button class="btn btn-danger btn-sm" onclick="deletePost(\'' + p.id + '\')">削除</button>'
+        + '</div></div>';
     }).join('');
   }
 
   // ===== CRUD =====
   async function addPost() {
-    const date = document.getElementById('input-date').value.trim();
-    const tag  = document.getElementById('input-tag').value;
-    const text = document.getElementById('input-text').value.trim();
+    var date = document.getElementById('input-date').value.trim();
+    var tag  = document.getElementById('input-tag').value;
+    var text = document.getElementById('input-text').value.trim();
     if (!date || !text) { showToast('日付と本文を入力してください'); return; }
 
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.textContent = '投稿中…';
-
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true; btn.textContent = '投稿中…';
     try {
-      await db.collection('news').add({ date, tag, text, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-      document.getElementById('input-text').value = '';
-      document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
-      showToast('投稿しました！');
-    } catch (e) {
-      showToast('投稿に失敗しました');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = '投稿する →';
-    }
+      var res = await apiPost({ type: 'addNews', date: date, tag: tag, text: text });
+      if (res.success) {
+        document.getElementById('input-text').value = '';
+        document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
+        showToast('投稿しました！');
+        loadNews();
+      } else { showToast('投稿に失敗しました'); }
+    } catch (e) { showToast('投稿に失敗しました'); }
+    finally { btn.disabled = false; btn.textContent = '投稿する →'; }
   }
 
   async function deletePost(id) {
     if (!confirm('このお知らせを削除しますか？')) return;
     try {
-      await db.collection('news').doc(id).delete();
-      showToast('削除しました');
-    } catch (e) {
-      showToast('削除に失敗しました');
-    }
+      await apiPost({ type: 'deleteNews', id: id });
+      showToast('削除しました'); loadNews();
+    } catch (e) { showToast('削除に失敗しました'); }
   }
 
-  let editingId = null;
+  var editingId = null;
 
   function openEdit(id) {
-    // onSnapshot で最新データを持っているので DOM から読む
-    const row  = [...document.querySelectorAll('.news-row')].find(r => r.querySelector(`[onclick="openEdit('${id}')"]`));
-    const date = row.querySelector('.news-row-date').textContent.replace(/\./g, '-');
-    const text = row.querySelector('.news-row-text').textContent;
-    // タグは cls から逆引き
-    const tagCls = row.querySelector('.news-tag').className.split(' ').find(c => c.startsWith('tag-'));
-    const tag = tagCls ? tagCls.replace('tag-', '') : 'other';
-
-    document.getElementById('edit-date').value = date;
-    document.getElementById('edit-tag').value  = tag;
-    document.getElementById('edit-text').value = text;
+    var post = currentPosts.find(function(p) { return p.id === id; });
+    if (!post) return;
+    document.getElementById('edit-date').value = post.date;
+    document.getElementById('edit-tag').value  = post.tag;
+    document.getElementById('edit-text').value = post.text;
     editingId = id;
     document.getElementById('edit-modal').classList.add('open');
   }
 
   async function saveEdit() {
     if (!editingId) return;
-    const date = document.getElementById('edit-date').value.trim();
-    const tag  = document.getElementById('edit-tag').value;
-    const text = document.getElementById('edit-text').value.trim();
+    var date = document.getElementById('edit-date').value.trim();
+    var tag  = document.getElementById('edit-tag').value;
+    var text = document.getElementById('edit-text').value.trim();
     if (!date || !text) { showToast('日付と本文を入力してください'); return; }
-
     try {
-      await db.collection('news').doc(editingId).update({ date, tag, text });
-      closeModal();
-      showToast('保存しました！');
-    } catch (e) {
-      showToast('保存に失敗しました');
-    }
+      await apiPost({ type: 'updateNews', id: editingId, date: date, tag: tag, text: text });
+      closeModal(); showToast('保存しました！'); loadNews();
+    } catch (e) { showToast('保存に失敗しました'); }
   }
 
   function closeModal() {
@@ -628,7 +614,7 @@
     editingId = null;
   }
 
-  document.getElementById('edit-modal').addEventListener('click', e => {
+  document.getElementById('edit-modal').addEventListener('click', function(e) {
     if (e.target === document.getElementById('edit-modal')) closeModal();
   });
 
@@ -639,13 +625,13 @@
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  let toastTimer;
+  var toastTimer;
   function showToast(msg) {
-    const el = document.getElementById('toast');
+    var el = document.getElementById('toast');
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+    toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2400);
   }
 </script>
 </body>
