@@ -36,7 +36,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 24px 80px;
+    padding: 116px 24px 80px;
     overflow: hidden;
   }
 
@@ -1085,12 +1085,166 @@
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
   }
+
+  /* ===== SITE HEADER NAV ===== */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--cream);
+    border-bottom: 2.5px solid var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 56px;
+    transition: box-shadow 0.2s;
+  }
+  .site-header.scrolled {
+    box-shadow: 0 4px 0 var(--dark);
+  }
+  .site-header-logo {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+  }
+  .site-header-logo .logo-sub {
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    opacity: 0.6;
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .site-nav a {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 2.5px solid transparent;
+    border-radius: 6px;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .site-nav a:hover {
+    background: var(--yellow);
+    border-color: var(--dark);
+    transform: translate(-1px, -1px);
+  }
+  .site-nav a.active {
+    background: var(--yellow);
+    border-color: var(--dark);
+  }
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    transition: background 0.15s;
+  }
+  .nav-burger span {
+    display: block;
+    height: 2.5px;
+    background: var(--dark);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    border-bottom: 2.5px solid var(--dark);
+    z-index: 999;
+    padding: 16px 24px 20px;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 6px 0 var(--dark);
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 12px 16px;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    background: var(--cream);
+    transition: background 0.15s, transform 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .nav-drawer a:hover, .nav-drawer a:active {
+    background: var(--yellow);
+    transform: translate(-2px, -2px);
+  }
+  @media (max-width: 680px) {
+    .site-nav { display: none; }
+    .nav-burger { display: flex; }
+  }
+  /* ページ先頭へのオフセット補正 */
+  .hero, section[id] {
+    scroll-margin-top: 56px;
+  }
 </style>
 </head>
 <body>
 
+<!-- SITE HEADER -->
+<header class="site-header" id="site-header">
+  <a class="site-header-logo" href="#hero">
+    富士見文化室
+    <span class="logo-sub">FUJIMI BUNKA SHITSU 2025</span>
+  </a>
+  <nav class="site-nav" aria-label="メインメニュー">
+    <a href="#artists">アーティスト</a>
+    <a href="#works">作品</a>
+    <a href="#news">ニュース</a>
+    <a href="#venue">会場</a>
+    <a href="#info">概要</a>
+  </nav>
+  <button class="nav-burger" id="nav-burger" aria-label="メニューを開く" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="nav-drawer" id="nav-drawer" aria-label="モバイルメニュー">
+  <a href="#artists">🎨 アーティスト</a>
+  <a href="#works">🖼 作品</a>
+  <a href="#news">📰 ニュース</a>
+  <a href="#venue">📍 会場</a>
+  <a href="#info">ℹ️ 概要</a>
+</nav>
+
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-tag">🎨 FUJIMI BUNKA SHITSU 2025</div>
   <h1 class="hero-title">
     <span class="line1">富士見</span><br>
@@ -1214,7 +1368,7 @@
 </section>
 
 <!-- ARTISTS -->
-<section class="artists">
+<section class="artists" id="artists">
   <div class="artists-inner">
     <p class="section-label" style="opacity:0.4;">Artists</p>
     <h2 class="artists-title">🎨 参加アーティスト</h2>
@@ -1354,7 +1508,7 @@
 </script>
 
 <!-- WORKS -->
-<section class="works">
+<section class="works" id="works">
   <div class="works-header">
     <p class="section-label" style="color:var(--cream); opacity:0.4;">Works</p>
     <h2 class="works-title">🖼 作品たち</h2>
@@ -1702,7 +1856,7 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
 </script>
 
 <!-- NEWS -->
-<section class="news">
+<section class="news" id="news">
   <div class="news-inner">
     <p class="section-label" style="opacity:0.4;">News</p>
     <h2 class="news-title">📢 お知らせ</h2>
@@ -1767,7 +1921,7 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
 </script>
 
 <!-- VENUE -->
-<section class="venue">
+<section class="venue" id="venue">
   <div class="venue-inner">
     <p class="section-label" style="opacity:0.5;">Venue</p>
     <h2 class="venue-title">🏠 会場</h2>
@@ -1798,7 +1952,7 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
 </section>
 
 <!-- INFO -->
-<section class="info">
+<section class="info" id="info">
   <div class="info-inner">
     <p class="section-label" style="text-align:center; opacity:0.4;">Event Info</p>
     <h2 class="info-title">📅 開催情報</h2>
@@ -1889,5 +2043,56 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
   </div>
 </div>
 
+<script>
+  (function () {
+    var header = document.getElementById('site-header');
+    var burger = document.getElementById('nav-burger');
+    var drawer = document.getElementById('nav-drawer');
+    var navLinks = document.querySelectorAll('.site-nav a, .nav-drawer a');
+
+    // スクロールでヘッダーに影
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      updateActiveLink();
+    }, { passive: true });
+
+    // ハンバーガー開閉
+    burger.addEventListener('click', function () {
+      var isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // ドロワーリンク押したら閉じる
+    drawer.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // アクティブリンク更新
+    var sectionIds = ['artists', 'works', 'news', 'venue', 'info'];
+    function updateActiveLink() {
+      var current = '';
+      var offset = 80;
+      sectionIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = id;
+        }
+      });
+      document.querySelectorAll('.site-nav a').forEach(function (a) {
+        var href = a.getAttribute('href').replace('#', '');
+        a.classList.toggle('active', href === current);
+      });
+    }
+  })();
+</script>
 </body>
 </html>
