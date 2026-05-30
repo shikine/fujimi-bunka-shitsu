@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理画面 | 富士見文化室</title>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+  // ============================================================
+  //  ★ Firebase の設定をここに貼り付けてください
+  //    Firebase Console → プロジェクト設定 → マイアプリ → SDK の設定と構成
+  // ============================================================
+  const firebaseConfig = {
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  };
+  // ============================================================
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db   = firebase.firestore();
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+
+  :root {
+    --yellow: #FFE135;
+    --pink: #FF6B9D;
+    --blue: #4ECDC4;
+    --orange: #FF8C42;
+    --purple: #A855F7;
+    --green: #6BCB77;
+    --red: #FF4444;
+    --cream: #FFFDF5;
+    --dark: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: #f0ede4;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ===== LOGIN SCREEN ===== */
+  .login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: var(--yellow);
+  }
+
+  .login-card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 24px;
+    padding: 40px 36px;
+    box-shadow: 6px 6px 0 var(--dark);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .login-logo {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  .login-sub {
+    font-size: 13px;
+    opacity: 0.45;
+    margin-bottom: 32px;
+  }
+
+  .login-error {
+    background: #fff0f0;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .login-error.show { display: block; }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--yellow);
+  }
+
+  .header-logo {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--yellow);
+    letter-spacing: 0.03em;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-user {
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+  /* ===== LAYOUT ===== */
+  .layout {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 5px 5px 0 var(--dark);
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== FORM ===== */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 12px;
+    align-items: end;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+  }
+
+  input, select, textarea {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 14px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: var(--cream);
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus { border-color: var(--dark); }
+
+  textarea { resize: vertical; min-height: 80px; }
+
+  .btn {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 100px;
+    border: 2.5px solid var(--dark);
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    box-shadow: 3px 3px 0 var(--dark);
+  }
+
+  .btn:hover  { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--dark); }
+  .btn:active { transform: translate(1px,1px);   box-shadow: 2px 2px 0 var(--dark); }
+
+  .btn-primary { background: var(--dark);   color: var(--yellow); }
+  .btn-danger  { background: var(--red);    color: white; border-color: var(--red); box-shadow: 3px 3px 0 rgba(0,0,0,0.3); }
+  .btn-edit    { background: var(--yellow); color: var(--dark); }
+  .btn-ghost   { background: transparent;  color: var(--cream); border-color: rgba(255,255,255,0.3); box-shadow: none; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); box-shadow: none; transform: none; }
+  .btn-sm { font-size: 12px; padding: 7px 14px; box-shadow: 2px 2px 0 var(--dark); }
+  .btn-sm:hover { box-shadow: 3px 3px 0 var(--dark); }
+  .btn-full { width: 100%; justify-content: center; }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+
+  /* ===== NEWS LIST ===== */
+  .news-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .news-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--cream);
+    border: 2px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+  }
+
+  .news-row:hover { border-color: rgba(0,0,0,0.25); }
+
+  .news-row-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 100px;
+  }
+
+  .news-row-date { font-size: 12px; font-weight: 700; opacity: 0.45; }
+
+  .news-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .tag-info  { background: var(--yellow); }
+  .tag-event { background: var(--pink); }
+  .tag-art   { background: var(--blue); }
+  .tag-other { background: var(--green); }
+
+  .news-row-text { flex: 1; font-size: 14px; font-weight: 500; line-height: 1.5; }
+
+  .news-row-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+  /* ===== EMPTY / LOADING ===== */
+  .empty, .loading {
+    text-align: center;
+    padding: 40px 24px;
+    color: rgba(0,0,0,0.3);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--dark);
+    color: var(--yellow);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 100px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 200;
+    pointer-events: none;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 150;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 6px 6px 0 var(--dark);
+    max-width: 540px;
+    width: 100%;
+  }
+
+  .modal-title { font-size: 18px; font-weight: 900; margin-bottom: 20px; }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .btn-cancel { background: var(--cream); color: var(--dark); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ログイン画面 -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">富士見文化室</div>
+    <div class="login-sub">管理画面にログイン</div>
+    <div class="login-error" id="login-error"></div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="form-group">
+        <label>メールアドレス</label>
+        <input type="email" id="login-email" placeholder="admin@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>パスワード</label>
+        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <div style="margin-top:8px;">
+        <button class="btn btn-primary btn-full" onclick="doLogin()">ログイン →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 管理画面本体（ログイン後に表示） -->
+<div id="admin-screen" style="display:none;">
+
+  <header class="header">
+    <div class="header-logo">富士見文化室 管理画面</div>
+    <div class="header-right">
+      <span class="header-user" id="header-user"></span>
+      <button class="btn btn-ghost btn-sm" onclick="doLogout()">ログアウト</button>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- 投稿フォーム -->
+    <div class="card">
+      <div class="card-title">✏️ 新しいお知らせを投稿</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>日付</label>
+          <input type="date" id="input-date">
+        </div>
+        <div class="form-group">
+          <label>カテゴリ</label>
+          <select id="input-tag">
+            <option value="info">📢 お知らせ</option>
+            <option value="event">🎉 イベント</option>
+            <option value="art">🎨 作品募集</option>
+            <option value="other">📌 その他</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>本文</label>
+          <textarea id="input-text" placeholder="お知らせの内容を入力してください…"></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="submit-btn" onclick="addPost()">投稿する →</button>
+      </div>
+    </div>
+
+    <!-- 投稿一覧 -->
+    <div class="card">
+      <div class="section-header">
+        <div class="card-title" style="margin-bottom:0;">📋 投稿一覧</div>
+        <span id="post-count" style="font-size:13px;opacity:0.4;font-weight:700;"></span>
+      </div>
+      <div class="news-list" id="news-list">
+        <div class="loading">読み込み中…</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 編集モーダル -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal-title">✏️ お知らせを編集</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>日付</label>
+        <input type="date" id="edit-date">
+      </div>
+      <div class="form-group">
+        <label>カテゴリ</label>
+        <select id="edit-tag">
+          <option value="info">📢 お知らせ</option>
+          <option value="event">🎉 イベント</option>
+          <option value="art">🎨 作品募集</option>
+          <option value="other">📌 その他</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>本文</label>
+        <textarea id="edit-text"></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-cancel" onclick="closeModal()">キャンセル</button>
+      <button class="btn btn-primary" onclick="saveEdit()">保存する</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const TAG_META = {
+    info:  { label: 'お知らせ', cls: 'tag-info' },
+    event: { label: 'イベント',  cls: 'tag-event' },
+    art:   { label: '作品募集', cls: 'tag-art' },
+    other: { label: 'その他',   cls: 'tag-other' },
+  };
+
+  // ===== AUTH =====
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-screen').style.display = 'block';
+      document.getElementById('header-user').textContent = user.email;
+      startListener();
+      document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
+    } else {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('admin-screen').style.display = 'none';
+    }
+  });
+
+  async function doLogin() {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl    = document.getElementById('login-error');
+    errEl.classList.remove('show');
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (e) {
+      errEl.textContent = 'ログインに失敗しました。メールアドレスとパスワードを確認してください。';
+      errEl.classList.add('show');
+    }
+  }
+
+  function doLogout() {
+    if (unsubscribe) unsubscribe();
+    auth.signOut();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+      doLogin();
+    }
+  });
+
+  // ===== FIRESTORE LISTENER =====
+  let unsubscribe = null;
+
+  function startListener() {
+    unsubscribe = db.collection('news')
+      .orderBy('date', 'desc')
+      .onSnapshot(snap => {
+        const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderList(posts);
+      }, err => {
+        console.error(err);
+        showToast('データの取得に失敗しました');
+      });
+  }
+
+  // ===== RENDER =====
+  function renderList(posts) {
+    const list  = document.getElementById('news-list');
+    const count = document.getElementById('post-count');
+    count.textContent = `${posts.length} 件`;
+
+    if (posts.length === 0) {
+      list.innerHTML = '<div class="empty">まだお知らせがありません。<br>上のフォームから投稿してみましょう！</div>';
+      return;
+    }
+
+    list.innerHTML = posts.map(p => {
+      const meta = TAG_META[p.tag] || TAG_META.other;
+      return `
+        <div class="news-row">
+          <div class="news-row-meta">
+            <span class="news-row-date">${formatDate(p.date)}</span>
+            <span class="news-tag ${meta.cls}">${meta.label}</span>
+          </div>
+          <div class="news-row-text">${escHtml(p.text)}</div>
+          <div class="news-row-actions">
+            <button class="btn btn-edit btn-sm" onclick="openEdit('${p.id}')">編集</button>
+            <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">削除</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ===== CRUD =====
+  async function addPost() {
+    const date = document.getElementById('input-date').value.trim();
+    const tag  = document.getElementById('input-tag').value;
+    const text = document.getElementById('input-text').value.trim();
+    if (!date || !text) { showToast('日付と本文を入力してください'); return; }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '投稿中…';
+
+    try {
+      await db.collection('news').add({ date, tag, text, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+      document.getElementById('input-text').value = '';
+      document.getElementById('input-date').value = new Date().toISOString().slice(0, 10);
+      showToast('投稿しました！');
+    } catch (e) {
+      showToast('投稿に失敗しました');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '投稿する →';
+    }
+  }
+
+  async function deletePost(id) {
+    if (!confirm('このお知らせを削除しますか？')) return;
+    try {
+      await db.collection('news').doc(id).delete();
+      showToast('削除しました');
+    } catch (e) {
+      showToast('削除に失敗しました');
+    }
+  }
+
+  let editingId = null;
+
+  function openEdit(id) {
+    // onSnapshot で最新データを持っているので DOM から読む
+    const row  = [...document.querySelectorAll('.news-row')].find(r => r.querySelector(`[onclick="openEdit('${id}')"]`));
+    const date = row.querySelector('.news-row-date').textContent.replace(/\./g, '-');
+    const text = row.querySelector('.news-row-text').textContent;
+    // タグは cls から逆引き
+    const tagCls = row.querySelector('.news-tag').className.split(' ').find(c => c.startsWith('tag-'));
+    const tag = tagCls ? tagCls.replace('tag-', '') : 'other';
+
+    document.getElementById('edit-date').value = date;
+    document.getElementById('edit-tag').value  = tag;
+    document.getElementById('edit-text').value = text;
+    editingId = id;
+    document.getElementById('edit-modal').classList.add('open');
+  }
+
+  async function saveEdit() {
+    if (!editingId) return;
+    const date = document.getElementById('edit-date').value.trim();
+    const tag  = document.getElementById('edit-tag').value;
+    const text = document.getElementById('edit-text').value.trim();
+    if (!date || !text) { showToast('日付と本文を入力してください'); return; }
+
+    try {
+      await db.collection('news').doc(editingId).update({ date, tag, text });
+      closeModal();
+      showToast('保存しました！');
+    } catch (e) {
+      showToast('保存に失敗しました');
+    }
+  }
+
+  function closeModal() {
+    document.getElementById('edit-modal').classList.remove('open');
+    editingId = null;
+  }
+
+  document.getElementById('edit-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('edit-modal')) closeModal();
+  });
+
+  // ===== UTILS =====
+  function formatDate(iso) { return iso.replace(/-/g, '.'); }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+  }
+</script>
+</body>
+</html>

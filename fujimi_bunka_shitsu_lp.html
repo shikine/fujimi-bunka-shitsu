@@ -379,6 +379,102 @@
     transform: translateY(-2px);
   }
 
+  /* ===== NEWS ===== */
+  .news {
+    background: var(--cream);
+    padding: 80px 24px;
+  }
+
+  .news-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .news-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .news-sub {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-bottom: 36px;
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .news-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .news-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 90px;
+  }
+
+  .news-date {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .news-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    white-space: nowrap;
+  }
+
+  .tag-info { background: var(--yellow); }
+  .tag-event { background: var(--pink); }
+  .tag-art { background: var(--blue); }
+  .tag-other { background: var(--green); }
+
+  .news-text {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    padding-top: 2px;
+  }
+
+  .news-empty {
+    text-align: center;
+    padding: 48px 24px;
+    background: white;
+    border: 2.5px dashed rgba(0,0,0,0.15);
+    border-radius: 16px;
+    color: rgba(0,0,0,0.35);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
   /* ===== INFO ===== */
   .info {
     background: var(--cream);
@@ -605,6 +701,95 @@
     <div class="sns-btn">👥 Facebook</div>
   </div>
 </section>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<!-- NEWS -->
+<section class="news">
+  <div class="news-inner">
+    <p class="section-label" style="opacity:0.4;">News</p>
+    <h2 class="news-title">📢 お知らせ</h2>
+    <p class="news-sub">最新の情報をお届けします</p>
+    <div class="news-list" id="news-list">
+      <div class="news-empty" style="text-align:center;padding:32px;opacity:0.4;font-size:14px;">読み込み中…</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  // ============================================================
+  //  ★ admin.html と同じ Firebase 設定を貼り付けてください
+  // ============================================================
+  var firebaseConfig = {
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  };
+  // ============================================================
+
+  var TAG_META = {
+    info:  { label: 'お知らせ', cls: 'tag-info' },
+    event: { label: 'イベント',  cls: 'tag-event' },
+    art:   { label: '作品募集', cls: 'tag-art' },
+    other: { label: 'その他',   cls: 'tag-other' },
+  };
+  var DEFAULT_POSTS = [
+    { date: '2025-05-01', tag: 'info',  text: '富士見文化室のウェブサイトをオープンしました！' },
+    { date: '2025-05-10', tag: 'event', text: '開催日程・会場の詳細を近日公開予定です。SNSをフォローしてお待ちください。' },
+    { date: '2025-05-20', tag: 'art',   text: '出展アーティスト募集開始。素人・プロ問わず、ぜひご応募ください！' },
+  ];
+
+  var list = document.getElementById('news-list');
+
+  function formatDate(iso) { return iso.replace(/-/g, '.'); }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderPosts(posts) {
+    if (!posts || posts.length === 0) {
+      list.innerHTML = '<div class="news-empty" style="text-align:center;padding:32px;opacity:0.4;font-size:14px;">現在お知らせはありません。</div>';
+      return;
+    }
+    list.innerHTML = posts.map(function(p) {
+      var meta = TAG_META[p.tag] || TAG_META.other;
+      return '<div class="news-item">'
+        + '<div class="news-meta">'
+        + '<span class="news-date">' + formatDate(p.date) + '</span>'
+        + '<span class="news-tag ' + meta.cls + '">' + meta.label + '</span>'
+        + '</div>'
+        + '<div class="news-text">' + escHtml(p.text) + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  // Firebase が未設定の場合はデフォルト表示
+  if (firebaseConfig.apiKey === 'YOUR_API_KEY') {
+    renderPosts(DEFAULT_POSTS);
+    return;
+  }
+
+  try {
+    var app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+    var db  = firebase.firestore(app);
+    db.collection('news').orderBy('date', 'desc').get()
+      .then(function(snap) {
+        var posts = snap.docs.map(function(d) { return d.data(); });
+        renderPosts(posts.length > 0 ? posts : DEFAULT_POSTS);
+      })
+      .catch(function() { renderPosts(DEFAULT_POSTS); });
+  } catch (e) {
+    renderPosts(DEFAULT_POSTS);
+  }
+})();
+</script>
 
 <!-- INFO -->
 <section class="info">
