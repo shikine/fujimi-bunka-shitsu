@@ -558,6 +558,137 @@
   }
 
   .float { animation: float 3s ease-in-out infinite; }
+
+  /* ===== ARTISTS ===== */
+  .artists {
+    background: var(--cream);
+    padding: 80px 24px;
+  }
+
+  .artists-inner {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .artists-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .artists-sub {
+    font-size: 15px;
+    opacity: 0.6;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .artists-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .tab-btn {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s, background 0.12s, color 0.12s, box-shadow 0.12s;
+    box-shadow: 3px 3px 0 var(--dark);
+  }
+
+  .tab-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--dark);
+  }
+
+  .tab-btn.active {
+    background: var(--dark);
+    color: var(--yellow);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+  }
+
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+  }
+
+  .artist-card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+
+  .artist-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .artist-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2.5px solid var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 14px;
+  }
+
+  .artist-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .artist-genre-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .genre-painting { background: var(--pink); }
+  .genre-theater  { background: var(--orange); }
+  .genre-video    { background: var(--blue); }
+  .genre-toy      { background: var(--green); }
+  .genre-other    { background: var(--purple); color: white; border-color: var(--purple); }
+
+  .artist-note {
+    font-size: 13px;
+    opacity: 0.6;
+    line-height: 1.7;
+  }
+
+  .artists-tbd {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 32px;
+    background: white;
+    border: 2.5px dashed rgba(0,0,0,0.15);
+    border-radius: 16px;
+    color: rgba(0,0,0,0.35);
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -685,6 +816,126 @@
     </div>
   </div>
 </section>
+
+<!-- ARTISTS -->
+<section class="artists">
+  <div class="artists-inner">
+    <p class="section-label" style="opacity:0.4;">Artists</p>
+    <h2 class="artists-title">🎨 参加アーティスト</h2>
+    <p class="artists-sub">素人もプロも、ジャンルも年齢もバラバラな顔ぶれが集まります。</p>
+
+    <div class="artists-tabs" role="tablist">
+      <button class="tab-btn active" data-genre="all">すべて</button>
+      <button class="tab-btn" data-genre="painting">🖼 絵画</button>
+      <button class="tab-btn" data-genre="theater">🎭 演劇</button>
+      <button class="tab-btn" data-genre="video">🎬 映像</button>
+      <button class="tab-btn" data-genre="toy">🧸 おもちゃ</button>
+      <button class="tab-btn" data-genre="other">✨ その他</button>
+    </div>
+
+    <div class="artists-grid" id="artists-grid">
+
+      <div class="artist-card" data-genre="painting">
+        <div class="artist-avatar" style="background:var(--pink);">山</div>
+        <div class="artist-name">山田 花子</div>
+        <span class="artist-genre-tag genre-painting">🖼 絵画</span>
+        <p class="artist-note">日常に潜む光と影を水彩で描く。身近な風景に新しい名前をつけたい。</p>
+      </div>
+
+      <div class="artist-card" data-genre="theater">
+        <div class="artist-avatar" style="background:var(--orange);">鈴</div>
+        <div class="artist-name">鈴木 太郎</div>
+        <span class="artist-genre-tag genre-theater">🎭 演劇</span>
+        <p class="artist-note">即興演劇と身体表現でその場の空気をつくるパフォーマー。</p>
+      </div>
+
+      <div class="artist-card" data-genre="video">
+        <div class="artist-avatar" style="background:var(--blue);">田</div>
+        <div class="artist-name">田中 みほ</div>
+        <span class="artist-genre-tag genre-video">🎬 映像</span>
+        <p class="artist-note">富士見町の四季を記録するドキュメンタリー映像作家。</p>
+      </div>
+
+      <div class="artist-card" data-genre="toy">
+        <div class="artist-avatar" style="background:var(--green);">佐</div>
+        <div class="artist-name">佐藤 じろう</div>
+        <span class="artist-genre-tag genre-toy">🧸 おもちゃ</span>
+        <p class="artist-note">廃材で作る、触って動かせるインタラクティブなおもちゃアート。</p>
+      </div>
+
+      <div class="artist-card" data-genre="painting">
+        <div class="artist-avatar" style="background:var(--yellow);">中</div>
+        <div class="artist-name">中村 さくら</div>
+        <span class="artist-genre-tag genre-painting">🖼 絵画</span>
+        <p class="artist-note">抽象と具象の境界を探りながら、手芸との融合に挑む。</p>
+      </div>
+
+      <div class="artist-card" data-genre="video">
+        <div class="artist-avatar" style="background:var(--purple);">小</div>
+        <div class="artist-name">小林 ゆうき</div>
+        <span class="artist-genre-tag genre-video">🎬 映像</span>
+        <p class="artist-note">スマホ一台で地元の物語を切り取る、セルフ映像作家。</p>
+      </div>
+
+      <div class="artist-card" data-genre="theater">
+        <div class="artist-avatar" style="background:var(--red);">加</div>
+        <div class="artist-name">加藤 ひろし</div>
+        <span class="artist-genre-tag genre-theater">🎭 演劇</span>
+        <p class="artist-note">詩とダンスを融合させたコミカルなパフォーマンスが得意。</p>
+      </div>
+
+      <div class="artist-card" data-genre="toy">
+        <div class="artist-avatar" style="background:var(--pink);">渡</div>
+        <div class="artist-name">渡辺 あい</div>
+        <span class="artist-genre-tag genre-toy">🧸 おもちゃ</span>
+        <p class="artist-note">フェルトと布で作る、触れて遊べる柔らかなアート作品。</p>
+      </div>
+
+      <div class="artist-card" data-genre="other">
+        <div class="artist-avatar" style="background:var(--blue);">伊</div>
+        <div class="artist-name">伊藤 りか</div>
+        <span class="artist-genre-tag genre-other">✨ その他</span>
+        <p class="artist-note">陶芸とデジタルアートを掛け合わせた実験的なインスタレーション。</p>
+      </div>
+
+      <div class="artist-card" data-genre="painting">
+        <div class="artist-avatar" style="background:var(--orange);">松</div>
+        <div class="artist-name">松本 けんた</div>
+        <span class="artist-genre-tag genre-painting">🖼 絵画</span>
+        <p class="artist-note">地元の風景を大胆なアクリル絵の具で再解釈するアーティスト。</p>
+      </div>
+
+      <div class="artists-tbd" id="artists-tbd">
+        ＋ 続々と参加アーティストを公開中！<br>
+        <span style="font-weight:400; font-size:12px;">SNSをフォローしてチェックしよう</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var tabs  = document.querySelectorAll('.tab-btn');
+  var cards = document.querySelectorAll('.artist-card');
+  var tbd   = document.getElementById('artists-tbd');
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var genre = tab.dataset.genre;
+      var visible = 0;
+      cards.forEach(function (card) {
+        var show = genre === 'all' || card.dataset.genre === genre;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (tbd) tbd.style.display = genre === 'all' ? '' : 'none';
+    });
+  });
+})();
+</script>
 
 <!-- SNS TEASER -->
 <section class="sns">
