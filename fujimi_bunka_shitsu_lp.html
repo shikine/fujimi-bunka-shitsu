@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Shippori+Mincho:wght@400;700&display=swap');
+
+  :root {
+    --yellow: #FFE135;
+    --pink: #FF6B9D;
+    --blue: #4ECDC4;
+    --orange: #FF8C42;
+    --purple: #A855F7;
+    --green: #6BCB77;
+    --red: #FF4444;
+    --cream: #FFFDF5;
+    --dark: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: var(--yellow);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, var(--pink) 0 28px, transparent 28px),
+      radial-gradient(circle at 90% 15%, var(--blue) 0 20px, transparent 20px),
+      radial-gradient(circle at 80% 80%, var(--orange) 0 35px, transparent 35px),
+      radial-gradient(circle at 15% 75%, var(--purple) 0 22px, transparent 22px),
+      radial-gradient(circle at 50% 90%, var(--green) 0 18px, transparent 18px),
+      radial-gradient(circle at 30% 10%, var(--red) 0 14px, transparent 14px),
+      radial-gradient(circle at 70% 50%, var(--pink) 0 10px, transparent 10px);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    background: var(--dark);
+    color: var(--yellow);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .hero-title {
+    font-size: clamp(52px, 14vw, 110px);
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: -0.02em;
+    position: relative;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero-title span {
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero-title .line1 { color: var(--dark); }
+  .hero-title .line2 {
+    color: var(--pink);
+    -webkit-text-stroke: 2px var(--dark);
+  }
+  .hero-title .line3 { color: var(--dark); }
+
+  .hero-sub {
+    font-size: clamp(14px, 3.5vw, 18px);
+    font-weight: 500;
+    text-align: center;
+    margin-top: 24px;
+    max-width: 480px;
+    line-height: 1.8;
+    animation: fadeUp 0.7s 0.25s ease both;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 32px;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+
+  .badge {
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-1 { background: var(--pink); color: var(--dark); }
+  .badge-2 { background: var(--blue); color: var(--dark); }
+  .badge-3 { background: var(--orange); color: var(--dark); }
+  .badge-4 { background: var(--purple); color: white; border-color: var(--purple); }
+
+  .hero-cta {
+    margin-top: 44px;
+    animation: fadeUp 0.7s 0.45s ease both;
+  }
+
+  .btn-main {
+    display: inline-block;
+    background: var(--dark);
+    color: var(--yellow);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 3px solid var(--dark);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 4px 4px 0 var(--dark);
+  }
+
+  .btn-main:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dark);
+    opacity: 0.6;
+    animation: bounce 1.5s infinite;
+  }
+
+  /* ===== CONCEPT ===== */
+  .concept {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .concept::after {
+    content: 'ART';
+    position: absolute;
+    font-size: 200px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .concept-heading {
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 900;
+    line-height: 1.3;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .concept-heading .accent { color: var(--yellow); }
+
+  .concept-body {
+    font-size: 16px;
+    line-height: 2;
+    max-width: 520px;
+    margin: 28px auto 0;
+    opacity: 0.8;
+  }
+
+  /* ===== NAMING RULE ===== */
+  .naming {
+    padding: 80px 24px;
+    background: var(--cream);
+  }
+
+  .naming-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .naming-title {
+    font-size: clamp(24px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+
+  .naming-sub {
+    font-size: 15px;
+    line-height: 1.9;
+    opacity: 0.7;
+    margin-bottom: 44px;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 22px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s;
+  }
+
+  .step:hover { transform: translateX(4px); }
+
+  .step-num {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    min-width: 44px;
+  }
+
+  .step:nth-child(1) .step-num { color: var(--pink); }
+  .step:nth-child(2) .step-num { color: var(--blue); }
+  .step:nth-child(3) .step-num { color: var(--orange); }
+  .step:nth-child(4) .step-num { color: var(--purple); }
+
+  .step-content h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 14px;
+    opacity: 0.65;
+    line-height: 1.7;
+  }
+
+  /* ===== WHO ===== */
+  .who {
+    background: var(--pink);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .who-title {
+    font-size: clamp(26px, 7vw, 48px);
+    font-weight: 900;
+    margin-bottom: 36px;
+    color: var(--dark);
+  }
+
+  .who-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .who-card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 16px;
+    padding: 18px 24px;
+    text-align: center;
+    min-width: 130px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+
+  .who-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .who-icon { font-size: 32px; margin-bottom: 6px; }
+  .who-label { font-size: 14px; font-weight: 700; }
+
+  /* ===== SNS TEASER ===== */
+  .sns {
+    background: var(--blue);
+    padding: 80px 24px;
+    text-align: center;
+  }
+
+  .sns-title {
+    font-size: clamp(26px, 6vw, 44px);
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+
+  .sns-body {
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 460px;
+    margin: 0 auto 36px;
+    color: var(--dark);
+    opacity: 0.8;
+  }
+
+  .sns-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .sns-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 2.5px solid var(--dark);
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .sns-btn:hover {
+    background: var(--cream);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  /* ===== INFO ===== */
+  .info {
+    background: var(--cream);
+    padding: 80px 24px;
+  }
+
+  .info-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .info-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .info-table tr {
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+  }
+
+  .info-table td {
+    padding: 16px 0;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .info-table td:first-child {
+    font-weight: 700;
+    width: 100px;
+    color: var(--pink);
+  }
+
+  .info-cta {
+    text-align: center;
+    margin-top: 44px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: var(--cream);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  footer .footer-name {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--yellow);
+    margin-bottom: 8px;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50%       { transform: translateY(-8px) rotate(3deg); }
+  }
+
+  .float { animation: float 3s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">🎨 FUJIMI BUNKA SHITSU 2025</div>
+  <h1 class="hero-title">
+    <span class="line1">富士見</span><br>
+    <span class="line2">文化室</span><br>
+    <span class="line3" style="font-size:0.55em; letter-spacing:0.05em;">長野県富士見町</span>
+  </h1>
+  <p class="hero-sub">
+    みんなでつくる、アートの場所。<br>
+    素人もプロも、老いも若きも、子どもも。<br>
+    <strong>コミュニケーションが生まれる展示会</strong>
+  </p>
+  <div class="hero-badges">
+    <span class="badge badge-1">🖼 作品展示</span>
+    <span class="badge badge-2">🏷 名前をつけて購入</span>
+    <span class="badge badge-3">🎉 参加無料</span>
+    <span class="badge badge-4">👶〜👴 全年齢歓迎</span>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-main" onclick="document.querySelector('.info').scrollIntoView({behavior:'smooth'})">
+      くわしく見る ↓
+    </button>
+  </div>
+  <div class="scroll-hint">↓ スクロール</div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept">
+  <p class="section-label">Concept</p>
+  <h2 class="concept-heading">
+    アートで、<br>
+    <span class="accent">つながろう。</span>
+  </h2>
+  <p class="concept-body">
+    富士見文化室は、長野県富士見町で生まれるアートの場所。<br>
+    素人も、プロも、みんながアーティスト。<br>
+    作品を見て、話して、感じて。<br>
+    あなたと誰かをつなぐコミュニケーションが、ここから始まります。
+  </p>
+</section>
+
+<!-- NAMING RULE -->
+<section class="naming">
+  <div class="naming-inner">
+    <p class="section-label" style="opacity:0.4;">How to buy</p>
+    <h2 class="naming-title">🏷 名前をつけたら<br>買えるかも！？</h2>
+    <p class="naming-sub">
+      この展示会には、ユニークな購入ルールがあります。<br>
+      気に入った作品に、あなただけの名前をつけてみて。
+    </p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>作品と出会う</h3>
+          <p>展示されたたくさんの作品を自由に見てまわろう。ピンとくる作品を探してみて。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>名前をつける</h3>
+          <p>気に入った作品に、あなたが感じたタイトルをつけてみよう。センスが問われる！</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>アーティストが審査</h3>
+          <p>アーティスト本人がその名前を気に入ったら…あなたに購入の権利が！</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>作品があなたのもとへ</h3>
+          <p>名前をつけた人と作品の、新しい物語のはじまりです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who">
+  <p class="section-label" style="color:var(--dark); opacity:0.5;">Who</p>
+  <h2 class="who-title">みんな大歓迎！</h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-icon">👶</div>
+      <div class="who-label">子ども</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🧑</div>
+      <div class="who-label">若者</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">👩</div>
+      <div class="who-label">大人</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">👴</div>
+      <div class="who-label">お年寄り</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🎨</div>
+      <div class="who-label">アーティスト</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🌱</div>
+      <div class="who-label">アート初心者</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">🗾</div>
+      <div class="who-label">地元の方</div>
+    </div>
+    <div class="who-card">
+      <div class="who-icon">✈️</div>
+      <div class="who-label">旅行者</div>
+    </div>
+  </div>
+</section>
+
+<!-- SNS TEASER -->
+<section class="sns">
+  <p class="section-label" style="color:var(--dark); opacity:0.5;">SNS</p>
+  <h2 class="sns-title">最新情報は<br>SNSでチェック！</h2>
+  <p class="sns-body">
+    参加アーティストの紹介・開催情報・<br>
+    ウラ話まで、SNSで毎日発信中。<br>
+    フォローして、当日を一緒に楽しみにしよう！
+  </p>
+  <div class="sns-icons">
+    <div class="sns-btn">📸 Instagram</div>
+    <div class="sns-btn">🐦 X（Twitter）</div>
+    <div class="sns-btn">👥 Facebook</div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info">
+  <div class="info-inner">
+    <p class="section-label" style="text-align:center; opacity:0.4;">Event Info</p>
+    <h2 class="info-title">📅 開催情報</h2>
+    <table class="info-table">
+      <tr>
+        <td>開催地</td>
+        <td>長野県富士見町（詳細は後日発表）</td>
+      </tr>
+      <tr>
+        <td>日程</td>
+        <td>2025年　詳細近日公開</td>
+      </tr>
+      <tr>
+        <td>入場</td>
+        <td>無料</td>
+      </tr>
+      <tr>
+        <td>出展</td>
+        <td>素人・プロ問わず参加OK<br><span style="font-size:13px; opacity:0.6;">応募方法は後日SNSで告知</span></td>
+      </tr>
+      <tr>
+        <td>購入</td>
+        <td>名前をつけてアーティストが承認した場合のみ</td>
+      </tr>
+    </table>
+    <div class="info-cta">
+      <button class="btn-main" style="background:var(--pink); color:white; border-color:var(--pink); box-shadow:4px 4px 0 var(--dark);">
+        出展を検討する →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">富士見文化室</div>
+  <p>長野県富士見町発、みんなのアート展示会</p>
+  <p style="margin-top:12px; font-size:12px; opacity:0.4;">© 2025 富士見文化室</p>
+</footer>
+
+</body>
+</html>
