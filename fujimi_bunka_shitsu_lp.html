@@ -379,6 +379,102 @@
     transform: translateY(-2px);
   }
 
+  /* ===== NEWS ===== */
+  .news {
+    background: var(--cream);
+    padding: 80px 24px;
+  }
+
+  .news-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .news-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .news-sub {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-bottom: 36px;
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .news-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .news-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 90px;
+  }
+
+  .news-date {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .news-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    white-space: nowrap;
+  }
+
+  .tag-info { background: var(--yellow); }
+  .tag-event { background: var(--pink); }
+  .tag-art { background: var(--blue); }
+  .tag-other { background: var(--green); }
+
+  .news-text {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    padding-top: 2px;
+  }
+
+  .news-empty {
+    text-align: center;
+    padding: 48px 24px;
+    background: white;
+    border: 2.5px dashed rgba(0,0,0,0.15);
+    border-radius: 16px;
+    color: rgba(0,0,0,0.35);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
   /* ===== INFO ===== */
   .info {
     background: var(--cream);
@@ -603,6 +699,38 @@
     <div class="sns-btn">📸 Instagram</div>
     <div class="sns-btn">🐦 X（Twitter）</div>
     <div class="sns-btn">👥 Facebook</div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news">
+  <div class="news-inner">
+    <p class="section-label" style="opacity:0.4;">News</p>
+    <h2 class="news-title">📢 お知らせ</h2>
+    <p class="news-sub">最新の情報をお届けします</p>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-meta">
+          <span class="news-date">2025.05.01</span>
+          <span class="news-tag tag-info">お知らせ</span>
+        </div>
+        <div class="news-text">富士見文化室のウェブサイトをオープンしました！</div>
+      </div>
+      <div class="news-item">
+        <div class="news-meta">
+          <span class="news-date">2025.05.10</span>
+          <span class="news-tag tag-event">イベント</span>
+        </div>
+        <div class="news-text">開催日程・会場の詳細を近日公開予定です。SNSをフォローしてお待ちください。</div>
+      </div>
+      <div class="news-item">
+        <div class="news-meta">
+          <span class="news-date">2025.05.20</span>
+          <span class="news-tag tag-art">作品募集</span>
+        </div>
+        <div class="news-text">出展アーティスト募集開始。素人・プロ問わず、ぜひご応募ください！</div>
+      </div>
+    </div>
   </div>
 </section>
 
