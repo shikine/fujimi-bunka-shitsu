@@ -212,6 +212,100 @@
     opacity: 0.8;
   }
 
+  /* ===== MYSTERY ARTISTS ===== */
+  .mystery {
+    background: var(--cream);
+    padding: 80px 24px;
+  }
+
+  .mystery-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .mystery-title {
+    font-size: clamp(24px, 6vw, 40px);
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .mystery-lead {
+    font-size: 14px;
+    opacity: 0.55;
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  .artist-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .artist-card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 22px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+
+  .artist-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .artist-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    opacity: 0.35;
+    min-width: 40px;
+    padding-top: 3px;
+  }
+
+  .artist-body h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .artist-body p {
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.65;
+  }
+
+  .artist-hint {
+    display: inline-block;
+    background: var(--yellow);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 1;
+    color: var(--dark);
+    margin: 0 2px;
+  }
+
+  .artist-unknown {
+    border-style: dashed;
+    opacity: 0.55;
+    box-shadow: none;
+  }
+
+  .artist-unknown:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
   /* ===== NAMING RULE ===== */
   .naming {
     padding: 80px 24px;
@@ -740,15 +834,15 @@
     <span class="line3" style="font-size:0.55em; letter-spacing:0.05em;">長野県富士見町</span>
   </h1>
   <p class="hero-sub">
-    みんなでつくる、アートの場所。<br>
-    素人もプロも、老いも若きも、子どもも。<br>
-    <strong>コミュニケーションが生まれる展示会</strong>
+    作者は、謎のまま。<br>
+    あなたの言葉が、作品の名前になるかもしれない。<br>
+    <strong>500円から参加できる、ちょっと不思議な展示会。</strong>
   </p>
   <div class="hero-badges">
-    <span class="badge badge-1">🖼 作品展示</span>
-    <span class="badge badge-2">🏷 名前をつけて購入</span>
-    <span class="badge badge-3">🎉 参加無料</span>
-    <span class="badge badge-4">👶〜👴 全年齢歓迎</span>
+    <span class="badge badge-1">🎭 作者は匿名</span>
+    <span class="badge badge-2">🏷 名前をつけて参加</span>
+    <span class="badge badge-3">🎁 選ばれたらプレゼント</span>
+    <span class="badge badge-4">👁 鑑賞は無料</span>
   </div>
   <div class="hero-cta">
     <button class="btn-main" onclick="document.querySelector('.info').scrollIntoView({behavior:'smooth'})">
@@ -762,53 +856,110 @@
 <section class="concept">
   <p class="section-label">Concept</p>
   <h2 class="concept-heading">
-    アートで、<br>
-    <span class="accent">つながろう。</span>
+    アーティストは、<br>
+    <span class="accent">謎のまま。</span>
   </h2>
   <p class="concept-body">
-    富士見文化室は、長野県富士見町で生まれるアートの場所。<br>
-    素人も、プロも、みんながアーティスト。<br>
-    作品を見て、話して、感じて。<br>
-    あなたと誰かをつなぐコミュニケーションが、ここから始まります。
+    展示された作品には、作者の名前がない。<br>
+    でも、その筆跡や色使い、空気感に——どこかヒントが隠れている。<br>
+    あなたはその作品を感じて、言葉をひとつつける。<br>
+    その名前が選ばれたとき、あなたと作品の物語が始まります。
   </p>
+</section>
+
+<!-- MYSTERY ARTISTS -->
+<section class="mystery">
+  <div class="mystery-inner">
+    <p class="section-label" style="text-align:center; opacity:0.4;">Artists ― ?</p>
+    <h2 class="mystery-title">🎭 今回の出展者たち</h2>
+    <p class="mystery-lead">
+      名前は教えられません。でも、ヒントならある。<br>
+      あなたはこの作品が、誰のものか、わかりますか？
+    </p>
+    <div class="artist-cards">
+      <div class="artist-card">
+        <div class="artist-num">NO.1</div>
+        <div class="artist-body">
+          <h3>富士見町に<span class="artist-hint">移り住んで3年</span>の、元なにかのひと</h3>
+          <p>
+            以前は<span class="artist-hint">画面の前</span>で仕事をしていたらしい。
+            ある日<span class="artist-hint">八ヶ岳を見て</span>、気づいたら絵を描いていた。
+            好きな時間帯は<span class="artist-hint">朝靄のころ</span>。
+          </p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-num">NO.2</div>
+        <div class="artist-body">
+          <h3><span class="artist-hint">生まれも育ちも富士見</span>、ずっとここにいるひと</h3>
+          <p>
+            絵を習ったことは一度もない。
+            使う道具は<span class="artist-hint">台所にあるもの</span>だったりする。
+            テーマはいつも<span class="artist-hint">家族と食卓</span>、らしい。
+          </p>
+        </div>
+      </div>
+      <div class="artist-card">
+        <div class="artist-num">NO.3</div>
+        <div class="artist-body">
+          <h3><span class="artist-hint">週末だけ</span>アーティストになるひと</h3>
+          <p>
+            平日は別の顔を持っている。
+            山が好きで、<span class="artist-hint">標高1000m以上</span>でしか制作しないというこだわりがある。
+            サイズはいつも<span class="artist-hint">大きい</span>。
+          </p>
+        </div>
+      </div>
+      <div class="artist-card artist-unknown">
+        <div class="artist-num">NO.?</div>
+        <div class="artist-body">
+          <h3>もう一人いる、らしい</h3>
+          <p>
+            詳細は当日まで非公開。<br>
+            ヒントは、会場で。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- NAMING RULE -->
 <section class="naming">
   <div class="naming-inner">
-    <p class="section-label" style="opacity:0.4;">How to buy</p>
-    <h2 class="naming-title">🏷 名前をつけたら<br>買えるかも！？</h2>
+    <p class="section-label" style="opacity:0.4;">How to join</p>
+    <h2 class="naming-title">🏷 参加のしかた</h2>
     <p class="naming-sub">
-      この展示会には、ユニークな購入ルールがあります。<br>
-      気に入った作品に、あなただけの名前をつけてみて。
+      鑑賞は無料。でも、もし作品に名前をつけたくなったら——<br>
+      500円から参加できる、ちょっとドキドキな体験が待っています。
     </p>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-content">
-          <h3>作品と出会う</h3>
-          <p>展示されたたくさんの作品を自由に見てまわろう。ピンとくる作品を探してみて。</p>
+          <h3>作品と向き合う</h3>
+          <p>作者の名前は伏せられています。でも、何かが伝わってくる。素材、色、空気感——ヒントを探しながら、じっくり感じて。</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <div class="step-content">
-          <h3>名前をつける</h3>
-          <p>気に入った作品に、あなたが感じたタイトルをつけてみよう。センスが問われる！</p>
+          <h3>名前をつけて申し込む <span style="font-size:0.8em; opacity:0.65;">（500円〜 / 1作品）</span></h3>
+          <p>ピンときた作品に、あなただけの名前を。申込用紙に記入して、参加費を添えて投票箱へ。何点でも参加OK。</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-content">
-          <h3>アーティストが審査</h3>
-          <p>アーティスト本人がその名前を気に入ったら…あなたに購入の権利が！</p>
+          <h3>アーティストが選ぶ</h3>
+          <p>集まった名前の中から、アーティスト本人が「これだ」と思う一つを選びます。誰が選ばれるかは、発表まで誰にもわからない。</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
         <div class="step-content">
-          <h3>作品があなたのもとへ</h3>
-          <p>名前をつけた人と作品の、新しい物語のはじまりです。</p>
+          <h3>選ばれたら、作品がプレゼント 🎁</h3>
+          <p>選ばれた名前をつけた方に、アーティストから作品をプレゼント。その出会いが、新しい物語のはじまりです。</p>
         </div>
       </div>
     </div>
@@ -887,20 +1038,24 @@
       </tr>
       <tr>
         <td>入場</td>
-        <td>無料</td>
+        <td>無料（鑑賞のみの方も歓迎）</td>
+      </tr>
+      <tr>
+        <td>参加費</td>
+        <td>500円〜 / 1作品につき<br><span style="font-size:13px; opacity:0.6;">気に入った作品に名前をつけて申し込む場合</span></td>
       </tr>
       <tr>
         <td>出展</td>
-        <td>素人・プロ問わず参加OK<br><span style="font-size:13px; opacity:0.6;">応募方法は後日SNSで告知</span></td>
+        <td>匿名アーティストによる作品展示<br><span style="font-size:13px; opacity:0.6;">出展者の詳細は伏せています。ヒントを探してみて</span></td>
       </tr>
       <tr>
-        <td>購入</td>
-        <td>名前をつけてアーティストが承認した場合のみ</td>
+        <td>プレゼント</td>
+        <td>アーティストが選んだ名前をつけた方に、作品を贈呈</td>
       </tr>
     </table>
     <div class="info-cta">
       <button class="btn-main" style="background:var(--pink); color:white; border-color:var(--pink); box-shadow:4px 4px 0 var(--dark);">
-        出展を検討する →
+        SNSで最新情報を見る →
       </button>
     </div>
   </div>
