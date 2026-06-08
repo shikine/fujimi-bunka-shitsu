@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -1753,18 +1753,7 @@
         card.style.display = (genre === 'all' || card.dataset.genre === genre) ? '' : 'none';
       });
       if (tbd) tbd.style.display = genre === 'all' ? '' : 'none';
-      if (typeof setWorksFilter === 'function') setWorksFilter(genre, null);
-    });
-  });
-
-  // アーティストカードクリック → 作品セクションへスムーズスクロール + 絞り込み
-  cards.forEach(function (card) {
-    card.addEventListener('click', function () {
-      var artist = card.dataset.artist;
-      if (!artist) return;
-      if (typeof setWorksFilter === 'function') setWorksFilter('all', artist);
-      var worksEl = document.querySelector('.works');
-      if (worksEl) worksEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (typeof setWorksFilter === 'function') setWorksFilter(genre);
     });
   });
 })();
@@ -1785,7 +1774,7 @@
   <div class="works-scroll-wrap" id="works-wrap">
     <div class="works-track" id="works-track">
 
-      <div class="work-card" data-artist="山田 花子" data-genre="絵画" data-work-id="w001">
+      <div class="work-card" data-genre="絵画" data-work-id="w001">
         <div class="work-thumb" style="background:linear-gradient(135deg,#FF6B9D 0%,#FFE135 100%);">
           <div style="position:absolute;width:90px;height:90px;background:rgba(255,255,255,0.22);border-radius:50%;top:20px;left:20px;"></div>
           <div style="position:absolute;width:55px;height:55px;background:rgba(26,26,26,0.18);border-radius:50%;top:75px;left:130px;"></div>
@@ -1793,26 +1782,24 @@
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">山田 花子</p>
           <span class="work-genre-tag genre-painting">🖼 絵画</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="鈴木 太郎" data-genre="演劇" data-work-id="w002">
+      <div class="work-card" data-genre="演劇" data-work-id="w002">
         <div class="work-thumb" style="background:linear-gradient(160deg,#FF8C42 0%,#FF4444 100%);">
           <div style="position:absolute;width:0;height:0;border-left:52px solid transparent;border-right:52px solid transparent;border-bottom:90px solid rgba(255,255,255,0.22);top:36px;left:52px;"></div>
           <div style="position:absolute;width:28px;height:28px;background:rgba(255,255,255,0.3);border-radius:50%;top:140px;right:30px;"></div>
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">鈴木 太郎</p>
           <span class="work-genre-tag genre-theater">🎭 演劇</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="田中 みほ" data-genre="映像" data-work-id="w003">
+      <div class="work-card" data-genre="映像" data-work-id="w003">
         <div class="work-thumb" style="background:linear-gradient(180deg,#4ECDC4 0%,#1a1a1a 100%);">
           <div style="position:absolute;height:3px;background:rgba(255,255,255,0.25);left:0;right:0;top:50px;"></div>
           <div style="position:absolute;height:3px;background:rgba(255,255,255,0.15);left:0;right:0;top:80px;"></div>
@@ -1821,13 +1808,12 @@
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">田中 みほ</p>
           <span class="work-genre-tag genre-video">🎬 映像</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="佐藤 じろう" data-genre="おもちゃ" data-work-id="w004">
+      <div class="work-card" data-genre="おもちゃ" data-work-id="w004">
         <div class="work-thumb" style="background:linear-gradient(135deg,#6BCB77 0%,#FFE135 100%);">
           <div style="position:absolute;width:50px;height:50px;background:rgba(255,255,255,0.25);border-radius:6px;top:20px;left:20px;transform:rotate(12deg);"></div>
           <div style="position:absolute;width:38px;height:38px;background:rgba(26,26,26,0.15);border-radius:6px;top:30px;left:80px;transform:rotate(-8deg);"></div>
@@ -1836,13 +1822,12 @@
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">佐藤 じろう</p>
           <span class="work-genre-tag genre-toy">🧸 おもちゃ</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="中村 さくら" data-genre="絵画" data-work-id="w005">
+      <div class="work-card" data-genre="絵画" data-work-id="w005">
         <div class="work-thumb" style="background:linear-gradient(120deg,#A855F7 0%,#FF6B9D 100%);">
           <div style="position:absolute;width:100px;height:100px;background:rgba(255,255,255,0.12);border-radius:50%;top:-20px;right:-20px;"></div>
           <div style="position:absolute;width:70px;height:70px;background:rgba(255,255,255,0.15);border-radius:50%;bottom:0px;left:20px;"></div>
@@ -1850,13 +1835,12 @@
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">中村 さくら</p>
           <span class="work-genre-tag genre-painting">🖼 絵画</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="小林 ゆうき" data-genre="映像" data-work-id="w006">
+      <div class="work-card" data-genre="映像" data-work-id="w006">
         <div class="work-thumb" style="background:linear-gradient(200deg,#1a1a1a 0%,#4ECDC4 100%);">
           <div style="position:absolute;width:6px;height:6px;background:rgba(255,255,255,0.6);border-radius:50%;top:22px;left:30px;"></div>
           <div style="position:absolute;width:4px;height:4px;background:rgba(255,255,255,0.4);border-radius:50%;top:44px;left:80px;"></div>
@@ -1867,26 +1851,24 @@
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">小林 ゆうき</p>
           <span class="work-genre-tag genre-video">🎬 映像</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="加藤 ひろし" data-genre="演劇" data-work-id="w007">
+      <div class="work-card" data-genre="演劇" data-work-id="w007">
         <div class="work-thumb" style="background:linear-gradient(135deg,#FFE135 0%,#FF8C42 100%);">
           <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 18px,rgba(255,255,255,0.12) 18px,rgba(255,255,255,0.12) 20px);"></div>
           <div style="position:absolute;width:60px;height:60px;background:rgba(26,26,26,0.18);border-radius:50%;top:30px;left:80px;"></div>
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">加藤 ひろし</p>
           <span class="work-genre-tag genre-theater">🎭 演劇</span>
           <button class="work-btn">名前をつける →</button>
         </div>
       </div>
 
-      <div class="work-card" data-artist="渡辺 あい" data-genre="おもちゃ" data-work-id="w008">
+      <div class="work-card" data-genre="おもちゃ" data-work-id="w008">
         <div class="work-thumb" style="background:linear-gradient(135deg,#FF6B9D 0%,#6BCB77 100%);">
           <div style="position:absolute;width:70px;height:70px;background:rgba(255,255,255,0.2);border-radius:50%;top:20px;right:30px;"></div>
           <div style="position:absolute;width:45px;height:45px;background:rgba(255,255,255,0.15);border-radius:50%;top:70px;left:30px;"></div>
@@ -1894,7 +1876,6 @@
         </div>
         <div class="work-info">
           <p class="work-no-name">🏷 名前をつけてね</p>
-          <p class="work-artist">渡辺 あい</p>
           <span class="work-genre-tag genre-toy">🧸 おもちゃ</span>
           <button class="work-btn">名前をつける →</button>
         </div>
@@ -1940,17 +1921,16 @@
     });
     if (isAll) { addClones(); autoScrollOn = true; } else { autoScrollOn = false; }
     track.scrollLeft = 0;
-    updateBadge(genre, artist, count);
+    updateBadge(genre, count);
   };
 
-  function updateBadge(genre, artist, count) {
+  function updateBadge(genre, count) {
     var badge = document.getElementById('works-filter-badge');
     if (!badge) return;
-    var isAll = (!genre || genre === 'all') && !artist;
+    var isAll = !genre || genre === 'all';
     if (isAll) { badge.style.display = 'none'; return; }
     var map = { painting:'絵画', theater:'演劇', video:'映像', toy:'おもちゃ', other:'その他' };
-    var label = artist ? artist : (map[genre] || genre);
-    badge.querySelector('.badge-text').textContent = label + '（' + count + '件）';
+    badge.querySelector('.badge-text').textContent = (map[genre] || genre) + '（' + count + '件）';
     badge.style.display = 'inline-flex';
   }
 
