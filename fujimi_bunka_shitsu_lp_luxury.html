@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富士見文化室 2026 — 長野県富士見町</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Shippori+Mincho:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1C1C1E;
+    --ivory: #F8F5EF;
+    --white: #FFFFFF;
+    --gold: #B8973E;
+    --gold-light: #E3D4A4;
+    --warm-gray: #8A8280;
+    --stone: #EDE8E0;
+    --border: rgba(28,28,30,0.1);
+    --border-strong: rgba(28,28,30,0.22);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: var(--ivory);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes scaleX {
+    from { transform: scaleX(0); } to { transform: scaleX(1); }
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .site-header.scrolled {
+    background: rgba(248,245,239,0.96);
+    border-color: var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .site-header-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ivory);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    display: flex;
+    flex-direction: column;
+    transition: color 0.4s;
+  }
+  .site-header.scrolled .site-header-logo { color: var(--ink); }
+  .site-header-logo .logo-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.55rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    opacity: 0.65;
+    text-transform: uppercase;
+  }
+  .site-nav { display: flex; align-items: center; gap: 4px; }
+  .site-nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: rgba(248,245,239,0.75);
+    text-decoration: none;
+    padding: 4px 14px;
+    letter-spacing: 0.14em;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .site-header.scrolled .site-nav a { color: var(--warm-gray); }
+  .site-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 14px; right: 14px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.25s;
+    transform-origin: left;
+  }
+  .site-nav a:hover::after, .site-nav a.active::after { transform: scaleX(1); }
+  .site-nav a:hover { color: var(--ivory); }
+  .site-header.scrolled .site-nav a:hover,
+  .site-header.scrolled .site-nav a.active { color: var(--ink); }
+
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    background: none; border: none;
+    cursor: pointer; padding: 8px;
+  }
+  .nav-burger span {
+    display: block; height: 1px;
+    background: var(--ivory);
+    transition: transform 0.25s, opacity 0.25s, background 0.4s;
+  }
+  .site-header.scrolled .nav-burger span { background: var(--ink); }
+  .nav-burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(248,245,239,0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 999;
+    padding: 24px 48px 32px;
+    flex-direction: column;
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.1em;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .nav-drawer a:last-child { border-bottom: none; }
+  .nav-drawer a:hover { color: var(--gold); padding-left: 8px; }
+
+  @media (max-width: 768px) {
+    .site-nav { display: none; }
+    .nav-burger { display: flex; }
+    .site-header { padding: 0 24px; }
+  }
+  section[id] { scroll-margin-top: 64px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--ink);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 100px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 25% 15%, rgba(184,151,62,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 80%, rgba(184,151,62,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,151,62,0.4), transparent);
+  }
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.38em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 44px;
+    animation: fadeIn 1.2s ease both;
+  }
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(64px, 16vw, 140px);
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: var(--ivory);
+    animation: fadeUp 1s 0.25s ease both;
+  }
+  .hero-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(10px, 1.8vw, 14px);
+    font-weight: 300;
+    letter-spacing: 0.38em;
+    color: rgba(227,212,164,0.7);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 22px;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .hero-rule {
+    width: 56px; height: 1px;
+    background: var(--gold);
+    margin: 44px auto;
+    transform-origin: center;
+    animation: scaleX 0.8s 0.6s ease both;
+  }
+  .hero-sub {
+    font-size: clamp(13px, 2.2vw, 16px);
+    font-weight: 400;
+    text-align: center;
+    color: rgba(248,245,239,0.55);
+    max-width: 420px;
+    line-height: 2.3;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+  .hero-sub strong { color: var(--ivory); font-weight: 500; }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 44px;
+    animation: fadeUp 1s 0.65s ease both;
+  }
+  .hero-badge {
+    padding: 7px 18px;
+    border: 1px solid rgba(184,151,62,0.4);
+    border-radius: 100px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .hero-cta {
+    margin-top: 52px;
+    animation: fadeUp 1s 0.75s ease both;
+  }
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--ivory);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    padding: 13px 40px;
+    border: 1px solid rgba(184,151,62,0.55);
+    border-radius: 100px;
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    text-decoration: none;
+  }
+  .btn-outline:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px; left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: bounce 2s 1s infinite;
+  }
+  .scroll-hint-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: rgba(248,245,239,0.28);
+    text-transform: uppercase;
+  }
+  .scroll-hint-line {
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, rgba(184,151,62,0.5), transparent);
+  }
+
+  /* ── SHARED SECTION HELPERS ── */
+  .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .section-sub {
+    font-size: 14px;
+    line-height: 2.1;
+    opacity: 0.6;
+    margin-bottom: 56px;
+  }
+  .gold-rule {
+    width: 40px; height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+    margin: 32px 0;
+  }
+
+  /* ── CONCEPT ── */
+  .concept {
+    background: var(--ink);
+    color: var(--ivory);
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+  }
+  .concept::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,151,62,0.4), transparent);
+  }
+  .concept .eyebrow { color: rgba(184,151,62,0.8); }
+  .concept-heading {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(28px, 6vw, 50px);
+    font-weight: 700;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto;
+    letter-spacing: 0.04em;
+  }
+  .concept-heading .accent { color: var(--gold); }
+  .concept-rule {
+    width: 40px; height: 1px;
+    background: rgba(184,151,62,0.5);
+    margin: 40px auto;
+  }
+  .concept-body {
+    font-size: 15px;
+    line-height: 2.5;
+    max-width: 460px;
+    margin: 0 auto;
+    opacity: 0.6;
+  }
+
+  /* ── NAMING RULE ── */
+  .naming {
+    padding: 120px 48px;
+    background: var(--ivory);
+  }
+  .naming-inner { max-width: 660px; margin: 0 auto; }
+  .steps { display: flex; flex-direction: column; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    transition: opacity 0.2s;
+  }
+  .step:first-of-type { border-top: 1px solid var(--border); }
+  .step:hover { opacity: 0.65; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1;
+    min-width: 50px;
+    color: var(--gold);
+    letter-spacing: -0.02em;
+  }
+  .step-content h3 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .step-content p { font-size: 13px; opacity: 0.6; line-height: 1.9; }
+
+  /* ── WHO ── */
+  .who {
+    background: var(--stone);
+    padding: 120px 48px;
+    text-align: center;
+  }
+  .who-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 700;
+    margin-bottom: 56px;
+    letter-spacing: 0.04em;
+  }
+  .who-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .who-card {
+    background: var(--ivory);
+    border: 1px solid var(--border-strong);
+    padding: 20px 24px;
+    min-width: 130px;
+    transition: background 0.2s, transform 0.2s;
+    text-align: center;
+  }
+  .who-card:hover { background: var(--white); transform: translateY(-3px); }
+  .who-emoji { font-size: 26px; display: block; margin-bottom: 10px; }
+  .who-name { font-size: 12px; letter-spacing: 0.04em; line-height: 1.6; }
+
+  /* ── ARTISTS ── */
+  .artists {
+    padding: 120px 48px;
+    background: var(--ivory);
+  }
+  .artists-inner { max-width: 920px; margin: 0 auto; }
+  .artists-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .genre-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .genre-tab {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 5px 16px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--warm-gray);
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .genre-tab:hover { border-color: var(--gold); color: var(--ink); }
+  .genre-tab.active { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .artist-card {
+    background: var(--ivory);
+    padding: 32px 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .artist-card:hover { background: var(--white); }
+  .artist-avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--stone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 18px;
+  }
+  .artist-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  .artist-genre-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .artist-desc { font-size: 12px; line-height: 1.9; color: var(--warm-gray); }
+  .artist-card-link {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .artist-card:hover .artist-card-link { opacity: 1; }
+  .artists-tbd {
+    padding: 32px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    color: var(--warm-gray);
+    background: var(--ivory);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── WORKS ── */
+  .works {
+    padding: 100px 0 80px;
+    background: var(--ink);
+    overflow: hidden;
+    position: relative;
+  }
+  .works::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,151,62,0.4), transparent);
+  }
+  .works-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 48px;
+    margin-bottom: 44px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .works-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 700;
+    color: var(--ivory);
+    letter-spacing: 0.04em;
+  }
+  .works-filter-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 16px;
+    border: 1px solid rgba(184,151,62,0.35);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+  }
+  .works-filter-clear {
+    background: none; border: none;
+    color: var(--gold); cursor: pointer;
+    font-size: 14px; padding: 0; line-height: 1;
+  }
+  .works-scroll-wrap {
+    overflow-x: auto;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 48px;
+    user-select: none;
+  }
+  .works-scroll-wrap::-webkit-scrollbar { display: none; }
+  .works-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    padding-bottom: 4px;
+  }
+  .work-card {
+    width: 256px;
+    flex-shrink: 0;
+    background: #252525;
+    border: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .work-card:hover { border-color: rgba(184,151,62,0.5); transform: translateY(-4px); }
+  .work-thumb { height: 190px; overflow: hidden; }
+  .work-thumb-art { width: 100%; height: 100%; transition: transform 0.5s; }
+  .work-card:hover .work-thumb-art { transform: scale(1.04); }
+  .work-info { padding: 20px; }
+  .work-genre-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .work-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ivory);
+    margin-bottom: 3px;
+    letter-spacing: 0.04em;
+  }
+  .work-artist { font-size: 12px; color: var(--warm-gray); margin-bottom: 16px; }
+  .work-naming-btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    padding: 6px 14px;
+    border: 1px solid rgba(184,151,62,0.35);
+    cursor: pointer;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .work-naming-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+  /* ── SNS ── */
+  .sns {
+    background: var(--ink);
+    padding: 72px 48px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .sns-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(18px, 3vw, 26px);
+    color: var(--ivory);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .sns-sub { font-size: 13px; color: rgba(248,245,239,0.4); margin-bottom: 28px; }
+  .sns-handle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    border: 1px solid rgba(184,151,62,0.3);
+    padding: 10px 28px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .sns-handle:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── NEWS ── */
+  .news { padding: 120px 48px; background: var(--ivory); }
+  .news-inner { max-width: 680px; margin: 0 auto; }
+  .news-list { display: flex; flex-direction: column; }
+  .news-item {
+    display: grid;
+    grid-template-columns: 94px 72px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    transition: opacity 0.2s;
+  }
+  .news-item:first-child { border-top: 1px solid var(--border); }
+  .news-item:hover { opacity: 0.65; }
+  .news-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--warm-gray);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .news-tag-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .tag-info  { color: var(--gold); }
+  .tag-event { color: #7B9E87; }
+  .tag-art   { color: #8B7BAE; }
+  .news-text { font-size: 13px; line-height: 1.9; }
+
+  /* ── VENUE ── */
+  .venue { padding: 120px 48px; background: var(--stone); }
+  .venue-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  @media (max-width: 680px) { .venue-inner { grid-template-columns: 1fr; gap: 40px; } }
+  .venue-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  .venue-former { font-size: 12px; color: var(--warm-gray); margin-bottom: 32px; letter-spacing: 0.06em; }
+  .venue-dl { margin-bottom: 28px; }
+  .venue-dl dt {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 4px;
+  }
+  .venue-dl dd { font-size: 14px; line-height: 1.9; }
+  .venue-map-link {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(184,151,62,0.35);
+    padding-bottom: 3px;
+    transition: border-color 0.2s;
+  }
+  .venue-map-link:hover { border-color: var(--gold); }
+  .venue-map-wrap {
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+  }
+  .venue-map-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 1px solid var(--border-strong);
+    pointer-events: none;
+  }
+  .venue-map-wrap iframe { display: block; width: 100%; height: 320px; border: 0; }
+
+  /* ── INFO ── */
+  .info { padding: 120px 48px; background: var(--ivory); }
+  .info-inner { max-width: 660px; margin: 0 auto; }
+  .info-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+  .info-table tr { border-bottom: 1px solid var(--border); }
+  .info-table tr:first-child { border-top: 1px solid var(--border); }
+  .info-table th {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    font-weight: 400;
+    padding: 20px 0;
+    text-align: left;
+    width: 110px;
+    vertical-align: top;
+  }
+  .info-table td { font-size: 14px; padding: 20px 0; line-height: 1.9; vertical-align: top; }
+
+  /* ── CONTACT ── */
+  .contact {
+    padding: 120px 48px;
+    background: var(--ink);
+    position: relative;
+  }
+  .contact::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184,151,62,0.4), transparent);
+  }
+  .contact-inner { max-width: 580px; margin: 0 auto; }
+  .contact-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 700;
+    color: var(--ivory);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .contact-sub { font-size: 14px; color: rgba(248,245,239,0.45); line-height: 2.1; margin-bottom: 48px; }
+  .contact-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    padding: 40px;
+  }
+  .form-group { margin-bottom: 22px; }
+  .form-label {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(248,245,239,0.5);
+    margin-bottom: 8px;
+  }
+  .required { color: var(--gold); }
+  .form-input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+    border-radius: 0;
+    padding: 10px 0;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    background: transparent;
+    color: var(--ivory);
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .form-input::placeholder { color: rgba(248,245,239,0.22); }
+  .form-input:focus { border-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 100px; line-height: 1.8; }
+  .contact-select {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+    border-radius: 0;
+    padding: 10px 0;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    background: transparent;
+    color: var(--ivory);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B8973E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    padding-right: 18px;
+  }
+  .contact-select option { background: var(--ink); color: var(--ivory); }
+  .contact-select:focus { border-color: var(--gold); }
+  .contact-submit {
+    width: 100%;
+    background: transparent;
+    color: var(--ivory);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem;
+    padding: 14px;
+    border: 1px solid rgba(184,151,62,0.45);
+    cursor: pointer;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+    margin-top: 12px;
+  }
+  .contact-submit:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .contact-success { text-align: center; padding: 32px 0; color: var(--ivory); }
+  .contact-success h4 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 12px; letter-spacing: 0.04em;
+  }
+  .contact-success p { font-size: 13px; opacity: 0.5; line-height: 2.1; }
+
+  /* ── NAMING MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(28,28,30,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-card {
+    background: var(--ivory);
+    max-width: 460px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    padding: 48px 40px;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    font-size: 16px; color: var(--warm-gray);
+    transition: color 0.2s; padding: 4px;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .modal-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px; font-weight: 700;
+    margin-bottom: 8px; letter-spacing: 0.04em;
+  }
+  .modal-artist-info {
+    font-size: 13px; color: var(--warm-gray);
+    margin-bottom: 28px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-card .form-label { color: var(--ink); }
+  .modal-card .form-input { border-bottom: 1px solid var(--border-strong); color: var(--ink); }
+  .modal-card .form-input::placeholder { color: rgba(28,28,30,0.28); }
+  .modal-card .form-input:focus { border-color: var(--gold); }
+  .form-submit {
+    width: 100%;
+    background: var(--ink); color: var(--ivory);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem; padding: 14px;
+    border: none; cursor: pointer;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: #2e2e2e; transform: translateY(-1px); }
+  .naming-success { text-align: center; padding: 24px 0; }
+  .naming-success h4 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 10px;
+  }
+  .naming-success p { font-size: 13px; opacity: 0.6; line-height: 2.1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0e0e0f;
+    padding: 60px 48px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--ivory); letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  footer p { font-size: 12px; color: rgba(248,245,239,0.3); letter-spacing: 0.08em; line-height: 2.2; }
+
+  @media (max-width: 600px) {
+    .naming, .artists, .works-header, .news, .venue, .info, .contact { padding-left: 24px; padding-right: 24px; }
+    .news-item { grid-template-columns: 80px 1fr; }
+    .news-tag-badge { display: none; }
+    .contact-card { padding: 28px 20px; }
+    .modal-card { padding: 36px 20px; }
+    .works-scroll-wrap, .works-header { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header" id="site-header">
+  <a class="site-header-logo" href="#hero">
+    富士見文化室
+    <span class="logo-sub">Fujimi Bunka Shitsu 2026</span>
+  </a>
+  <nav class="site-nav" aria-label="メインメニュー">
+    <a href="#artists">Artists</a>
+    <a href="#works">Works</a>
+    <a href="#news">News</a>
+    <a href="#venue">Venue</a>
+    <a href="#info">Info</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="nav-burger" id="nav-burger" aria-label="メニューを開く" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="nav-drawer" id="nav-drawer" aria-label="モバイルメニュー">
+  <a href="#artists">アーティスト</a>
+  <a href="#works">作品</a>
+  <a href="#news">ニュース</a>
+  <a href="#venue">会場</a>
+  <a href="#info">概要</a>
+  <a href="#contact">お問い合わせ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">Nagano, Fujimi — 2026</div>
+  <h1 class="hero-title">富士見文化室</h1>
+  <p class="hero-en">Fujimi Bunka Shitsu</p>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">
+    みんなでつくる、アートの場所。<br>
+    素人もプロも、老いも若きも、子どもも。<br>
+    <strong>コミュニケーションが生まれる展示会</strong>
+  </p>
+  <div class="hero-badges">
+    <span class="hero-badge">作品展示</span>
+    <span class="hero-badge">名前をつけて購入</span>
+    <span class="hero-badge">参加無料</span>
+    <span class="hero-badge">全年齢歓迎</span>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-outline" onclick="document.querySelector('#info').scrollIntoView({behavior:'smooth'})">
+      Discover More
+    </button>
+  </div>
+  <div class="scroll-hint">
+    <span class="scroll-hint-label">Scroll</span>
+    <div class="scroll-hint-line"></div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept">
+  <span class="eyebrow">Our Concept</span>
+  <h2 class="concept-heading">
+    <span class="accent">アート</span>は、<br>むずかしくない。
+  </h2>
+  <div class="concept-rule"></div>
+  <p class="concept-body">
+    「好き」と思う気持ちが、すべての始まり。<br>
+    作品に名前をつけることで、<br>あなたもこの展示の一部になれます。
+  </p>
+</section>
+
+<!-- NAMING RULE -->
+<section class="naming">
+  <div class="naming-inner">
+    <span class="eyebrow">How It Works</span>
+    <h2 class="section-title">🏷 名前をつける、とは？</h2>
+    <p class="section-sub">
+      この展示では、作品に「名前」がついていません。<br>
+      気に入った作品に名前をつけて申請すると、<br>
+      アーティストが検討・承認します。承認されたら購入できます。
+    </p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <h3>作品を見る</h3>
+          <p>会場またはウェブで作品をじっくり鑑賞してください。</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <h3>名前を考える</h3>
+          <p>「これだ！」と思う作品に、あなたならではの名前を考えます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <h3>申請する</h3>
+          <p>フォームから名前・理由を送信。アーティストに届きます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <h3>承認 → 購入</h3>
+          <p>承認されたらメールでお知らせ。あなたの名付けた作品が手に入ります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who">
+  <span class="eyebrow" style="color:var(--warm-gray);">For Everyone</span>
+  <h2 class="who-title">こんな人に来てほしい</h2>
+  <div class="who-grid">
+    <div class="who-card"><span class="who-emoji">🎨</span><span class="who-name">はじめてアートに触れる人</span></div>
+    <div class="who-card"><span class="who-emoji">🖼</span><span class="who-name">作品を持ち帰りたい人</span></div>
+    <div class="who-card"><span class="who-emoji">🧒</span><span class="who-name">子どもと一緒に楽しみたい</span></div>
+    <div class="who-card"><span class="who-emoji">🎭</span><span class="who-name">表現を見せたいアーティスト</span></div>
+    <div class="who-card"><span class="who-emoji">🏡</span><span class="who-name">地域の文化に関わりたい</span></div>
+  </div>
+</section>
+
+<!-- ARTISTS -->
+<section class="artists" id="artists">
+  <div class="artists-inner">
+    <div class="artists-header">
+      <div>
+        <span class="eyebrow">Participating Artists</span>
+        <h2 class="section-title">参加アーティスト</h2>
+      </div>
+      <div class="genre-tabs" id="genre-tabs">
+        <button class="genre-tab active" data-genre="all">All</button>
+        <button class="genre-tab" data-genre="絵画">Painting</button>
+        <button class="genre-tab" data-genre="演劇">Theater</button>
+        <button class="genre-tab" data-genre="映像">Video</button>
+        <button class="genre-tab" data-genre="おもちゃ">Toy</button>
+        <button class="genre-tab" data-genre="その他">Other</button>
+      </div>
+    </div>
+    <div class="artists-grid" id="artists-grid">
+      <div class="artist-card" data-genre="絵画" data-artist="山田 花子">
+        <div class="artist-avatar">🎨</div>
+        <div class="artist-name">山田 花子</div>
+        <span class="artist-genre-tag">Painting</span>
+        <p class="artist-desc">色と形で語る抽象絵画。見る人の記憶を呼び起こす作風。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="演劇" data-artist="鈴木 太郎">
+        <div class="artist-avatar">🎭</div>
+        <div class="artist-name">鈴木 太郎</div>
+        <span class="artist-genre-tag">Theater</span>
+        <p class="artist-desc">身体と空間を使ったパフォーマンスアート。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="映像" data-artist="田中 みほ">
+        <div class="artist-avatar">🎬</div>
+        <div class="artist-name">田中 みほ</div>
+        <span class="artist-genre-tag">Video</span>
+        <p class="artist-desc">日常の断片を編集した短編映像作品。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="おもちゃ" data-artist="佐藤 じろう">
+        <div class="artist-avatar">🪆</div>
+        <div class="artist-name">佐藤 じろう</div>
+        <span class="artist-genre-tag">Toy</span>
+        <p class="artist-desc">木と布で作る、動く立体作品。遊べるアート。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="絵画" data-artist="中村 さくら">
+        <div class="artist-avatar">🌸</div>
+        <div class="artist-name">中村 さくら</div>
+        <span class="artist-genre-tag">Painting</span>
+        <p class="artist-desc">植物と自然をモチーフにした繊細な水彩画。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="映像" data-artist="小林 ゆうき">
+        <div class="artist-avatar">📽</div>
+        <div class="artist-name">小林 ゆうき</div>
+        <span class="artist-genre-tag">Video</span>
+        <p class="artist-desc">自然音と映像を組み合わせたインスタレーション。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="演劇" data-artist="加藤 ひろし">
+        <div class="artist-avatar">🎪</div>
+        <div class="artist-name">加藤 ひろし</div>
+        <span class="artist-genre-tag">Theater</span>
+        <p class="artist-desc">即興と構成を組み合わせたパフォーマンス。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="おもちゃ" data-artist="渡辺 あい">
+        <div class="artist-avatar">🧸</div>
+        <div class="artist-name">渡辺 あい</div>
+        <span class="artist-genre-tag">Toy</span>
+        <p class="artist-desc">廃材を再利用した、壊れないおもちゃの彫刻。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="その他" data-artist="伊藤 かずや">
+        <div class="artist-avatar">✨</div>
+        <div class="artist-name">伊藤 かずや</div>
+        <span class="artist-genre-tag">Other</span>
+        <p class="artist-desc">陶芸と詩を組み合わせた複合アート作品。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+      <div class="artist-card" data-genre="絵画" data-artist="松本 なな">
+        <div class="artist-avatar">🖌</div>
+        <div class="artist-name">松本 なな</div>
+        <span class="artist-genre-tag">Painting</span>
+        <p class="artist-desc">大判キャンバスに描く、夢と現実が混ざった絵画。</p>
+        <span class="artist-card-link">View Works →</span>
+      </div>
+    </div>
+    <div class="artists-tbd" id="artists-tbd">+ More artists to be announced</div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="works" id="works">
+  <div class="works-header">
+    <div>
+      <span class="eyebrow" style="color:rgba(184,151,62,0.8);">Featured Works</span>
+      <h2 class="works-title">作品ギャラリー</h2>
+    </div>
+    <div id="works-filter-badge" style="display:none;" class="works-filter-badge">
+      <span id="works-filter-text"></span>
+      <button id="works-filter-clear" class="works-filter-clear" aria-label="フィルターを解除">✕</button>
+    </div>
+  </div>
+  <div class="works-scroll-wrap" id="works-wrap">
+    <div class="works-track" id="works-track">
+      <div class="work-card" data-artist="山田 花子" data-genre="絵画" data-work-id="w001">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#2C1654,#7B2D8B 45%,#E8A838);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Painting</span>
+          <div class="work-title">無題 #1</div>
+          <div class="work-artist">山田 花子</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w001','山田 花子','絵画','無題 #1')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="鈴木 太郎" data-genre="演劇" data-work-id="w002">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#1a1a2e,#16213e 40%,#e94560);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Theater</span>
+          <div class="work-title">残響</div>
+          <div class="work-artist">鈴木 太郎</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w002','鈴木 太郎','演劇','残響')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="田中 みほ" data-genre="映像" data-work-id="w003">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#0f2027,#203a43 50%,#2c5364);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Video</span>
+          <div class="work-title">記録、あるいは</div>
+          <div class="work-artist">田中 みほ</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w003','田中 みほ','映像','記録、あるいは')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="佐藤 じろう" data-genre="おもちゃ" data-work-id="w004">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#2d4a22,#4a7c3f 50%,#8bc34a);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Toy</span>
+          <div class="work-title">動く森</div>
+          <div class="work-artist">佐藤 じろう</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w004','佐藤 じろう','おもちゃ','動く森')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="中村 さくら" data-genre="絵画" data-work-id="w005">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#fce4ec,#f48fb1 50%,#ad1457);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Painting</span>
+          <div class="work-title">春の気配</div>
+          <div class="work-artist">中村 さくら</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w005','中村 さくら','絵画','春の気配')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="小林 ゆうき" data-genre="映像" data-work-id="w006">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#1c1c1c,#3d3d3d 40%,#b8b8b8);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Video</span>
+          <div class="work-title">静寂</div>
+          <div class="work-artist">小林 ゆうき</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w006','小林 ゆうき','映像','静寂')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="加藤 ひろし" data-genre="演劇" data-work-id="w007">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#4a0000,#8b0000 40%,#ff6b6b);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Theater</span>
+          <div class="work-title">衝動</div>
+          <div class="work-artist">加藤 ひろし</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w007','加藤 ひろし','演劇','衝動')">Name This Work</button>
+        </div>
+      </div>
+      <div class="work-card" data-artist="渡辺 あい" data-genre="おもちゃ" data-work-id="w008">
+        <div class="work-thumb"><div class="work-thumb-art" style="background:linear-gradient(135deg,#4a3728,#7d5a3c 50%,#c8a876);"></div></div>
+        <div class="work-info">
+          <span class="work-genre-tag">Toy</span>
+          <div class="work-title">壊れないもの</div>
+          <div class="work-artist">渡辺 あい</div>
+          <button class="work-naming-btn" onclick="openNamingModal('w008','渡辺 あい','おもちゃ','壊れないもの')">Name This Work</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SNS -->
+<section class="sns">
+  <h2 class="sns-title">SNSで最新情報をチェック</h2>
+  <p class="sns-sub">開催情報・アーティスト紹介を随時更新中</p>
+  <span class="sns-handle">@fujimi_bunkashitsu</span>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="news-inner">
+    <span class="eyebrow">Latest News</span>
+    <h2 class="section-title">お知らせ</h2>
+    <div class="news-list" id="news-list"></div>
+  </div>
+</section>
+
+<!-- VENUE -->
+<section class="venue" id="venue">
+  <div class="venue-inner">
+    <div>
+      <span class="eyebrow">Venue</span>
+      <h2 class="venue-name">キリン堂</h2>
+      <p class="venue-former">元・靴屋さんの建物</p>
+      <dl class="venue-dl">
+        <dt>Address</dt>
+        <dd>〒399-0211<br>長野県諏訪郡富士見町富士見 4654-74</dd>
+      </dl>
+      <a class="venue-map-link" href="https://maps.google.com/?q=長野県諏訪郡富士見町富士見4654-74" target="_blank" rel="noopener">
+        Google Maps で開く →
+      </a>
+    </div>
+    <div class="venue-map-wrap">
+      <iframe
+        src="https://maps.google.com/maps?q=長野県諏訪郡富士見町富士見4654-74&output=embed&z=15"
+        width="400" height="320"
+        loading="lazy" allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info" id="info">
+  <div class="info-inner">
+    <span class="eyebrow">Exhibition Info</span>
+    <h2 class="section-title">開催概要</h2>
+    <table class="info-table">
+      <tr><th>会期</th><td>2026年　詳細近日公開</td></tr>
+      <tr><th>会場</th><td>キリン堂（元靴屋）<br>長野県諏訪郡富士見町富士見 4654-74</td></tr>
+      <tr><th>入場料</th><td>無料</td></tr>
+      <tr><th>主催</th><td>富士見文化室</td></tr>
+      <tr><th>お問合せ</th><td>下記フォームよりご連絡ください</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <span class="eyebrow">Contact / Inquiry</span>
+    <h2 class="contact-title">出展・お問い合わせ</h2>
+    <p class="contact-sub">
+      出展のご相談、取材・その他のお問い合わせはこちらからどうぞ。<br>
+      確認後、担当者よりご連絡いたします。
+    </p>
+    <div class="contact-card">
+      <form id="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="c-name">お名前 <span class="required">*</span></label>
+          <input type="text" class="form-input" id="c-name" placeholder="山田 花子" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-email">メールアドレス <span class="required">*</span></label>
+          <input type="email" class="form-input" id="c-email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-type">お問い合わせ種別 <span class="required">*</span></label>
+          <select class="contact-select" id="c-type" required>
+            <option value="">選択してください</option>
+            <option value="exhibit">出展希望</option>
+            <option value="press">取材・メディア</option>
+            <option value="sponsor">協賛・協力</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-message">メッセージ <span class="required">*</span></label>
+          <textarea class="form-input form-textarea" id="c-message" placeholder="ご相談内容をお書きください" required></textarea>
+        </div>
+        <button type="submit" class="contact-submit">Send Message</button>
+      </form>
+      <div id="contact-success" style="display:none;" class="contact-success">
+        <div style="font-size:44px;margin-bottom:16px;">✉</div>
+        <h4>送信しました</h4>
+        <p>お問い合わせありがとうございます。<br>内容を確認し、折り返しご連絡いたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">富士見文化室</div>
+  <p>長野県富士見町発、みんなのアート展示会</p>
+  <p style="margin-top:10px;">© 2026 富士見文化室</p>
+</footer>
+
+<!-- NAMING MODAL -->
+<div class="modal-overlay" id="naming-modal">
+  <div class="modal-card">
+    <button class="modal-close" id="modal-close-btn">✕</button>
+    <p class="modal-label">Naming Application</p>
+    <h3 class="modal-title">名前をつける</h3>
+    <div class="modal-artist-info" id="modal-artist-info"></div>
+    <form id="naming-form">
+      <div class="form-group">
+        <label class="form-label" for="f-title">作品につける名前 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="f-title" placeholder="あなたの名付け" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-person">あなたのお名前 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="f-person" placeholder="山田 花子" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-email">メールアドレス <span class="required">*</span></label>
+        <input type="email" class="form-input" id="f-email" placeholder="example@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-comment">名前の理由・コメント</label>
+        <textarea class="form-input form-textarea" id="f-comment" placeholder="なぜこの名前にしようと思ったか"></textarea>
+      </div>
+      <button type="submit" class="form-submit">申請する</button>
+    </form>
+    <div id="naming-success" style="display:none;" class="naming-success">
+      <div style="font-size:48px;margin-bottom:16px;">🎉</div>
+      <h4>申請しました！</h4>
+      <p>アーティストが確認します。<br>承認されたらメールでご連絡します。</p>
+      <button class="form-submit" onclick="closeNamingModal()" style="margin-top:24px;">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
+
+  /* NEWS */
+  var DEFAULT_POSTS = [
+    { id:'d1', date:'2026-05-01', tag:'info',  text:'富士見文化室のウェブサイトをオープンしました！' },
+    { id:'d2', date:'2026-05-10', tag:'event', text:'開催日程・会場の詳細を近日公開予定です。SNSをフォローしてお待ちください。' },
+    { id:'d3', date:'2026-05-20', tag:'art',   text:'出展アーティスト募集開始。素人・プロ問わず、ぜひご応募ください！' },
+  ];
+  function renderPosts(posts) {
+    var list = document.getElementById('news-list');
+    list.innerHTML = '';
+    posts.forEach(function(p) {
+      var tc = p.tag==='info'?'tag-info':p.tag==='event'?'tag-event':'tag-art';
+      var tl = p.tag==='info'?'Info':p.tag==='event'?'Event':'Art';
+      var el = document.createElement('div');
+      el.className = 'news-item';
+      el.innerHTML = '<span class="news-date">'+p.date+'</span>'
+        +'<span class="news-tag-badge '+tc+'">'+tl+'</span>'
+        +'<p class="news-text">'+p.text+'</p>';
+      list.appendChild(el);
+    });
+  }
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL') {
+    fetch(APPS_SCRIPT_URL+'?type=news')
+      .then(function(r){return r.json();})
+      .then(function(d){renderPosts(Array.isArray(d)&&d.length?d:DEFAULT_POSTS);})
+      .catch(function(){renderPosts(DEFAULT_POSTS);});
+  } else { renderPosts(DEFAULT_POSTS); }
+
+  /* WORKS CAROUSEL */
+  (function(){
+    var wrap=document.getElementById('works-wrap');
+    var track=document.getElementById('works-track');
+    var badge=document.getElementById('works-filter-badge');
+    var badgeText=document.getElementById('works-filter-text');
+    var clearBtn=document.getElementById('works-filter-clear');
+    var originals=Array.from(track.querySelectorAll('.work-card:not([data-clone])'));
+    var autoScrollOn=true, speed=0.55;
+    function addClones(){
+      originals.forEach(function(el){var c=el.cloneNode(true);c.dataset.clone='1';track.appendChild(c);});
+    }
+    addClones();
+    function step(){
+      if(autoScrollOn){
+        wrap.scrollLeft+=speed;
+        var half=track.scrollWidth/2;
+        if(wrap.scrollLeft>=half) wrap.scrollLeft-=half;
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    var dragging=false,startX=0,startScroll=0;
+    wrap.addEventListener('mousedown',function(e){dragging=true;startX=e.pageX;startScroll=wrap.scrollLeft;wrap.style.cursor='grabbing';autoScrollOn=false;});
+    document.addEventListener('mousemove',function(e){if(!dragging)return;wrap.scrollLeft=startScroll-(e.pageX-startX);});
+    document.addEventListener('mouseup',function(){if(!dragging)return;dragging=false;wrap.style.cursor='grab';setTimeout(function(){autoScrollOn=true;},2000);});
+    wrap.addEventListener('touchstart',function(e){startX=e.touches[0].pageX;startScroll=wrap.scrollLeft;autoScrollOn=false;},{passive:true});
+    wrap.addEventListener('touchmove',function(e){wrap.scrollLeft=startScroll-(e.touches[0].pageX-startX);},{passive:true});
+    wrap.addEventListener('touchend',function(){setTimeout(function(){autoScrollOn=true;},2000);});
+    function updateBadge(genre,artist,count){
+      if(!genre&&!artist){badge.style.display='none';return;}
+      badgeText.textContent=(artist||genre)+' — '+count+' works';
+      badge.style.display='flex';
+    }
+    window.setWorksFilter=function(genre,artist){
+      var isAll=(!genre||genre==='all')&&!artist;
+      track.querySelectorAll('[data-clone]').forEach(function(el){el.remove();});
+      var count=0;
+      originals.forEach(function(el){
+        var gm=!genre||genre==='all'||el.dataset.genre===genre;
+        var am=!artist||el.dataset.artist===artist;
+        var show=gm&&am;
+        el.style.display=show?'':'none';
+        if(show)count++;
+      });
+      if(isAll){addClones();autoScrollOn=true;}else{autoScrollOn=false;}
+      wrap.scrollLeft=0;
+      updateBadge(genre,artist,count);
+    };
+    clearBtn.addEventListener('click',function(){window.setWorksFilter('all');});
+  })();
+
+  /* ARTISTS TABS */
+  (function(){
+    var tabs=document.querySelectorAll('.genre-tab');
+    var cards=document.querySelectorAll('#artists-grid .artist-card');
+    var tbd=document.getElementById('artists-tbd');
+    tabs.forEach(function(tab){
+      tab.addEventListener('click',function(){
+        tabs.forEach(function(t){t.classList.remove('active');});
+        tab.classList.add('active');
+        var genre=tab.dataset.genre;
+        cards.forEach(function(card){card.style.display=(genre==='all'||card.dataset.genre===genre)?'':'none';});
+        if(tbd)tbd.style.display=genre==='all'?'':'none';
+        if(typeof window.setWorksFilter==='function')window.setWorksFilter(genre,'');
+      });
+    });
+    cards.forEach(function(card){
+      card.addEventListener('click',function(){
+        var artist=card.dataset.artist;
+        if(!artist)return;
+        if(typeof setWorksFilter==='function')setWorksFilter('all',artist);
+        var w=document.querySelector('#works');
+        if(w)w.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+  })();
+
+  /* NAMING MODAL */
+  var currentWork={};
+  function openNamingModal(workId,artist,genre,title){
+    currentWork={workId:workId,artist:artist,genre:genre,title:title};
+    document.getElementById('modal-artist-info').textContent=artist+' ／ '+genre+' ／ 「'+title+'」';
+    document.getElementById('naming-form').style.display='';
+    document.getElementById('naming-form').reset();
+    document.getElementById('naming-success').style.display='none';
+    document.getElementById('naming-modal').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeNamingModal(){
+    document.getElementById('naming-modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+  document.getElementById('modal-close-btn').addEventListener('click',closeNamingModal);
+  document.getElementById('naming-modal').addEventListener('click',function(e){if(e.target===this)closeNamingModal();});
+  document.getElementById('naming-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var payload=Object.assign({},currentWork,{
+      type:'naming',
+      namingTitle:document.getElementById('f-title').value.trim(),
+      person:document.getElementById('f-person').value.trim(),
+      email:document.getElementById('f-email').value.trim(),
+      comment:document.getElementById('f-comment').value.trim(),
+      submittedAt:new Date().toISOString()
+    });
+    if(APPS_SCRIPT_URL&&APPS_SCRIPT_URL!=='YOUR_APPS_SCRIPT_URL'){
+      fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(JSON.stringify(payload))}).catch(function(){});
+    }
+    document.getElementById('naming-form').style.display='none';
+    document.getElementById('naming-success').style.display='';
+  });
+
+  /* CONTACT FORM */
+  (function(){
+    var form=document.getElementById('contact-form');
+    var success=document.getElementById('contact-success');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=form.querySelector('.contact-submit');
+      btn.disabled=true; btn.textContent='Sending…';
+      var payload={type:'contact',name:document.getElementById('c-name').value.trim(),email:document.getElementById('c-email').value.trim(),inquiryType:document.getElementById('c-type').value,message:document.getElementById('c-message').value.trim(),submittedAt:new Date().toISOString()};
+      var send=(APPS_SCRIPT_URL&&APPS_SCRIPT_URL!=='YOUR_APPS_SCRIPT_URL')?fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'data='+encodeURIComponent(JSON.stringify(payload))}).catch(function(){}):Promise.resolve();
+      send.finally(function(){form.style.display='none';success.style.display='block';});
+    });
+  })();
+
+  /* HEADER NAV */
+  (function(){
+    var header=document.getElementById('site-header');
+    var burger=document.getElementById('nav-burger');
+    var drawer=document.getElementById('nav-drawer');
+    window.addEventListener('scroll',function(){
+      header.classList.toggle('scrolled',window.scrollY>60);
+      updateActive();
+    },{passive:true});
+    burger.addEventListener('click',function(){
+      var open=drawer.classList.toggle('open');
+      burger.classList.toggle('open',open);
+      burger.setAttribute('aria-expanded',String(open));
+    });
+    drawer.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drawer.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');});
+    });
+    var ids=['artists','works','news','venue','info','contact'];
+    function updateActive(){
+      var cur='';
+      ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=100)cur=id;});
+      document.querySelectorAll('.site-nav a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href').replace('#','')===cur);});
+    }
+  })();
+</script>
+</body>
+</html>

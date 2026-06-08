@@ -36,7 +36,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 24px 80px;
+    padding: 116px 24px 80px;
     overflow: hidden;
   }
 
@@ -212,100 +212,6 @@
     opacity: 0.8;
   }
 
-  /* ===== MYSTERY ARTISTS ===== */
-  .mystery {
-    background: var(--cream);
-    padding: 80px 24px;
-  }
-
-  .mystery-inner {
-    max-width: 680px;
-    margin: 0 auto;
-  }
-
-  .mystery-title {
-    font-size: clamp(24px, 6vw, 40px);
-    font-weight: 900;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  .mystery-lead {
-    font-size: 14px;
-    opacity: 0.55;
-    text-align: center;
-    margin-bottom: 40px;
-    line-height: 1.8;
-  }
-
-  .artist-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .artist-card {
-    background: white;
-    border: 2.5px solid var(--dark);
-    border-radius: 20px;
-    padding: 22px 28px;
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    box-shadow: 4px 4px 0 var(--dark);
-    transition: transform 0.15s, box-shadow 0.15s;
-    cursor: default;
-  }
-
-  .artist-card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--dark);
-  }
-
-  .artist-num {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    opacity: 0.35;
-    min-width: 40px;
-    padding-top: 3px;
-  }
-
-  .artist-body h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
-  .artist-body p {
-    font-size: 14px;
-    line-height: 1.8;
-    opacity: 0.65;
-  }
-
-  .artist-hint {
-    display: inline-block;
-    background: var(--yellow);
-    border-radius: 4px;
-    padding: 1px 6px;
-    font-size: 12px;
-    font-weight: 700;
-    opacity: 1;
-    color: var(--dark);
-    margin: 0 2px;
-  }
-
-  .artist-unknown {
-    border-style: dashed;
-    opacity: 0.55;
-    box-shadow: none;
-  }
-
-  .artist-unknown:hover {
-    transform: none;
-    box-shadow: none;
-  }
-
   /* ===== NAMING RULE ===== */
   .naming {
     padding: 80px 24px;
@@ -473,6 +379,102 @@
     transform: translateY(-2px);
   }
 
+  /* ===== NEWS ===== */
+  .news {
+    background: var(--cream);
+    padding: 80px 24px;
+  }
+
+  .news-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .news-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .news-sub {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-bottom: 36px;
+  }
+
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .news-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .news-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 90px;
+  }
+
+  .news-date {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .news-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    white-space: nowrap;
+  }
+
+  .tag-info { background: var(--yellow); }
+  .tag-event { background: var(--pink); }
+  .tag-art { background: var(--blue); }
+  .tag-other { background: var(--green); }
+
+  .news-text {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    padding-top: 2px;
+  }
+
+  .news-empty {
+    text-align: center;
+    padding: 48px 24px;
+    background: white;
+    border: 2.5px dashed rgba(0,0,0,0.15);
+    border-radius: 16px;
+    color: rgba(0,0,0,0.35);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
   /* ===== INFO ===== */
   .info {
     background: var(--cream);
@@ -557,292 +559,822 @@
 
   .float { animation: float 3s ease-in-out infinite; }
 
-  /* ===== A/B/C TEST: VARIANT C (モネ印象派) ===== */
-  body.variant-c {
-    --yellow: #E8D5B0;
-    --pink: #C9A0A8;
-    --blue: #7BAFC4;
-    --orange: #C4A882;
-    --purple: #9B8FBD;
-    --green: #8AAF96;
-    --red: #C4889A;
-    --cream: #F0EBE3;
-    --dark: #3D3550;
+  /* ===== ARTISTS ===== */
+  .artists {
+    background: var(--cream);
+    padding: 80px 24px;
   }
 
-  body.variant-c .hero {
-    background: linear-gradient(160deg, #B8C9D9 0%, #C9B8D4 35%, #D4C9B8 65%, #B8D4C9 100%);
+  .artists-inner {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .artists-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .artists-sub {
+    font-size: 15px;
+    opacity: 0.6;
+    margin-bottom: 32px;
+    line-height: 1.8;
+  }
+
+  .artists-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .tab-btn {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s, background 0.12s, color 0.12s, box-shadow 0.12s;
+    box-shadow: 3px 3px 0 var(--dark);
+  }
+
+  .tab-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--dark);
+  }
+
+  .tab-btn.active {
+    background: var(--dark);
+    color: var(--yellow);
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+  }
+
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
+  }
+
+  .artist-card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+
+  .artist-card-works-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--pink);
+    opacity: 0;
+    transition: opacity 0.15s;
+    letter-spacing: 0.04em;
+  }
+
+  .artist-card:hover .artist-card-works-link { opacity: 1; }
+
+  .artist-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  .artist-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 2.5px solid var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 14px;
+  }
+
+  .artist-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .artist-genre-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .genre-painting { background: var(--pink); }
+  .genre-theater  { background: var(--orange); }
+  .genre-video    { background: var(--blue); }
+  .genre-toy      { background: var(--green); }
+  .genre-other    { background: var(--purple); color: white; border-color: var(--purple); }
+
+  .artist-note {
+    font-size: 13px;
+    opacity: 0.6;
+    line-height: 1.7;
+  }
+
+  .artists-tbd {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 32px;
+    background: white;
+    border: 2.5px dashed rgba(0,0,0,0.15);
+    border-radius: 16px;
+    color: rgba(0,0,0,0.35);
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 700;
+  }
+
+  /* ===== WORKS ===== */
+  .works {
+    background: var(--dark);
+    padding: 80px 0 52px;
+    overflow: hidden;
+  }
+
+  .works-header {
+    padding: 0 24px 36px;
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .works-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .works-sub {
+    font-size: 15px;
+    color: var(--cream);
+    opacity: 0.6;
+    line-height: 1.8;
+  }
+
+  .works-scroll-wrap {
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .works-scroll-wrap.is-dragging { cursor: grabbing; }
+
+  .works-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 8px 24px 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .works-track::-webkit-scrollbar { display: none; }
+
+  .work-card {
+    flex: 0 0 240px;
+    background: white;
+    border: 2.5px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 rgba(255,255,255,0.12);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .work-card:hover {
+    transform: translate(-2px, -4px);
+    box-shadow: 6px 8px 0 rgba(255,255,255,0.22);
+  }
+
+  .work-thumb {
+    height: 180px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .work-info { padding: 16px 16px 18px; }
+
+  .work-no-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--pink);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .work-artist {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .work-genre-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 100px;
+    border: 2px solid var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .work-btn {
+    display: block;
+    width: 100%;
+    background: var(--dark);
+    color: var(--yellow);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 0;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: opacity 0.12s, transform 0.12s;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+  }
+
+  .work-btn:hover { opacity: 0.82; transform: translateY(-1px); }
+
+  .works-hint {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cream);
+    opacity: 0.28;
+    margin-top: 4px;
+    letter-spacing: 0.12em;
+  }
+
+  /* ===== NAMING MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal-card {
+    background: var(--cream);
+    border: 2.5px solid var(--dark);
+    border-radius: 24px;
+    padding: 32px 28px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 8px 8px 0 var(--dark);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(24px);
+    transition: transform 0.2s;
+  }
+
+  .modal-overlay.open .modal-card { transform: translateY(0); }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    opacity: 0.4;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .modal-title { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+
+  .modal-artist-info {
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    margin-bottom: 22px;
+    opacity: 0.75;
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+  .required { color: var(--pink); }
+
+  .form-input {
+    width: 100%;
+    border: 2.5px solid var(--dark);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    background: white;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(255,107,157,0.15);
+  }
+
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--dark);
+    color: var(--yellow);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+    transition: transform 0.12s, box-shadow 0.12s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.25);
+  }
+
+  .naming-success { text-align: center; padding: 16px 0; }
+
+  .works-filter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 100px;
+    padding: 6px 8px 6px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-top: 14px;
+  }
+
+  .works-filter-clear {
+    background: rgba(255,255,255,0.18);
+    border: none;
+    color: var(--cream);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    transition: background 0.12s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .works-filter-clear:hover { background: rgba(255,255,255,0.35); }
+
+  /* ===== VENUE ===== */
+  .venue {
+    background: var(--yellow);
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .venue::before {
+    content: '📍';
+    position: absolute;
+    font-size: 180px;
+    right: -20px;
+    bottom: -20px;
+    opacity: 0.08;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .venue-inner {
+    max-width: 640px;
+    margin: 0 auto;
     position: relative;
   }
 
-  body.variant-c .hero::before {
-    background-image:
-      radial-gradient(ellipse 180px 120px at 15% 25%, rgba(180,160,200,0.55) 0%, transparent 70%),
-      radial-gradient(ellipse 220px 160px at 80% 15%, rgba(140,175,210,0.50) 0%, transparent 70%),
-      radial-gradient(ellipse 200px 250px at 70% 75%, rgba(160,200,180,0.45) 0%, transparent 70%),
-      radial-gradient(ellipse 150px 180px at 20% 70%, rgba(200,175,155,0.50) 0%, transparent 70%),
-      radial-gradient(ellipse 120px 100px at 50% 10%, rgba(210,180,200,0.40) 0%, transparent 70%),
-      radial-gradient(ellipse 280px 200px at 90% 60%, rgba(155,175,200,0.35) 0%, transparent 70%);
-    filter: blur(12px);
+  .venue-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    margin-bottom: 28px;
+    color: var(--dark);
   }
 
-  body.variant-c .hero-tag {
-    background: rgba(61,53,80,0.15);
-    color: #3D3550;
-    border: 1px solid rgba(61,53,80,0.25);
-    backdrop-filter: blur(4px);
+  .venue-card {
+    background: white;
+    border: 2.5px solid var(--dark);
+    border-radius: 24px;
+    padding: 28px 24px;
+    box-shadow: 6px 6px 0 var(--dark);
   }
 
-  body.variant-c .hero-title .line1,
-  body.variant-c .hero-title .line3 { color: #3D3550; }
-
-  body.variant-c .hero-title .line2 {
-    color: #7B6FA8;
-    -webkit-text-stroke: 1.5px rgba(61,53,80,0.5);
-  }
-
-  body.variant-c .hero-sub { color: rgba(61,53,80,0.8); }
-
-  body.variant-c .badge {
-    border-color: rgba(61,53,80,0.2);
-    background: rgba(255,255,255,0.5);
-    backdrop-filter: blur(6px);
-    color: #3D3550;
-  }
-  body.variant-c .badge-1 { background: rgba(201,160,168,0.55); }
-  body.variant-c .badge-2 { background: rgba(123,175,196,0.55); }
-  body.variant-c .badge-3 { background: rgba(138,175,150,0.55); }
-  body.variant-c .badge-4 { background: rgba(155,143,189,0.55); color: #3D3550; border-color: rgba(61,53,80,0.2); }
-
-  body.variant-c .btn-main {
-    background: rgba(61,53,80,0.75);
-    color: #F0EBE3;
-    border-color: transparent;
-    box-shadow: 0 4px 20px rgba(61,53,80,0.25);
-    backdrop-filter: blur(4px);
-    border-radius: 100px;
-  }
-  body.variant-c .btn-main:hover {
-    background: rgba(61,53,80,0.9);
-    transform: translate(-2px, -2px);
-    box-shadow: 0 8px 28px rgba(61,53,80,0.35);
-  }
-
-  body.variant-c .scroll-hint { color: rgba(61,53,80,0.45); }
-
-  body.variant-c .concept {
-    background: linear-gradient(135deg, #3D3550 0%, #5A4A72 100%);
-  }
-  body.variant-c .concept::after { content: '睡'; color: rgba(255,255,255,0.05); font-size: 220px; }
-  body.variant-c .concept-heading .accent { color: #C9B8D4; }
-
-  body.variant-c .naming { background: #EDE8E0; }
-
-  body.variant-c .step {
-    border-color: rgba(61,53,80,0.12);
-    box-shadow: 0 2px 12px rgba(61,53,80,0.08);
-  }
-  body.variant-c .step:nth-child(1) .step-num { color: #C9A0A8; }
-  body.variant-c .step:nth-child(2) .step-num { color: #7BAFC4; }
-  body.variant-c .step:nth-child(3) .step-num { color: #C4A882; }
-  body.variant-c .step:nth-child(4) .step-num { color: #9B8FBD; }
-
-  body.variant-c .who {
-    background: linear-gradient(135deg, #C9B8D4 0%, #B8C9D9 50%, #C9D4B8 100%);
-  }
-  body.variant-c .who-title { color: #3D3550; }
-  body.variant-c .who-card {
-    border-color: rgba(61,53,80,0.15);
-    box-shadow: 0 4px 16px rgba(61,53,80,0.10);
-    background: rgba(255,255,255,0.65);
-    backdrop-filter: blur(4px);
-  }
-  body.variant-c .who-card:hover {
-    box-shadow: 0 8px 24px rgba(61,53,80,0.18);
-    transform: translate(-2px, -4px);
-  }
-
-  body.variant-c .sns {
-    background: linear-gradient(135deg, #7BAFC4 0%, #9B8FBD 100%);
-  }
-  body.variant-c .sns-title,
-  body.variant-c .sns-body { color: #F0EBE3; }
-  body.variant-c .sns-btn {
-    background: rgba(255,255,255,0.2);
-    color: #F0EBE3;
-    border-color: rgba(255,255,255,0.35);
-    backdrop-filter: blur(4px);
-  }
-  body.variant-c .sns-btn:hover {
-    background: rgba(255,255,255,0.35);
-    color: #3D3550;
-  }
-
-  body.variant-c .info-table td:first-child { color: #7B6FA8; }
-  body.variant-c .info-cta .btn-main {
-    background: rgba(155,143,189,0.85);
-    color: #F0EBE3;
-    border-color: transparent;
-    box-shadow: 0 4px 20px rgba(155,143,189,0.4);
-  }
-
-  body.variant-c footer {
-    background: linear-gradient(135deg, #3D3550 0%, #5A4A72 100%);
-  }
-  body.variant-c footer .footer-name { color: #C9B8D4; }
-
-  /* ===== A/B TEST: VARIANT B (和モダン) ===== */
-  body.variant-b {
-    --yellow: #D4C4A0;
-    --pink: #C4773A;
-    --blue: #4A7C6F;
-    --orange: #B85C38;
-    --purple: #6B5B47;
-    --green: #5A7A5A;
-    --cream: #F5F0E8;
-    --dark: #2C2416;
-  }
-
-  body.variant-b .hero {
-    background: #2C2416;
-    background-image: none;
-  }
-
-  body.variant-b .hero::before {
-    background-image:
-      radial-gradient(circle at 10% 20%, rgba(212,196,160,0.15) 0 60px, transparent 60px),
-      radial-gradient(circle at 90% 15%, rgba(74,124,111,0.12) 0 80px, transparent 80px),
-      radial-gradient(circle at 80% 80%, rgba(196,119,58,0.10) 0 100px, transparent 100px),
-      radial-gradient(circle at 15% 75%, rgba(212,196,160,0.08) 0 120px, transparent 120px);
-  }
-
-  body.variant-b .hero-tag {
-    background: #D4C4A0;
-    color: #2C2416;
-  }
-
-  body.variant-b .hero-title .line1,
-  body.variant-b .hero-title .line3 { color: #F5F0E8; }
-
-  body.variant-b .hero-title .line2 {
-    color: #C4773A;
-    -webkit-text-stroke: 2px #F5F0E8;
-  }
-
-  body.variant-b .hero-sub { color: rgba(245,240,232,0.85); }
-
-  body.variant-b .badge {
-    border-color: rgba(245,240,232,0.4);
-  }
-  body.variant-b .badge-1 { background: #C4773A; color: #F5F0E8; }
-  body.variant-b .badge-2 { background: #4A7C6F; color: #F5F0E8; }
-  body.variant-b .badge-3 { background: #5A7A5A; color: #F5F0E8; }
-  body.variant-b .badge-4 { background: #6B5B47; color: #F5F0E8; border-color: rgba(245,240,232,0.4); }
-
-  body.variant-b .btn-main {
-    background: #D4C4A0;
-    color: #2C2416;
-    border-color: #D4C4A0;
-    box-shadow: 4px 4px 0 rgba(212,196,160,0.3);
-  }
-
-  body.variant-b .btn-main:hover {
-    box-shadow: 6px 6px 0 rgba(212,196,160,0.4);
-  }
-
-  body.variant-b .scroll-hint { color: rgba(245,240,232,0.5); }
-
-  body.variant-b .concept { background: #4A7C6F; }
-  body.variant-b .concept::after { content: '文'; color: rgba(255,255,255,0.06); }
-  body.variant-b .concept-heading .accent { color: #D4C4A0; }
-
-  body.variant-b .step:nth-child(1) .step-num { color: #C4773A; }
-  body.variant-b .step:nth-child(2) .step-num { color: #4A7C6F; }
-  body.variant-b .step:nth-child(3) .step-num { color: #B85C38; }
-  body.variant-b .step:nth-child(4) .step-num { color: #6B5B47; }
-
-  body.variant-b .who { background: #D4C4A0; }
-  body.variant-b .who-title { color: #2C2416; }
-
-  body.variant-b .sns { background: #4A7C6F; }
-  body.variant-b .sns-title,
-  body.variant-b .sns-body { color: #F5F0E8; }
-
-  body.variant-b .info-table td:first-child { color: #C4773A; }
-
-  body.variant-b .info-cta .btn-main {
-    background: #C4773A;
-    color: #F5F0E8;
-    border-color: #C4773A;
-  }
-
-  body.variant-b footer { background: #2C2416; }
-  body.variant-b footer .footer-name { color: #D4C4A0; }
-
-  /* A/B スイッチャー */
-  #ab-switcher {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(0,0,0,0.80);
-    backdrop-filter: blur(6px);
-    border-radius: 100px;
-    padding: 6px 8px 6px 14px;
-    z-index: 9999;
-    font-family: monospace;
+  .venue-badge {
+    display: inline-block;
+    background: var(--dark);
+    color: var(--yellow);
     font-size: 11px;
     font-weight: 700;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 0.08em;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
-
-  .ab-btn {
-    padding: 4px 12px;
+    letter-spacing: 0.1em;
+    padding: 4px 14px;
     border-radius: 100px;
-    border: none;
-    font-family: monospace;
-    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .venue-name {
+    font-size: clamp(28px, 7vw, 42px);
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: var(--dark);
+    line-height: 1.1;
+  }
+
+  .venue-address {
+    font-size: 14px;
+    line-height: 2;
+    opacity: 0.65;
+    margin-bottom: 24px;
+  }
+
+  .venue-map {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2.5px solid var(--dark);
+    margin-bottom: 18px;
+  }
+
+  .venue-map iframe {
+    display: block;
+    width: 100%;
+    height: 300px;
+  }
+
+  .venue-map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--dark);
+    color: var(--yellow);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
     font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 2.5px solid var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+  }
+
+  .venue-map-link:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ===== SITE HEADER NAV ===== */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--cream);
+    border-bottom: 2.5px solid var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 56px;
+    transition: box-shadow 0.2s;
+  }
+  .site-header.scrolled {
+    box-shadow: 0 4px 0 var(--dark);
+  }
+  .site-header-logo {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+  }
+  .site-header-logo .logo-sub {
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    opacity: 0.6;
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .site-nav a {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 2.5px solid transparent;
+    border-radius: 6px;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .site-nav a:hover {
+    background: var(--yellow);
+    border-color: var(--dark);
+    transform: translate(-1px, -1px);
+  }
+  .site-nav a.active {
+    background: var(--yellow);
+    border-color: var(--dark);
+  }
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
     cursor: pointer;
-    transition: opacity 0.15s, transform 0.1s;
-    letter-spacing: 0.05em;
-    opacity: 0.4;
+    padding: 8px;
+    transition: background 0.15s;
+  }
+  .nav-burger span {
+    display: block;
+    height: 2.5px;
+    background: var(--dark);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    border-bottom: 2.5px solid var(--dark);
+    z-index: 999;
+    padding: 16px 24px 20px;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 6px 0 var(--dark);
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 12px 16px;
+    border: 2.5px solid var(--dark);
+    border-radius: 8px;
+    background: var(--cream);
+    transition: background 0.15s, transform 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .nav-drawer a:hover, .nav-drawer a:active {
+    background: var(--yellow);
+    transform: translate(-2px, -2px);
+  }
+  @media (max-width: 680px) {
+    .site-nav { display: none; }
+    .nav-burger { display: flex; }
+  }
+  /* ページ先頭へのオフセット補正 */
+  .hero, section[id] {
+    scroll-margin-top: 56px;
   }
 
-  .ab-btn.active {
-    opacity: 1;
-    transform: scale(1.05);
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--dark);
+    padding: 80px 24px 100px;
+    position: relative;
+    overflow: hidden;
   }
-
-  .ab-btn-a { background: #FFE135; color: #1a1a1a; }
-  .ab-btn-b { background: #D4C4A0; color: #2C2416; }
-  .ab-btn-c { background: linear-gradient(135deg, #C9B8D4, #7BAFC4); color: #3D3550; }
+  .contact::before {
+    content: 'CONTACT';
+    position: absolute;
+    font-size: 160px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    right: -10px;
+    bottom: -20px;
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .contact-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .contact-title {
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .contact-sub {
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.6;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .contact-card {
+    background: var(--cream);
+    border: 2.5px solid var(--cream);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 6px 6px 0 rgba(255,255,255,0.12);
+  }
+  .contact-card .form-label { color: var(--dark); }
+  .contact-select {
+    width: 100%;
+    border: 2.5px solid var(--dark);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 14px;
+    background: white;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a1a1a' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .contact-select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(107,203,119,0.2);
+  }
+  .contact-textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+  .contact-submit {
+    width: 100%;
+    background: var(--green);
+    color: var(--dark);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 14px;
+    border: 2.5px solid var(--dark);
+    border-radius: 100px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--dark);
+    transition: transform 0.12s, box-shadow 0.12s;
+    margin-top: 8px;
+  }
+  .contact-submit:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+  .contact-success {
+    text-align: center;
+    padding: 24px 0;
+  }
+  .contact-success h4 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+  .contact-success p {
+    font-size: 14px;
+    opacity: 0.65;
+    line-height: 1.9;
+    color: var(--dark);
+  }
 </style>
 </head>
 <body>
 
+<!-- SITE HEADER -->
+<header class="site-header" id="site-header">
+  <a class="site-header-logo" href="#hero">
+    富士見文化室
+    <span class="logo-sub">FUJIMI BUNKA SHITSU 2026</span>
+  </a>
+  <nav class="site-nav" aria-label="メインメニュー">
+    <a href="#artists">アーティスト</a>
+    <a href="#works">作品</a>
+    <a href="#news">ニュース</a>
+    <a href="#venue">会場</a>
+    <a href="#info">概要</a>
+    <a href="#contact">お問い合わせ</a>
+  </nav>
+  <button class="nav-burger" id="nav-burger" aria-label="メニューを開く" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="nav-drawer" id="nav-drawer" aria-label="モバイルメニュー">
+  <a href="#artists">🎨 アーティスト</a>
+  <a href="#works">🖼 作品</a>
+  <a href="#news">📰 ニュース</a>
+  <a href="#venue">📍 会場</a>
+  <a href="#info">ℹ️ 概要</a>
+  <a href="#contact">✉️ お問い合わせ</a>
+</nav>
+
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-tag">🎨 FUJIMI BUNKA SHITSU 2025</div>
+<section class="hero" id="hero">
+  <div class="hero-tag">🎨 FUJIMI BUNKA SHITSU 2026</div>
   <h1 class="hero-title">
     <span class="line1">富士見</span><br>
     <span class="line2">文化室</span><br>
     <span class="line3" style="font-size:0.55em; letter-spacing:0.05em;">長野県富士見町</span>
   </h1>
   <p class="hero-sub">
-    作者は、謎のまま。<br>
-    あなたの言葉が、作品の名前になるかもしれない。<br>
-    <strong>500円から参加できる、ちょっと不思議な展示会。</strong>
+    みんなでつくる、アートの場所。<br>
+    素人もプロも、老いも若きも、子どもも。<br>
+    <strong>コミュニケーションが生まれる展示会</strong>
   </p>
   <div class="hero-badges">
-    <span class="badge badge-1">🎭 作者は匿名</span>
-    <span class="badge badge-2">🏷 名前をつけて参加</span>
-    <span class="badge badge-3">🎁 選ばれたらプレゼント</span>
-    <span class="badge badge-4">👁 鑑賞は無料</span>
+    <span class="badge badge-1">🖼 作品展示</span>
+    <span class="badge badge-2">🏷 名前をつけて購入</span>
+    <span class="badge badge-3">🎉 参加無料</span>
+    <span class="badge badge-4">👶〜👴 全年齢歓迎</span>
   </div>
   <div class="hero-cta">
     <button class="btn-main" onclick="document.querySelector('.info').scrollIntoView({behavior:'smooth'})">
@@ -856,110 +1388,53 @@
 <section class="concept">
   <p class="section-label">Concept</p>
   <h2 class="concept-heading">
-    アーティストは、<br>
-    <span class="accent">謎のまま。</span>
+    アートで、<br>
+    <span class="accent">つながろう。</span>
   </h2>
   <p class="concept-body">
-    展示された作品には、作者の名前がない。<br>
-    でも、その筆跡や色使い、空気感に——どこかヒントが隠れている。<br>
-    あなたはその作品を感じて、言葉をひとつつける。<br>
-    その名前が選ばれたとき、あなたと作品の物語が始まります。
+    富士見文化室は、長野県富士見町で生まれるアートの場所。<br>
+    素人も、プロも、みんながアーティスト。<br>
+    作品を見て、話して、感じて。<br>
+    あなたと誰かをつなぐコミュニケーションが、ここから始まります。
   </p>
-</section>
-
-<!-- MYSTERY ARTISTS -->
-<section class="mystery">
-  <div class="mystery-inner">
-    <p class="section-label" style="text-align:center; opacity:0.4;">Artists ― ?</p>
-    <h2 class="mystery-title">🎭 今回の出展者たち</h2>
-    <p class="mystery-lead">
-      名前は教えられません。でも、ヒントならある。<br>
-      あなたはこの作品が、誰のものか、わかりますか？
-    </p>
-    <div class="artist-cards">
-      <div class="artist-card">
-        <div class="artist-num">NO.1</div>
-        <div class="artist-body">
-          <h3>富士見町に<span class="artist-hint">移り住んで3年</span>の、元なにかのひと</h3>
-          <p>
-            以前は<span class="artist-hint">画面の前</span>で仕事をしていたらしい。
-            ある日<span class="artist-hint">八ヶ岳を見て</span>、気づいたら絵を描いていた。
-            好きな時間帯は<span class="artist-hint">朝靄のころ</span>。
-          </p>
-        </div>
-      </div>
-      <div class="artist-card">
-        <div class="artist-num">NO.2</div>
-        <div class="artist-body">
-          <h3><span class="artist-hint">生まれも育ちも富士見</span>、ずっとここにいるひと</h3>
-          <p>
-            絵を習ったことは一度もない。
-            使う道具は<span class="artist-hint">台所にあるもの</span>だったりする。
-            テーマはいつも<span class="artist-hint">家族と食卓</span>、らしい。
-          </p>
-        </div>
-      </div>
-      <div class="artist-card">
-        <div class="artist-num">NO.3</div>
-        <div class="artist-body">
-          <h3><span class="artist-hint">週末だけ</span>アーティストになるひと</h3>
-          <p>
-            平日は別の顔を持っている。
-            山が好きで、<span class="artist-hint">標高1000m以上</span>でしか制作しないというこだわりがある。
-            サイズはいつも<span class="artist-hint">大きい</span>。
-          </p>
-        </div>
-      </div>
-      <div class="artist-card artist-unknown">
-        <div class="artist-num">NO.?</div>
-        <div class="artist-body">
-          <h3>もう一人いる、らしい</h3>
-          <p>
-            詳細は当日まで非公開。<br>
-            ヒントは、会場で。
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- NAMING RULE -->
 <section class="naming">
   <div class="naming-inner">
-    <p class="section-label" style="opacity:0.4;">How to join</p>
-    <h2 class="naming-title">🏷 参加のしかた</h2>
+    <p class="section-label" style="opacity:0.4;">How to buy</p>
+    <h2 class="naming-title">🏷 名前をつけたら<br>買えるかも！？</h2>
     <p class="naming-sub">
-      鑑賞は無料。でも、もし作品に名前をつけたくなったら——<br>
-      500円から参加できる、ちょっとドキドキな体験が待っています。
+      この展示会には、ユニークな購入ルールがあります。<br>
+      気に入った作品に、あなただけの名前をつけてみて。
     </p>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
         <div class="step-content">
-          <h3>作品と向き合う</h3>
-          <p>作者の名前は伏せられています。でも、何かが伝わってくる。素材、色、空気感——ヒントを探しながら、じっくり感じて。</p>
+          <h3>作品と出会う</h3>
+          <p>展示されたたくさんの作品を自由に見てまわろう。ピンとくる作品を探してみて。</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">02</div>
         <div class="step-content">
-          <h3>名前をつけて申し込む <span style="font-size:0.8em; opacity:0.65;">（500円〜 / 1作品）</span></h3>
-          <p>ピンときた作品に、あなただけの名前を。申込用紙に記入して、参加費を添えて投票箱へ。何点でも参加OK。</p>
+          <h3>名前をつける</h3>
+          <p>気に入った作品に、あなたが感じたタイトルをつけてみよう。センスが問われる！</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-content">
-          <h3>アーティストが選ぶ</h3>
-          <p>集まった名前の中から、アーティスト本人が「これだ」と思う一つを選びます。誰が選ばれるかは、発表まで誰にもわからない。</p>
+          <h3>アーティストが審査</h3>
+          <p>アーティスト本人がその名前を気に入ったら…あなたに購入の権利が！</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
         <div class="step-content">
-          <h3>選ばれたら、作品がプレゼント 🎁</h3>
-          <p>選ばれた名前をつけた方に、アーティストから作品をプレゼント。その出会いが、新しい物語のはじまりです。</p>
+          <h3>作品があなたのもとへ</h3>
+          <p>名前をつけた人と作品の、新しい物語のはじまりです。</p>
         </div>
       </div>
     </div>
@@ -1006,6 +1481,470 @@
   </div>
 </section>
 
+<!-- ARTISTS -->
+<section class="artists" id="artists">
+  <div class="artists-inner">
+    <p class="section-label" style="opacity:0.4;">Artists</p>
+    <h2 class="artists-title">🎨 参加アーティスト</h2>
+    <p class="artists-sub">素人もプロも、ジャンルも年齢もバラバラな顔ぶれが集まります。</p>
+
+    <div class="artists-tabs" role="tablist">
+      <button class="tab-btn active" data-genre="all">すべて</button>
+      <button class="tab-btn" data-genre="painting">🖼 絵画</button>
+      <button class="tab-btn" data-genre="theater">🎭 演劇</button>
+      <button class="tab-btn" data-genre="video">🎬 映像</button>
+      <button class="tab-btn" data-genre="toy">🧸 おもちゃ</button>
+      <button class="tab-btn" data-genre="other">✨ その他</button>
+    </div>
+
+    <div class="artists-grid" id="artists-grid">
+
+      <div class="artist-card" data-genre="painting" data-artist="山田 花子">
+        <div class="artist-avatar" style="background:var(--pink);">山</div>
+        <div class="artist-name">山田 花子</div>
+        <span class="artist-genre-tag genre-painting">🖼 絵画</span>
+        <p class="artist-note">日常に潜む光と影を水彩で描く。身近な風景に新しい名前をつけたい。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="theater" data-artist="鈴木 太郎">
+        <div class="artist-avatar" style="background:var(--orange);">鈴</div>
+        <div class="artist-name">鈴木 太郎</div>
+        <span class="artist-genre-tag genre-theater">🎭 演劇</span>
+        <p class="artist-note">即興演劇と身体表現でその場の空気をつくるパフォーマー。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="video" data-artist="田中 みほ">
+        <div class="artist-avatar" style="background:var(--blue);">田</div>
+        <div class="artist-name">田中 みほ</div>
+        <span class="artist-genre-tag genre-video">🎬 映像</span>
+        <p class="artist-note">富士見町の四季を記録するドキュメンタリー映像作家。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="toy" data-artist="佐藤 じろう">
+        <div class="artist-avatar" style="background:var(--green);">佐</div>
+        <div class="artist-name">佐藤 じろう</div>
+        <span class="artist-genre-tag genre-toy">🧸 おもちゃ</span>
+        <p class="artist-note">廃材で作る、触って動かせるインタラクティブなおもちゃアート。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="painting" data-artist="中村 さくら">
+        <div class="artist-avatar" style="background:var(--yellow);">中</div>
+        <div class="artist-name">中村 さくら</div>
+        <span class="artist-genre-tag genre-painting">🖼 絵画</span>
+        <p class="artist-note">抽象と具象の境界を探りながら、手芸との融合に挑む。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="video" data-artist="小林 ゆうき">
+        <div class="artist-avatar" style="background:var(--purple);">小</div>
+        <div class="artist-name">小林 ゆうき</div>
+        <span class="artist-genre-tag genre-video">🎬 映像</span>
+        <p class="artist-note">スマホ一台で地元の物語を切り取る、セルフ映像作家。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="theater" data-artist="加藤 ひろし">
+        <div class="artist-avatar" style="background:var(--red);">加</div>
+        <div class="artist-name">加藤 ひろし</div>
+        <span class="artist-genre-tag genre-theater">🎭 演劇</span>
+        <p class="artist-note">詩とダンスを融合させたコミカルなパフォーマンスが得意。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="toy" data-artist="渡辺 あい">
+        <div class="artist-avatar" style="background:var(--pink);">渡</div>
+        <div class="artist-name">渡辺 あい</div>
+        <span class="artist-genre-tag genre-toy">🧸 おもちゃ</span>
+        <p class="artist-note">フェルトと布で作る、触れて遊べる柔らかなアート作品。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="other" data-artist="伊藤 りか">
+        <div class="artist-avatar" style="background:var(--blue);">伊</div>
+        <div class="artist-name">伊藤 りか</div>
+        <span class="artist-genre-tag genre-other">✨ その他</span>
+        <p class="artist-note">陶芸とデジタルアートを掛け合わせた実験的なインスタレーション。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artist-card" data-genre="painting" data-artist="松本 けんた">
+        <div class="artist-avatar" style="background:var(--orange);">松</div>
+        <div class="artist-name">松本 けんた</div>
+        <span class="artist-genre-tag genre-painting">🖼 絵画</span>
+        <p class="artist-note">地元の風景を大胆なアクリル絵の具で再解釈するアーティスト。</p>
+        <span class="artist-card-works-link">作品を見る →</span>
+      </div>
+
+      <div class="artists-tbd" id="artists-tbd">
+        ＋ 続々と参加アーティストを公開中！<br>
+        <span style="font-weight:400; font-size:12px;">SNSをフォローしてチェックしよう</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var tabs  = document.querySelectorAll('.tab-btn');
+  var cards = document.querySelectorAll('.artist-card');
+  var tbd   = document.getElementById('artists-tbd');
+
+  // ジャンルタブ切替 → アーティスト + 作品を連動フィルタ
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var genre = tab.dataset.genre;
+      cards.forEach(function (card) {
+        card.style.display = (genre === 'all' || card.dataset.genre === genre) ? '' : 'none';
+      });
+      if (tbd) tbd.style.display = genre === 'all' ? '' : 'none';
+      if (typeof setWorksFilter === 'function') setWorksFilter(genre, null);
+    });
+  });
+
+  // アーティストカードクリック → 作品セクションへスムーズスクロール + 絞り込み
+  cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      var artist = card.dataset.artist;
+      if (!artist) return;
+      if (typeof setWorksFilter === 'function') setWorksFilter('all', artist);
+      var worksEl = document.querySelector('.works');
+      if (worksEl) worksEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
+
+<!-- WORKS -->
+<section class="works" id="works">
+  <div class="works-header">
+    <p class="section-label" style="color:var(--cream); opacity:0.4;">Works</p>
+    <h2 class="works-title">🖼 作品たち</h2>
+    <p class="works-sub">気に入った作品に、あなただけの名前をつけよう。</p>
+    <div id="works-filter-badge" style="display:none;" class="works-filter-badge">
+      <span class="badge-text"></span>
+      <button id="works-filter-clear" class="works-filter-clear" aria-label="フィルターを解除">✕</button>
+    </div>
+  </div>
+
+  <div class="works-scroll-wrap" id="works-wrap">
+    <div class="works-track" id="works-track">
+
+      <div class="work-card" data-artist="山田 花子" data-genre="絵画" data-work-id="w001">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#FF6B9D 0%,#FFE135 100%);">
+          <div style="position:absolute;width:90px;height:90px;background:rgba(255,255,255,0.22);border-radius:50%;top:20px;left:20px;"></div>
+          <div style="position:absolute;width:55px;height:55px;background:rgba(26,26,26,0.18);border-radius:50%;top:75px;left:130px;"></div>
+          <div style="position:absolute;width:30px;height:30px;background:rgba(255,255,255,0.3);border-radius:50%;top:12px;right:24px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">山田 花子</p>
+          <span class="work-genre-tag genre-painting">🖼 絵画</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="鈴木 太郎" data-genre="演劇" data-work-id="w002">
+        <div class="work-thumb" style="background:linear-gradient(160deg,#FF8C42 0%,#FF4444 100%);">
+          <div style="position:absolute;width:0;height:0;border-left:52px solid transparent;border-right:52px solid transparent;border-bottom:90px solid rgba(255,255,255,0.22);top:36px;left:52px;"></div>
+          <div style="position:absolute;width:28px;height:28px;background:rgba(255,255,255,0.3);border-radius:50%;top:140px;right:30px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">鈴木 太郎</p>
+          <span class="work-genre-tag genre-theater">🎭 演劇</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="田中 みほ" data-genre="映像" data-work-id="w003">
+        <div class="work-thumb" style="background:linear-gradient(180deg,#4ECDC4 0%,#1a1a1a 100%);">
+          <div style="position:absolute;height:3px;background:rgba(255,255,255,0.25);left:0;right:0;top:50px;"></div>
+          <div style="position:absolute;height:3px;background:rgba(255,255,255,0.15);left:0;right:0;top:80px;"></div>
+          <div style="position:absolute;height:3px;background:rgba(255,255,255,0.1);left:0;right:0;top:110px;"></div>
+          <div style="position:absolute;width:48px;height:48px;background:rgba(78,205,196,0.4);border-radius:50%;bottom:20px;right:20px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">田中 みほ</p>
+          <span class="work-genre-tag genre-video">🎬 映像</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="佐藤 じろう" data-genre="おもちゃ" data-work-id="w004">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#6BCB77 0%,#FFE135 100%);">
+          <div style="position:absolute;width:50px;height:50px;background:rgba(255,255,255,0.25);border-radius:6px;top:20px;left:20px;transform:rotate(12deg);"></div>
+          <div style="position:absolute;width:38px;height:38px;background:rgba(26,26,26,0.15);border-radius:6px;top:30px;left:80px;transform:rotate(-8deg);"></div>
+          <div style="position:absolute;width:55px;height:55px;background:rgba(255,255,255,0.18);border-radius:6px;top:90px;left:120px;transform:rotate(20deg);"></div>
+          <div style="position:absolute;width:32px;height:32px;background:rgba(107,203,119,0.5);border-radius:50%;bottom:16px;left:24px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">佐藤 じろう</p>
+          <span class="work-genre-tag genre-toy">🧸 おもちゃ</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="中村 さくら" data-genre="絵画" data-work-id="w005">
+        <div class="work-thumb" style="background:linear-gradient(120deg,#A855F7 0%,#FF6B9D 100%);">
+          <div style="position:absolute;width:100px;height:100px;background:rgba(255,255,255,0.12);border-radius:50%;top:-20px;right:-20px;"></div>
+          <div style="position:absolute;width:70px;height:70px;background:rgba(255,255,255,0.15);border-radius:50%;bottom:0px;left:20px;"></div>
+          <div style="position:absolute;width:40px;height:40px;background:rgba(26,26,26,0.2);border-radius:50%;top:50px;left:100px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">中村 さくら</p>
+          <span class="work-genre-tag genre-painting">🖼 絵画</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="小林 ゆうき" data-genre="映像" data-work-id="w006">
+        <div class="work-thumb" style="background:linear-gradient(200deg,#1a1a1a 0%,#4ECDC4 100%);">
+          <div style="position:absolute;width:6px;height:6px;background:rgba(255,255,255,0.6);border-radius:50%;top:22px;left:30px;"></div>
+          <div style="position:absolute;width:4px;height:4px;background:rgba(255,255,255,0.4);border-radius:50%;top:44px;left:80px;"></div>
+          <div style="position:absolute;width:7px;height:7px;background:rgba(255,255,255,0.5);border-radius:50%;top:70px;left:140px;"></div>
+          <div style="position:absolute;width:5px;height:5px;background:rgba(255,255,255,0.45);border-radius:50%;top:100px;left:50px;"></div>
+          <div style="position:absolute;width:8px;height:8px;background:rgba(78,205,196,0.7);border-radius:50%;top:130px;left:170px;"></div>
+          <div style="position:absolute;width:60px;height:60px;border:3px solid rgba(255,255,255,0.2);border-radius:50%;bottom:10px;left:80px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">小林 ゆうき</p>
+          <span class="work-genre-tag genre-video">🎬 映像</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="加藤 ひろし" data-genre="演劇" data-work-id="w007">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#FFE135 0%,#FF8C42 100%);">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 18px,rgba(255,255,255,0.12) 18px,rgba(255,255,255,0.12) 20px);"></div>
+          <div style="position:absolute;width:60px;height:60px;background:rgba(26,26,26,0.18);border-radius:50%;top:30px;left:80px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">加藤 ひろし</p>
+          <span class="work-genre-tag genre-theater">🎭 演劇</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+      <div class="work-card" data-artist="渡辺 あい" data-genre="おもちゃ" data-work-id="w008">
+        <div class="work-thumb" style="background:linear-gradient(135deg,#FF6B9D 0%,#6BCB77 100%);">
+          <div style="position:absolute;width:70px;height:70px;background:rgba(255,255,255,0.2);border-radius:50%;top:20px;right:30px;"></div>
+          <div style="position:absolute;width:45px;height:45px;background:rgba(255,255,255,0.15);border-radius:50%;top:70px;left:30px;"></div>
+          <div style="position:absolute;width:30px;height:30px;background:rgba(255,255,255,0.25);border-radius:50%;bottom:20px;right:80px;"></div>
+        </div>
+        <div class="work-info">
+          <p class="work-no-name">🏷 名前をつけてね</p>
+          <p class="work-artist">渡辺 あい</p>
+          <span class="work-genre-tag genre-toy">🧸 おもちゃ</span>
+          <button class="work-btn">名前をつける →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <p class="works-hint">← ドラッグして動かせます →</p>
+</section>
+
+<script>
+// ===== WORKS: スクロール + フィルタリング =====
+(function () {
+  var wrap  = document.getElementById('works-wrap');
+  var track = document.getElementById('works-track');
+  if (!track || !wrap) return;
+
+  var originals    = Array.from(track.querySelectorAll('.work-card'));
+  var autoScrollOn = true;
+  var paused       = false;
+  var SPEED        = 0.55;
+
+  function addClones() {
+    originals.forEach(function (el) {
+      var c = el.cloneNode(true);
+      c.dataset.clone = '1';
+      track.appendChild(c);
+    });
+  }
+  addClones();
+
+  // ===== 外部から呼ばれるフィルタ関数 =====
+  window.setWorksFilter = function (genre, artist) {
+    var isAll = (!genre || genre === 'all') && !artist;
+    track.querySelectorAll('[data-clone]').forEach(function (el) { el.remove(); });
+    var count = 0;
+    originals.forEach(function (el) {
+      var gMatch = !genre || genre === 'all' || el.dataset.genre === genre;
+      var aMatch = !artist || el.dataset.artist === artist;
+      var show   = gMatch && aMatch;
+      el.style.display = show ? '' : 'none';
+      if (show) count++;
+    });
+    if (isAll) { addClones(); autoScrollOn = true; } else { autoScrollOn = false; }
+    track.scrollLeft = 0;
+    updateBadge(genre, artist, count);
+  };
+
+  function updateBadge(genre, artist, count) {
+    var badge = document.getElementById('works-filter-badge');
+    if (!badge) return;
+    var isAll = (!genre || genre === 'all') && !artist;
+    if (isAll) { badge.style.display = 'none'; return; }
+    var map = { painting:'絵画', theater:'演劇', video:'映像', toy:'おもちゃ', other:'その他' };
+    var label = artist ? artist : (map[genre] || genre);
+    badge.querySelector('.badge-text').textContent = label + '（' + count + '件）';
+    badge.style.display = 'inline-flex';
+  }
+
+  var clearBtn = document.getElementById('works-filter-clear');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var allTab = document.querySelector('.tab-btn[data-genre="all"]');
+      if (allTab) allTab.click();
+    });
+  }
+
+  // ===== 自動スクロール =====
+  (function tick() {
+    if (autoScrollOn && !paused) {
+      track.scrollLeft += SPEED;
+      var half = track.scrollWidth / 2;
+      if (half > 0 && track.scrollLeft >= half) track.scrollLeft -= half;
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  wrap.addEventListener('mouseenter', function () { paused = true; });
+  wrap.addEventListener('mouseleave', function () { if (autoScrollOn) paused = false; });
+
+  // ===== マウスドラッグ =====
+  var dragging = false, startX, startScroll, hasMoved;
+  wrap.addEventListener('mousedown', function (e) {
+    dragging = true; hasMoved = false;
+    startX = e.pageX; startScroll = track.scrollLeft;
+    paused = true; wrap.classList.add('is-dragging');
+  });
+  document.addEventListener('mouseup', function () {
+    if (!dragging) return;
+    dragging = false; wrap.classList.remove('is-dragging');
+    setTimeout(function () { if (autoScrollOn) paused = false; }, 1200);
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (!dragging) return;
+    var dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) hasMoved = true;
+    track.scrollLeft = startScroll - dx;
+  });
+  wrap.addEventListener('click', function (e) {
+    if (hasMoved) { e.stopPropagation(); e.preventDefault(); }
+  }, true);
+
+  // ===== タッチ =====
+  var tStartX, tStartScroll;
+  track.addEventListener('touchstart', function (e) {
+    tStartX = e.touches[0].pageX; tStartScroll = track.scrollLeft; paused = true;
+  }, { passive: true });
+  track.addEventListener('touchmove', function (e) {
+    track.scrollLeft = tStartScroll - (e.touches[0].pageX - tStartX);
+  }, { passive: true });
+  track.addEventListener('touchend', function () {
+    setTimeout(function () { if (autoScrollOn) paused = false; }, 1500);
+  });
+
+  // ===== 名前をつけるボタン =====
+  wrap.addEventListener('click', function (e) {
+    if (hasMoved) return;
+    var btn = e.target.closest('.work-btn');
+    if (!btn) return;
+    var card = btn.closest('.work-card');
+    openNamingModal(card.dataset.artist, card.dataset.genre, card.dataset.workId);
+  });
+})();
+
+// ===== NAMING MODAL =====
+var _currentWork = {};
+
+function openNamingModal(artist, genre, workId) {
+  _currentWork = { artist: artist, genre: genre, workId: workId };
+  var info = document.getElementById('modal-artist-info');
+  if (info) info.textContent = 'アーティスト：' + artist + '　ジャンル：' + genre;
+  var form    = document.getElementById('naming-form');
+  var success = document.getElementById('naming-success');
+  if (form)    { form.reset(); form.style.display = ''; }
+  if (success) success.style.display = 'none';
+  var overlay = document.getElementById('naming-modal');
+  if (overlay) overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNamingModal() {
+  var overlay = document.getElementById('naming-modal');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var closeBtn = document.getElementById('modal-close-btn');
+  if (closeBtn) closeBtn.addEventListener('click', closeNamingModal);
+
+  var overlay = document.getElementById('naming-modal');
+  if (overlay) overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeNamingModal();
+  });
+
+  var form = document.getElementById('naming-form');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    submitNaming();
+  });
+});
+
+function submitNaming() {
+  var title   = document.getElementById('f-title').value.trim();
+  var person  = document.getElementById('f-person').value.trim();
+  var email   = document.getElementById('f-email').value.trim();
+  var comment = (document.getElementById('f-comment').value || '').trim();
+  if (!title || !person || !email) return;
+
+  var payload = {
+    type:        'naming',
+    workId:      _currentWork.workId   || '',
+    artist:      _currentWork.artist   || '',
+    genre:       _currentWork.genre    || '',
+    namingTitle: title,
+    person:      person,
+    email:       email,
+    comment:     comment
+  };
+
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL') {
+    fetch(APPS_SCRIPT_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body:    'data=' + encodeURIComponent(JSON.stringify(payload))
+    }).catch(function() {});
+  }
+  showNamingSuccess();
+}
+
+function showNamingSuccess() {
+  var form    = document.getElementById('naming-form');
+  var success = document.getElementById('naming-success');
+  if (form)    form.style.display = 'none';
+  if (success) success.style.display = 'block';
+}
+</script>
+
 <!-- SNS TEASER -->
 <section class="sns">
   <p class="section-label" style="color:var(--dark); opacity:0.5;">SNS</p>
@@ -1022,41 +1961,185 @@
   </div>
 </section>
 
+<script>
+// ============================================================
+//  ★ デプロイした Apps Script の URL を貼り付けてください
+// ============================================================
+var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
+// ============================================================
+</script>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="news-inner">
+    <p class="section-label" style="opacity:0.4;">News</p>
+    <h2 class="news-title">📢 お知らせ</h2>
+    <p class="news-sub">最新の情報をお届けします</p>
+    <div class="news-list" id="news-list">
+      <div class="news-empty" style="text-align:center;padding:32px;opacity:0.4;font-size:14px;">読み込み中…</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var TAG_META = {
+    info:  { label: 'お知らせ', cls: 'tag-info' },
+    event: { label: 'イベント',  cls: 'tag-event' },
+    art:   { label: '作品募集', cls: 'tag-art' },
+    other: { label: 'その他',   cls: 'tag-other' },
+  };
+  var DEFAULT_POSTS = [
+    { date: '2026-05-01', tag: 'info',  text: '富士見文化室のウェブサイトをオープンしました！' },
+    { date: '2026-05-10', tag: 'event', text: '開催日程・会場の詳細を近日公開予定です。SNSをフォローしてお待ちください。' },
+    { date: '2026-05-20', tag: 'art',   text: '出展アーティスト募集開始。素人・プロ問わず、ぜひご応募ください！' },
+  ];
+
+  var list = document.getElementById('news-list');
+
+  function formatDate(iso) { return iso.replace(/-/g, '.'); }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function renderPosts(posts) {
+    if (!posts || posts.length === 0) {
+      list.innerHTML = '<div class="news-empty" style="text-align:center;padding:32px;opacity:0.4;font-size:14px;">現在お知らせはありません。</div>';
+      return;
+    }
+    list.innerHTML = posts.map(function(p) {
+      var meta = TAG_META[p.tag] || TAG_META.other;
+      return '<div class="news-item">'
+        + '<div class="news-meta">'
+        + '<span class="news-date">' + formatDate(p.date) + '</span>'
+        + '<span class="news-tag ' + meta.cls + '">' + meta.label + '</span>'
+        + '</div>'
+        + '<div class="news-text">' + escHtml(p.text) + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+    renderPosts(DEFAULT_POSTS);
+    return;
+  }
+
+  fetch(APPS_SCRIPT_URL + '?type=news')
+    .then(function(r) { return r.json(); })
+    .then(function(posts) {
+      renderPosts(Array.isArray(posts) && posts.length > 0 ? posts : DEFAULT_POSTS);
+    })
+    .catch(function() { renderPosts(DEFAULT_POSTS); });
+})();
+</script>
+
+<!-- VENUE -->
+<section class="venue" id="venue">
+  <div class="venue-inner">
+    <p class="section-label" style="opacity:0.5;">Venue</p>
+    <h2 class="venue-title">🏠 会場</h2>
+
+    <div class="venue-card">
+      <span class="venue-badge">元靴屋の建物</span>
+      <h3 class="venue-name">キリン堂</h3>
+      <p class="venue-address">
+        〒399-0211<br>
+        長野県諏訪郡富士見町富士見 4654-74<br>
+        <span style="font-size:13px; opacity:0.7;">JR富士見駅より徒歩圏内</span>
+      </p>
+
+      <div class="venue-map">
+        <iframe
+          src="https://maps.google.com/maps?q=長野県諏訪郡富士見町富士見4654-74&output=embed&hl=ja&z=16"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="キリン堂 地図">
+        </iframe>
+      </div>
+
+      <a href="https://maps.app.goo.gl/cjCzLHMGHuRY89R7A" target="_blank" rel="noopener" class="venue-map-link">
+        Google マップで開く →
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- INFO -->
-<section class="info">
+<section class="info" id="info">
   <div class="info-inner">
     <p class="section-label" style="text-align:center; opacity:0.4;">Event Info</p>
     <h2 class="info-title">📅 開催情報</h2>
     <table class="info-table">
       <tr>
         <td>開催地</td>
-        <td>長野県富士見町（詳細は後日発表）</td>
+        <td>キリン堂（元靴屋）<br><span style="font-size:13px; opacity:0.6;">長野県諏訪郡富士見町富士見 4654-74</span></td>
       </tr>
       <tr>
         <td>日程</td>
-        <td>2025年　詳細近日公開</td>
+        <td>2026年　詳細近日公開</td>
       </tr>
       <tr>
         <td>入場</td>
-        <td>無料（鑑賞のみの方も歓迎）</td>
-      </tr>
-      <tr>
-        <td>参加費</td>
-        <td>500円〜 / 1作品につき<br><span style="font-size:13px; opacity:0.6;">気に入った作品に名前をつけて申し込む場合</span></td>
+        <td>無料</td>
       </tr>
       <tr>
         <td>出展</td>
-        <td>匿名アーティストによる作品展示<br><span style="font-size:13px; opacity:0.6;">出展者の詳細は伏せています。ヒントを探してみて</span></td>
+        <td>素人・プロ問わず参加OK<br><span style="font-size:13px; opacity:0.6;">応募方法は後日SNSで告知</span></td>
       </tr>
       <tr>
-        <td>プレゼント</td>
-        <td>アーティストが選んだ名前をつけた方に、作品を贈呈</td>
+        <td>購入</td>
+        <td>名前をつけてアーティストが承認した場合のみ</td>
       </tr>
     </table>
     <div class="info-cta">
       <button class="btn-main" style="background:var(--pink); color:white; border-color:var(--pink); box-shadow:4px 4px 0 var(--dark);">
-        SNSで最新情報を見る →
+        出展を検討する →
       </button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-label">Contact / Inquiry</div>
+    <h2 class="contact-title">出展・お問い合わせ</h2>
+    <p class="contact-sub">
+      出展のご相談、取材・その他のお問い合わせはこちらからどうぞ。<br>
+      確認後、担当者よりご連絡いたします。
+    </p>
+    <div class="contact-card">
+      <form id="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="c-name">お名前 <span class="required">*</span></label>
+          <input type="text" class="form-input" id="c-name" placeholder="山田 花子" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-email">メールアドレス <span class="required">*</span></label>
+          <input type="email" class="form-input" id="c-email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-type">お問い合わせ種別 <span class="required">*</span></label>
+          <select class="contact-select" id="c-type" required>
+            <option value="">選択してください</option>
+            <option value="exhibit">出展希望</option>
+            <option value="press">取材・メディア</option>
+            <option value="sponsor">協賛・協力</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="c-message">メッセージ <span class="required">*</span></label>
+          <textarea class="form-input contact-textarea" id="c-message" placeholder="ご相談内容をお書きください" required></textarea>
+        </div>
+        <button type="submit" class="contact-submit">送信する →</button>
+      </form>
+      <div id="contact-success" style="display:none;" class="contact-success">
+        <div style="font-size:52px; margin-bottom:16px;">✉️</div>
+        <h4>送信しました！</h4>
+        <p>お問い合わせありがとうございます。<br>内容を確認し、折り返しご連絡いたします。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1065,36 +2148,146 @@
 <footer>
   <div class="footer-name">富士見文化室</div>
   <p>長野県富士見町発、みんなのアート展示会</p>
-  <p style="margin-top:12px; font-size:12px; opacity:0.4;">© 2025 富士見文化室</p>
+  <p style="margin-top:12px; font-size:12px; opacity:0.4;">© 2026 富士見文化室</p>
 </footer>
 
+<!-- NAMING MODAL -->
+<div class="modal-overlay" id="naming-modal">
+  <div class="modal-card">
+    <button class="modal-close" id="modal-close-btn">✕</button>
+    <p class="modal-label">Naming Application</p>
+    <h3 class="modal-title">🏷 名前をつける</h3>
+    <div class="modal-artist-info" id="modal-artist-info"></div>
 
-<div id="ab-switcher">
-  Pattern
-  <button class="ab-btn ab-btn-a" id="btn-a" onclick="setVariant('A')">A</button>
-  <button class="ab-btn ab-btn-b" id="btn-b" onclick="setVariant('B')">B</button>
-  <button class="ab-btn ab-btn-c" id="btn-c" onclick="setVariant('C')">C</button>
+    <form id="naming-form">
+      <div class="form-group">
+        <label class="form-label">あなたがつける名前 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="f-title"
+          placeholder="この作品の名前は…" required maxlength="50">
+      </div>
+      <div class="form-group">
+        <label class="form-label">お名前 <span class="required">*</span></label>
+        <input type="text" class="form-input" id="f-person"
+          placeholder="あなたのお名前" required maxlength="30">
+      </div>
+      <div class="form-group">
+        <label class="form-label">メールアドレス <span class="required">*</span></label>
+        <input type="email" class="form-input" id="f-email"
+          placeholder="example@mail.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">
+          ひとこと
+          <span style="opacity:0.4; font-weight:400;">（任意）</span>
+        </label>
+        <textarea class="form-input form-textarea" id="f-comment"
+          placeholder="なぜこの名前をつけたのか、どんなところが気に入ったか…"
+          maxlength="200"></textarea>
+      </div>
+      <button type="submit" class="form-submit">申請する →</button>
+    </form>
+
+    <div id="naming-success" style="display:none;" class="naming-success">
+      <div style="font-size:52px; margin-bottom:16px;">🎉</div>
+      <h4 style="font-size:22px; font-weight:900; margin-bottom:10px;">申請しました！</h4>
+      <p style="font-size:14px; opacity:0.7; line-height:1.9;">
+        アーティストが確認します。<br>
+        承認されたらメールでご連絡します。
+      </p>
+      <button class="form-submit" onclick="closeNamingModal()" style="margin-top:24px;">
+        とじる
+      </button>
+    </div>
+  </div>
 </div>
 
 <script>
-  function setVariant(v) {
-    localStorage.setItem('ab_variant', v);
-    location.reload();
-  }
+  (function () {
+    var header = document.getElementById('site-header');
+    var burger = document.getElementById('nav-burger');
+    var drawer = document.getElementById('nav-drawer');
+    var navLinks = document.querySelectorAll('.site-nav a, .nav-drawer a');
 
-  (function() {
-    var stored = localStorage.getItem('ab_variant');
-    if (!stored) {
-      stored = ['A','B','C'][Math.floor(Math.random() * 3)];
-      localStorage.setItem('ab_variant', stored);
+    // スクロールでヘッダーに影
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      updateActiveLink();
+    }, { passive: true });
+
+    // ハンバーガー開閉
+    burger.addEventListener('click', function () {
+      var isOpen = drawer.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // ドロワーリンク押したら閉じる
+    drawer.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        drawer.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // アクティブリンク更新
+    var sectionIds = ['artists', 'works', 'news', 'venue', 'info', 'contact'];
+    function updateActiveLink() {
+      var current = '';
+      var offset = 80;
+      sectionIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = id;
+        }
+      });
+      document.querySelectorAll('.site-nav a').forEach(function (a) {
+        var href = a.getAttribute('href').replace('#', '');
+        a.classList.toggle('active', href === current);
+      });
     }
-
-    if (stored === 'B') document.body.classList.add('variant-b');
-    if (stored === 'C') document.body.classList.add('variant-c');
-
-    document.getElementById('btn-' + stored.toLowerCase()).classList.add('active');
   })();
 </script>
 
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var success = document.getElementById('contact-success');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('.contact-submit');
+      btn.disabled = true;
+      btn.textContent = '送信中…';
+
+      var payload = {
+        type: 'contact',
+        name: document.getElementById('c-name').value.trim(),
+        email: document.getElementById('c-email').value.trim(),
+        inquiryType: document.getElementById('c-type').value,
+        message: document.getElementById('c-message').value.trim(),
+        submittedAt: new Date().toISOString()
+      };
+
+      var send = (typeof APPS_SCRIPT_URL !== 'undefined' && APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL')
+        ? fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'data=' + encodeURIComponent(JSON.stringify(payload))
+          }).catch(function () {})
+        : Promise.resolve();
+
+      send.finally(function () {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      });
+    });
+  })();
+</script>
 </body>
 </html>
