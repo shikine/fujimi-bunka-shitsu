@@ -314,6 +314,33 @@ function saveNaming(d) {
     } catch(err) { Logger.log('Mail error: ' + err); }
   }
 
+  // 申込者へサンクスメール
+  if (d.email) {
+    try {
+      MailApp.sendEmail(d.email,
+        '【富士見文化室】名前申込を受け付けました',
+        [
+          (d.person || 'お客様') + ' さん、ありがとうございます！',
+          '',
+          '以下の内容で名前申込を受け付けました。',
+          'Stripeでのお支払いが完了すると、正式に申込完了となります。',
+          '',
+          '─────────────────',
+          '作品番号：' + (d.workNo || d.workId || ''),
+          'つけた名前：「' + (d.namingTitle || '') + '」',
+          'コメント：' + (d.comment || 'なし'),
+          '─────────────────',
+          '',
+          'アーティストが名前を選んだ結果は、会期中にご連絡いたします。',
+          '選ばれた場合は作品をプレゼントします。お楽しみに！',
+          '',
+          '富士見文化室',
+          LP_BASE_URL
+        ].join('\n')
+      );
+    } catch(err) { Logger.log('Thanks mail error: ' + err); }
+  }
+
   return {
     success:     true,
     orderId:     orderId,
@@ -396,6 +423,29 @@ function saveContact(d) {
     } catch (err) {
       Logger.log('Mail error: ' + err);
     }
+  }
+
+  // 申込者へサンクスメール
+  if (d.email) {
+    try {
+      MailApp.sendEmail(d.email,
+        '【富士見文化室】お問い合わせを受け付けました',
+        [
+          (d.name || 'お客様') + ' さん、ありがとうございます！',
+          '',
+          'お問い合わせを受け付けました。',
+          '内容を確認の上、担当者よりご連絡いたします。',
+          '',
+          '─────────────────',
+          '種別：' + (CONTACT_TYPE_LABEL[contactType] || contactType || 'その他'),
+          'メッセージ：' + (d.message || ''),
+          '─────────────────',
+          '',
+          '富士見文化室',
+          LP_BASE_URL
+        ].join('\n')
+      );
+    } catch(err) { Logger.log('Thanks mail error: ' + err); }
   }
 
   return { success: true, id: id };
