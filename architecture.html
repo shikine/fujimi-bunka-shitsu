@@ -106,6 +106,17 @@
   .node-icon { font-size: 24px; margin-bottom: 4px; }
   .node-name { font-size: 13px; font-weight: 700; }
   .node-desc { font-size: 10px; opacity: 0.5; margin-top: 2px; line-height: 1.4; }
+  .node-url {
+    display: block;
+    font-size: 9px;
+    color: #3B82F6;
+    text-decoration: none;
+    margin-top: 5px;
+    word-break: break-all;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+  .node-url:hover { text-decoration: underline; opacity: 1; }
 
   .node.lp    { border-color: #F59E0B; }
   .node.gas   { border-color: #3B82F6; }
@@ -273,20 +284,23 @@
       <div class="node lp main">
         <div class="node-icon">🌐</div>
         <div class="node-name">LP（ランディングページ）</div>
-        <div class="node-desc">GitHub Pages でホスティング<br>shikine.github.io/fujimi-bunka-shitsu</div>
+        <div class="node-desc">GitHub Pages でホスティング</div>
+        <a class="node-url" href="https://shikine.github.io/fujimi-bunka-shitsu/fujimi_bunka_shitsu_lp.html" target="_blank">shikine.github.io/fujimi-bunka-shitsu/fujimi_bunka_shitsu_lp.html</a>
+        <a class="node-url" href="https://github.com/shikine/fujimi-bunka-shitsu" target="_blank" style="color:#6B7280;">github.com/shikine/fujimi-bunka-shitsu</a>
         <span class="badge done">✅ 稼働中</span>
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
         <div class="node">
-          <div class="node-icon">🎨</div>
-          <div class="node-name">A/B/Cデザインパターン</div>
-          <div class="node-desc">トンマナ・フォント切替</div>
-          <span class="badge done">✅ 実装済</span>
+          <div class="node-icon">🔧</div>
+          <div class="node-name">管理画面（admin）</div>
+          <div class="node-desc">お知らせ投稿・申込一覧</div>
+          <a class="node-url" href="https://shikine.github.io/fujimi-bunka-shitsu/admin.html" target="_blank">…/admin.html</a>
+          <span class="badge done">✅ 稼働中</span>
         </div>
         <div class="node">
           <div class="node-icon">🏷</div>
           <div class="node-name">名前申込モーダル</div>
-          <div class="node-desc">SP対応ボトムシート</div>
+          <div class="node-desc">SP対応ボトムシート<br>二重送信防止済</div>
           <span class="badge done">✅ 実装済</span>
         </div>
       </div>
@@ -318,6 +332,7 @@
           Stripe Checkout生成<br>
           Webhook受信 / メール送信
         </div>
+        <a class="node-url" href="https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxIHcB0HC6Aof3URyak_-yp7gEr9PgaLXUuPMiQ78VuJpuL5kRLI8Eg/exec" target="_blank">script.google.com/macros/s/…/exec</a>
         <span class="badge done">✅ 稼働中</span>
       </div>
       <div class="node stripe">
@@ -328,6 +343,7 @@
           500円 決済処理<br>
           Webhook → GAS
         </div>
+        <a class="node-url" href="https://dashboard.stripe.com/" target="_blank">dashboard.stripe.com</a>
         <span class="badge done">✅ 設定済</span>
       </div>
     </div>
@@ -358,6 +374,7 @@
           📋 <b>contacts</b>　問い合わせ管理<br>
           📋 <b>news</b>　　　お知らせ投稿
         </div>
+        <a class="node-url" href="https://docs.google.com/spreadsheets/d/1T1friY__dC9i_8B-BIFyFSFhK9epmwYyTq3xDx4IG9s" target="_blank">docs.google.com/spreadsheets/d/1T1friY…</a>
         <span class="badge done">✅ 稼働中</span>
       </div>
     </div>
@@ -396,12 +413,14 @@
           <div class="node-icon">🏢</div>
           <div class="node-name">Meta Business Suite</div>
           <div class="node-desc">FB / IG / Threads<br>まとめて管理</div>
+          <a class="node-url" href="https://business.facebook.com/" target="_blank">business.facebook.com</a>
           <span class="badge planned">🔧 アカウント作成予定</span>
         </div>
         <div class="node x">
           <div class="node-icon">𝕏</div>
           <div class="node-name">X (Twitter)</div>
           <div class="node-desc">X API v2<br>月1500投稿（無料）</div>
+          <a class="node-url" href="https://developer.twitter.com/" target="_blank" style="color:#1a1a1a;">developer.twitter.com</a>
           <span class="badge planned">🔧 アカウント作成予定</span>
         </div>
       </div>
@@ -410,7 +429,8 @@
         <div class="sns-node">
           <div class="node-icon">📘</div>
           <div class="node-name">Facebook</div>
-          <span class="badge planned">ページ必要</span>
+          <a class="node-url" href="https://www.facebook.com/profile.php?id=61590943010074" target="_blank">富士見文化室ページ</a>
+          <span class="badge done">✅ 作成済</span>
         </div>
         <div class="sns-node">
           <div class="node-icon">📸</div>
