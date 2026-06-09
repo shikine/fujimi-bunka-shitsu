@@ -1486,6 +1486,164 @@
   .ab-btn-b { background: #D4C4A0; color: #2C2416; }
   .ab-btn-c { background: linear-gradient(135deg, #C9B8D4, #7BAFC4); color: #3D3550; }
   .ab-btn-d { background: linear-gradient(135deg, #5A8060, #3A6A4A); color: #D8EBD0; }
+  .ab-btn-e { background: linear-gradient(135deg, #FF6B9D, #A855F7, #4ECDC4); color: white; }
+
+  /* ===== VARIANT E: 動くアート ===== */
+
+  /* -- キーフレーム -- */
+  @keyframes blob-move {
+    0%   { transform: translate(0,0) scale(1) rotate(0deg); }
+    33%  { transform: translate(var(--tx1),var(--ty1)) scale(var(--s1)) rotate(120deg); }
+    66%  { transform: translate(var(--tx2),var(--ty2)) scale(var(--s2)) rotate(240deg); }
+    100% { transform: translate(0,0) scale(1) rotate(360deg); }
+  }
+  @keyframes particle-rise {
+    0%   { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(-120px) scale(0.2); opacity: 0; }
+  }
+  @keyframes gradient-pan {
+    0%,100% { background-position: 0% 50%; }
+    50%     { background-position: 100% 50%; }
+  }
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(36px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes reveal-left {
+    from { opacity: 0; transform: translateX(-32px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes shimmer {
+    0%,100% { background-position: -200% center; }
+    50%     { background-position: 200% center; }
+  }
+  @keyframes pulse-ring {
+    0%   { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255,107,157,0.5); }
+    70%  { transform: scale(1);   box-shadow: 0 0 0 16px rgba(255,107,157,0); }
+    100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255,107,157,0); }
+  }
+  @keyframes float-badge {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-6px); }
+  }
+  @keyframes wave-border {
+    0%,100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50%     { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  }
+
+  /* -- 基本色 -- */
+  body.variant-e {
+    --yellow: #FFE135; --pink: #FF6B9D; --blue: #4ECDC4;
+    --orange: #FF8C42; --purple: #A855F7; --green: #6BCB77;
+    --cream: #FFFDF5; --dark: #1a1a1a;
+  }
+
+  /* -- HERO -- */
+  body.variant-e .hero {
+    background: #FFFDF5;
+    overflow: hidden;
+  }
+  body.variant-e .hero::before { display: none; }
+
+  /* blob コンテナ */
+  #e-blobs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .e-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(72px);
+    opacity: 0.55;
+    animation: blob-move var(--dur, 14s) ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* パーティクル */
+  .e-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle-rise var(--pr, 2.5s) ease-out forwards;
+    will-change: transform, opacity;
+  }
+
+  /* hero内コンテンツを前面に */
+  body.variant-e .hero > *:not(#e-blobs) { position: relative; z-index: 1; }
+
+  /* タイトルにシマー */
+  body.variant-e .hero-title {
+    background: linear-gradient(90deg,
+      var(--dark) 0%, #FF6B9D 30%, #A855F7 50%, #4ECDC4 70%, var(--dark) 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 5s linear infinite;
+  }
+  body.variant-e .hero-title .line2 {
+    -webkit-text-stroke: 0;
+  }
+
+  /* バッジをフロート */
+  body.variant-e .badge:nth-child(1) { animation: float-badge 3.0s ease-in-out infinite; }
+  body.variant-e .badge:nth-child(2) { animation: float-badge 3.4s ease-in-out infinite 0.3s; }
+  body.variant-e .badge:nth-child(3) { animation: float-badge 2.8s ease-in-out infinite 0.6s; }
+  body.variant-e .badge:nth-child(4) { animation: float-badge 3.2s ease-in-out infinite 0.9s; }
+
+  /* CTAボタン パルス */
+  body.variant-e .btn-main {
+    animation: pulse-ring 2.5s ease-in-out infinite;
+  }
+  body.variant-e .btn-main:hover { animation: none; transform: translate(-2px,-2px); }
+
+  /* -- スクロールリビール -- */
+  body.variant-e .reveal-section {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  body.variant-e .reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* -- セクション -- */
+  body.variant-e .concept {
+    background: linear-gradient(-45deg, #1a1a1a, #2D1B4E, #1a1a1a, #0D2E1A);
+    background-size: 400% 400%;
+    animation: gradient-pan 10s ease infinite;
+  }
+  body.variant-e .concept-heading .accent { color: var(--yellow); }
+
+  /* step カードのウェーブ枠 */
+  body.variant-e .step {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  body.variant-e .step:hover {
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 6px 6px 0 var(--dark);
+  }
+
+  /* who カードのモーフ */
+  body.variant-e .who-card {
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+  }
+  body.variant-e .who-card:hover {
+    transform: translate(-4px,-8px) rotate(-2deg) scale(1.06);
+    box-shadow: 8px 8px 0 var(--dark);
+  }
+
+  /* sns ボタン */
+  body.variant-e .sns { background: linear-gradient(-45deg,#4ECDC4,#A855F7,#FF6B9D,#FF8C42); background-size:400% 400%; animation: gradient-pan 8s ease infinite; }
+
+  /* artist カードのグロー */
+  body.variant-e .artist-card:hover {
+    box-shadow: 0 0 0 3px var(--pink), 8px 8px 0 var(--dark);
+    transform: translate(-3px,-3px);
+  }
 
   /* ===== VARIANT D: 山・森 風景 ===== */
   body.variant-d {
@@ -2311,6 +2469,77 @@ function showNamingSuccess() {
   }
 })();
 
+// ===== VARIANT E 初期化 =====
+function initVariantE() {
+  // ── Blob 生成 ──
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    var blobWrap = document.createElement('div');
+    blobWrap.id = 'e-blobs';
+    hero.insertBefore(blobWrap, hero.firstChild);
+    var blobs = [
+      { color:'#FFE135', w:420, x:10, y:5,  tx1:'8vw',  ty1:'6vh',  s1:1.15, tx2:'-5vw', ty2:'12vh',  s2:0.9,  dur:'16s' },
+      { color:'#FF6B9D', w:380, x:60, y:20, tx1:'-7vw', ty1:'8vh',  s1:1.2,  tx2:'10vw', ty2:'-4vh',  s2:0.85, dur:'20s' },
+      { color:'#4ECDC4', w:340, x:75, y:55, tx1:'6vw',  ty1:'-10vh',s1:0.9,  tx2:'-8vw', ty2:'5vh',   s2:1.1,  dur:'18s' },
+      { color:'#A855F7', w:300, x:20, y:60, tx1:'-6vw', ty1:'-8vh', s1:1.1,  tx2:'9vw',  ty2:'6vh',   s2:0.95, dur:'22s' },
+      { color:'#FF8C42', w:260, x:45, y:80, tx1:'10vw', ty1:'-5vh', s1:1.0,  tx2:'-4vw', ty2:'-10vh', s2:1.15, dur:'14s' },
+      { color:'#6BCB77', w:200, x:85, y:80, tx1:'-8vw', ty1:'4vh',  s1:0.85, tx2:'5vw',  ty2:'-8vh',  s2:1.05, dur:'19s' },
+    ];
+    blobs.forEach(function(b, i) {
+      var el = document.createElement('div');
+      el.className = 'e-blob';
+      el.style.cssText = [
+        'width:'+b.w+'px','height:'+b.w+'px',
+        'left:'+b.x+'%','top:'+b.y+'%',
+        'background:'+b.color,
+        '--tx1:'+b.tx1,'--ty1:'+b.ty1,'--s1:'+b.s1,
+        '--tx2:'+b.tx2,'--ty2:'+b.ty2,'--s2:'+b.s2,
+        '--dur:'+b.dur,
+        'animation-delay:'+(i*-2.5)+'s'
+      ].join(';');
+      blobWrap.appendChild(el);
+    });
+  }
+
+  // ── パーティクル連続生成 ──
+  var pColors = ['#FFE135','#FF6B9D','#4ECDC4','#A855F7','#FF8C42','#6BCB77'];
+  function spawnParticle() {
+    if (!document.body.classList.contains('variant-e')) return;
+    var heroEl = document.querySelector('.hero');
+    if (!heroEl) return;
+    var p = document.createElement('div');
+    p.className = 'e-particle';
+    var size = 4 + Math.random() * 10;
+    var dur  = 1.8 + Math.random() * 2;
+    p.style.cssText = [
+      'width:'+size+'px','height:'+size+'px',
+      'left:'+(5+Math.random()*90)+'%',
+      'bottom:'+(5+Math.random()*40)+'%',
+      'background:'+pColors[Math.floor(Math.random()*pColors.length)],
+      '--pr:'+dur+'s'
+    ].join(';');
+    heroEl.appendChild(p);
+    setTimeout(function(){ if(p.parentNode) p.parentNode.removeChild(p); }, dur*1000);
+    setTimeout(spawnParticle, 100 + Math.random()*180);
+  }
+  spawnParticle();
+
+  // ── スクロールリビール ──
+  var sels = '.concept,.naming,.who,.sns,.info,.artists,.news,.venue,.contact,.mystery';
+  var sections = document.querySelectorAll(sels);
+  sections.forEach(function(s){ s.classList.add('reveal-section'); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08 });
+    sections.forEach(function(s){ io.observe(s); });
+  } else {
+    sections.forEach(function(s){ s.classList.add('visible'); });
+  }
+}
+
 // ドットアニメーション（リダイレクト中表示用）
 (function() {
   var dots = ['●○○','○●○','○○●'];
@@ -2729,6 +2958,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
   <button class="ab-btn ab-btn-b" id="btn-b" onclick="setVariant('B')">B</button>
   <button class="ab-btn ab-btn-c" id="btn-c" onclick="setVariant('C')">C</button>
   <button class="ab-btn ab-btn-d" id="btn-d" onclick="setVariant('D')">D</button>
+  <button class="ab-btn ab-btn-e" id="btn-e" onclick="setVariant('E')">E</button>
   <button class="ab-btn" id="btn-tone" onclick="toggleTone()" style="background:rgba(255,255,255,0.15); color:white; font-size:14px; padding:4px 8px;">⚙</button>
 </div>
 
@@ -2801,6 +3031,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
     if (stored === 'B') document.body.classList.add('variant-b');
     if (stored === 'C') document.body.classList.add('variant-c');
     if (stored === 'D') document.body.classList.add('variant-d');
+    if (stored === 'E') { document.body.classList.add('variant-e'); initVariantE(); }
     document.getElementById('btn-' + stored.toLowerCase()).classList.add('active');
 
     var savedFont = localStorage.getItem('ab_font') || 'maru';
