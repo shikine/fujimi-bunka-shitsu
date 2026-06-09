@@ -1479,6 +1479,82 @@
   .ab-btn-d { background: linear-gradient(135deg, #5A8060, #3A6A4A); color: #D8EBD0; }
   .ab-btn-e { background: linear-gradient(135deg, #FF6B9D, #A855F7, #4ECDC4); color: white; }
 
+  /* ===== 出展者募集バナー ===== */
+  @keyframes recruit-bounce {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-6px); }
+  }
+  @keyframes recruit-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  #recruit-banner {
+    position: fixed;
+    bottom: 110px;
+    right: 16px;
+    z-index: 9000;
+    animation: recruit-in 0.6s 1.5s ease both, recruit-bounce 3s 2.5s ease-in-out infinite;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .recruit-inner {
+    background: var(--dark);
+    color: var(--yellow);
+    border-radius: 16px;
+    padding: 10px 16px 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 4px 4px 0 var(--pink), 0 8px 24px rgba(0,0,0,0.2);
+    border: 2px solid var(--dark);
+    transition: transform 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+  }
+
+  #recruit-banner:hover .recruit-inner {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--pink), 0 10px 28px rgba(0,0,0,0.25);
+    animation-play-state: paused;
+  }
+
+  .recruit-icon { font-size: 20px; line-height: 1; }
+
+  .recruit-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .recruit-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+    font-family: sans-serif;
+  }
+
+  .recruit-title {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  .recruit-arrow {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-left: 2px;
+  }
+
+  /* バリアントB: 和モダン対応 */
+  body.variant-b .recruit-inner { background: #2C2416; color: #D4C4A0; box-shadow: 4px 4px 0 #C4773A; }
+  /* バリアントC: モネ対応 */
+  body.variant-c .recruit-inner { background: rgba(61,53,80,0.9); color: #C9B8D4; box-shadow: 4px 4px 0 #9B8FBD; backdrop-filter: blur(4px); }
+  /* バリアントD: 山・森対応 */
+  body.variant-d .recruit-inner { background: #1A2E1E; color: #A8D8B0; box-shadow: 4px 4px 0 #3A6A4A; }
+
   /* ===== VARIANT E: 動くアート ===== */
 
   /* -- キーフレーム -- */
@@ -3082,6 +3158,17 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
     });
   })();
 </script>
+
+<a id="recruit-banner" href="#contact" onclick="document.querySelector('.contact').scrollIntoView({behavior:'smooth'}); return false;">
+  <div class="recruit-inner">
+    <span class="recruit-icon">🎨</span>
+    <span class="recruit-text">
+      <span class="recruit-label">WANTED</span>
+      <span class="recruit-title">出展者募集中</span>
+    </span>
+    <span class="recruit-arrow">→</span>
+  </div>
+</a>
 
 <div id="font-row">
   Font
