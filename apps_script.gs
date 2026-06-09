@@ -202,7 +202,20 @@ function getSheet(name, headers) {
 
 function rowToObj(headers, row) {
   var obj = {};
-  headers.forEach(function(h, i) { obj[h] = row[i] != null ? String(row[i]) : ''; });
+  headers.forEach(function(h, i) {
+    var val = row[i];
+    if (val == null) {
+      obj[h] = '';
+    } else if (val instanceof Date) {
+      // 日付型は YYYY-MM-DD 形式に変換
+      var y = val.getFullYear();
+      var m = ('0' + (val.getMonth() + 1)).slice(-2);
+      var d = ('0' + val.getDate()).slice(-2);
+      obj[h] = y + '-' + m + '-' + d;
+    } else {
+      obj[h] = String(val);
+    }
+  });
   return obj;
 }
 
