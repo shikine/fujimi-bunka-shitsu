@@ -2084,6 +2084,9 @@ function closeNamingModal() {
   var overlay = document.getElementById('naming-modal');
   if (overlay) overlay.classList.remove('open');
   document.body.style.overflow = '';
+  _namingSubmitting = false; // モーダルを閉じたらフラグリセット
+  var submitBtn = document.querySelector('#naming-form .form-submit');
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '申請する →'; }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -2102,14 +2105,19 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+var _namingSubmitting = false; // 二重送信防止フラグ
+
 function submitNaming() {
+  if (_namingSubmitting) return; // 二重送信ガード
+
   var title   = document.getElementById('f-title').value.trim();
   var person  = document.getElementById('f-person').value.trim();
   var email   = document.getElementById('f-email').value.trim();
   var comment = (document.getElementById('f-comment').value || '').trim();
   if (!title || !person || !email) return;
 
-  var submitBtn = document.querySelector('#naming-form .btn-main');
+  _namingSubmitting = true;
+  var submitBtn = document.querySelector('#naming-form .form-submit');
   if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
 
   var payload = {
@@ -2140,12 +2148,14 @@ function submitNaming() {
       showStripeRedirect(res.checkoutUrl);
     } else {
       alert('エラーが発生しました。もう一度お試しください。\n' + (res.error || ''));
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '申し込む →'; }
+      _namingSubmitting = false;
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '申請する →'; }
     }
   })
   .catch(function() {
     alert('通信エラーが発生しました。');
-    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '申し込む →'; }
+    _namingSubmitting = false;
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '申請する →'; }
   });
 }
 
