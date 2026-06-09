@@ -3214,7 +3214,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
   document.body.insertBefore(toneWrapper, document.body.firstChild);
   while (document.body.children.length > 1) {
     var child = document.body.children[1];
-    if (child.id === 'tone-panel' || child.id === 'ab-switcher') break;
+    if (child.id === 'tone-panel' || child.id === 'ab-switcher' || child.id === 'font-row' || child.id === 'recruit-banner') break;
     toneWrapper.appendChild(child);
   }
 
