@@ -832,10 +832,10 @@
     inset: 0;
     background: rgba(0,0,0,0.65);
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* SP: 下から出る */
     justify-content: center;
-    padding: 20px;
-    z-index: 1000;
+    padding: 0;
+    z-index: 10000; /* Font行・Pattern行より上 */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s;
@@ -846,19 +846,35 @@
   .modal-card {
     background: var(--cream);
     border: 2.5px solid var(--dark);
-    border-radius: 24px;
-    padding: 32px 28px;
-    max-width: 440px;
+    border-radius: 24px 24px 0 0;
+    padding: 28px 20px 40px;
+    max-width: 100%;
     width: 100%;
-    box-shadow: 8px 8px 0 var(--dark);
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
     position: relative;
-    max-height: 90vh;
+    max-height: 92dvh;
     overflow-y: auto;
-    transform: translateY(24px);
-    transition: transform 0.2s;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(40px);
+    transition: transform 0.25s ease;
   }
 
   .modal-overlay.open .modal-card { transform: translateY(0); }
+
+  /* タブレット以上は中央表示に戻す */
+  @media (min-width: 600px) {
+    .modal-overlay {
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-card {
+      border-radius: 24px;
+      max-width: 440px;
+      padding: 32px 28px;
+      box-shadow: 8px 8px 0 var(--dark);
+      max-height: 90vh;
+    }
+  }
 
   .modal-close {
     position: absolute;
@@ -1371,7 +1387,7 @@
     color: rgba(255,255,255,0.4);
     letter-spacing: 0.08em;
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-    z-index: 9998;
+    z-index: 9000;
   }
 
   /* ===== TONE PANEL ===== */
@@ -1379,6 +1395,7 @@
     position: fixed;
     bottom: 100px;
     right: 16px;
+    z-index: 9000;
     width: 220px;
     background: rgba(10,10,10,0.88);
     backdrop-filter: blur(10px);
