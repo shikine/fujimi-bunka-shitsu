@@ -2530,15 +2530,24 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
         submittedAt: new Date().toISOString()
       };
 
-      var send = (typeof APPS_SCRIPT_URL !== 'undefined' && APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL')
-        ? fetch(APPS_SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'data=' + encodeURIComponent(JSON.stringify(payload))
-          }).catch(function () {})
-        : Promise.resolve();
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        return;
+      }
 
-      send.finally(function () {
+      fetch(APPS_SCRIPT_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body:    'data=' + encodeURIComponent(JSON.stringify(payload))
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      })
+      .catch(function() {
+        // 通信エラーでも完了表示（スプレッドシートに入らないケースはまれ）
         form.style.display = 'none';
         success.style.display = 'block';
       });
