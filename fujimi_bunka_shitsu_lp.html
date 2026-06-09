@@ -1485,6 +1485,119 @@
   .ab-btn-a { background: #FFE135; color: #1a1a1a; }
   .ab-btn-b { background: #D4C4A0; color: #2C2416; }
   .ab-btn-c { background: linear-gradient(135deg, #C9B8D4, #7BAFC4); color: #3D3550; }
+  .ab-btn-d { background: linear-gradient(135deg, #5A8060, #3A6A4A); color: #D8EBD0; }
+
+  /* ===== VARIANT D: 山・森 風景 ===== */
+  body.variant-d {
+    --yellow: #D8EBD0; --pink: #7AA890; --blue: #5A8AAA;
+    --orange: #C8A060; --purple: #6B788A; --green: #3A6A4A;
+    --red: #8B6B5A; --cream: #F0F5EC; --dark: #1A2E1E;
+  }
+
+  body.variant-d .hero {
+    background: linear-gradient(180deg,
+      #D0E4EE 0%, #A8C4D4 18%, #849EA8 35%,
+      #5A8060 52%, #2E5A38 72%, #1A3020 100%
+    );
+  }
+
+  /* 山シルエット */
+  body.variant-d .hero::before {
+    background-image: none;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600' preserveAspectRatio='xMidYMid slice'%3E%3Cpolygon points='0,600 0,340 120,220 280,310 460,160 620,260 780,120 940,240 1080,170 1200,230 1200,600' fill='%23305840' opacity='0.75'/%3E%3Cpolygon points='0,600 0,420 180,360 360,400 540,350 720,390 900,345 1100,380 1200,355 1200,600' fill='%231E3A28' opacity='0.85'/%3E%3Cellipse cx='430' cy='158' rx='18' ry='24' fill='%23F5F8F0' opacity='0.6'/%3E%3Cellipse cx='782' cy='118' rx='22' ry='28' fill='%23EFF4EC' opacity='0.55'/%3E%3C/svg%3E") no-repeat center/cover,
+      radial-gradient(ellipse 160% 35% at 50% 25%, rgba(220,238,230,0.45) 0%, transparent 65%),
+      radial-gradient(ellipse 80% 25% at 25% 12%, rgba(255,248,230,0.35) 0%, transparent 55%);
+    filter: none;
+  }
+
+  body.variant-d .hero-tag {
+    background: rgba(255,255,255,0.2);
+    color: #F0F5EC;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(4px);
+  }
+
+  body.variant-d .hero-title .line1,
+  body.variant-d .hero-title .line3 { color: #F0F5EC; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  body.variant-d .hero-title .line2 {
+    color: #A8D8B0;
+    -webkit-text-stroke: 1.5px rgba(240,245,236,0.6);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+
+  body.variant-d .hero-sub { color: rgba(240,245,236,0.85); text-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+
+  body.variant-d .badge {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.3);
+    color: #F0F5EC;
+    backdrop-filter: blur(4px);
+  }
+  body.variant-d .badge-1 { background: rgba(122,168,144,0.6); }
+  body.variant-d .badge-2 { background: rgba(90,138,170,0.6); }
+  body.variant-d .badge-3 { background: rgba(200,160,96,0.6); }
+  body.variant-d .badge-4 { background: rgba(58,106,74,0.6); border-color: rgba(255,255,255,0.25); }
+
+  body.variant-d .btn-main {
+    background: rgba(26,46,30,0.75);
+    color: #D8EBD0;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+  }
+  body.variant-d .btn-main:hover {
+    background: rgba(26,46,30,0.92);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+    transform: translate(-2px, -2px);
+  }
+  body.variant-d .scroll-hint { color: rgba(240,245,236,0.45); }
+
+  body.variant-d .concept {
+    background: linear-gradient(135deg, #1A2E1E 0%, #2A4A30 100%);
+  }
+  body.variant-d .concept::after { content: '山'; color: rgba(255,255,255,0.04); font-size: 220px; }
+  body.variant-d .concept-heading .accent { color: #A8D8B0; }
+
+  body.variant-d .naming { background: #EBF2E8; }
+  body.variant-d .step { border-color: rgba(26,46,30,0.12); box-shadow: 0 2px 12px rgba(26,46,30,0.07); }
+  body.variant-d .step:nth-child(1) .step-num { color: #7AA890; }
+  body.variant-d .step:nth-child(2) .step-num { color: #5A8AAA; }
+  body.variant-d .step:nth-child(3) .step-num { color: #C8A060; }
+  body.variant-d .step:nth-child(4) .step-num { color: #3A6A4A; }
+
+  body.variant-d .who {
+    background: linear-gradient(135deg, #5A8060 0%, #3A6A4A 50%, #2E5038 100%);
+  }
+  body.variant-d .who-title { color: #F0F5EC; }
+  body.variant-d .who-card {
+    background: rgba(255,255,255,0.85);
+    border-color: rgba(26,46,30,0.15);
+    box-shadow: 0 4px 16px rgba(26,46,30,0.15);
+  }
+  body.variant-d .who-card:hover { box-shadow: 0 8px 24px rgba(26,46,30,0.2); transform: translate(-2px,-4px); }
+
+  body.variant-d .sns { background: linear-gradient(135deg, #2A4A30 0%, #5A8AAA 100%); }
+  body.variant-d .sns-title, body.variant-d .sns-body { color: #F0F5EC; }
+  body.variant-d .sns-btn {
+    background: rgba(255,255,255,0.18);
+    color: #F0F5EC;
+    border-color: rgba(255,255,255,0.35);
+    backdrop-filter: blur(4px);
+  }
+  body.variant-d .sns-btn:hover { background: rgba(255,255,255,0.32); color: #1A2E1E; }
+
+  body.variant-d .info-table td:first-child { color: #3A6A4A; }
+  body.variant-d .info-cta .btn-main {
+    background: #3A6A4A; color: #F0F5EC;
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(58,106,74,0.4);
+  }
+
+  body.variant-d footer {
+    background: linear-gradient(135deg, #1A2E1E 0%, #2A4A30 100%);
+  }
+  body.variant-d footer .footer-name { color: #A8D8B0; }
 
   /* ===== VARIANT B: 和モダン ===== */
   body.variant-b {
@@ -2615,6 +2728,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
   <button class="ab-btn ab-btn-a" id="btn-a" onclick="setVariant('A')">A</button>
   <button class="ab-btn ab-btn-b" id="btn-b" onclick="setVariant('B')">B</button>
   <button class="ab-btn ab-btn-c" id="btn-c" onclick="setVariant('C')">C</button>
+  <button class="ab-btn ab-btn-d" id="btn-d" onclick="setVariant('D')">D</button>
   <button class="ab-btn" id="btn-tone" onclick="toggleTone()" style="background:rgba(255,255,255,0.15); color:white; font-size:14px; padding:4px 8px;">⚙</button>
 </div>
 
@@ -2686,6 +2800,7 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
     localStorage.setItem('ab_variant', stored);
     if (stored === 'B') document.body.classList.add('variant-b');
     if (stored === 'C') document.body.classList.add('variant-c');
+    if (stored === 'D') document.body.classList.add('variant-d');
     document.getElementById('btn-' + stored.toLowerCase()).classList.add('active');
 
     var savedFont = localStorage.getItem('ab_font') || 'maru';
