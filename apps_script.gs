@@ -127,6 +127,22 @@ function handleStripeWebhook(body, sigHeader) {
       if (orderId) {
         updateNamingPayStatus(orderId, 'paid');
         Logger.log('Payment completed: ' + orderId);
+
+        // 支払い完了メール通知
+        if (NOTIFY_EMAIL) {
+          try {
+            MailApp.sendEmail(NOTIFY_EMAIL,
+              '【富士見文化室】💳 支払い完了：' + orderId,
+              [
+                '名前申込の支払いが完了しました。',
+                '',
+                '注文ID：' + orderId,
+                '',
+                '管理シート：https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID
+              ].join('\n')
+            );
+          } catch(err) { Logger.log('Mail error: ' + err); }
+        }
       }
     }
   } catch (err) {
@@ -273,6 +289,29 @@ function saveNaming(d) {
 
   if (!stripe.success) {
     return { success: false, error: 'stripe_error', detail: stripe.error };
+  }
+
+  // メール通知
+  if (NOTIFY_EMAIL) {
+    try {
+      MailApp.sendEmail(NOTIFY_EMAIL,
+        '【富士見文化室】名前申込が届きました（支払い待ち）',
+        [
+          '新しい名前申込が届きました。',
+          '',
+          '作品番号：' + (d.workNo || d.workId || '不明'),
+          'ジャンル：' + (d.genre || ''),
+          'つけた名前：' + (d.namingTitle || ''),
+          '申込者：'   + (d.person || ''),
+          'メール：'   + (d.email  || ''),
+          'コメント：' + (d.comment || 'なし'),
+          '',
+          '※ Stripe での支払い完了後、payStatus が paid に更新されます。',
+          '',
+          '管理シート：https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID
+        ].join('\n')
+      );
+    } catch(err) { Logger.log('Mail error: ' + err); }
   }
 
   return {
