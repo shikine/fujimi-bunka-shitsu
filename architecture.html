@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>富士見文化室 — システム構成図</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', 'Hiragino Sans', sans-serif;
+    background: #F7F6F3;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 32px 24px 48px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-bottom: 36px;
+  }
+
+  /* ── レイヤー ── */
+  .diagram {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .layer {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+  }
+
+  .layer-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #fff;
+    padding: 12px 6px;
+    border-radius: 8px 0 0 8px;
+    min-width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .layer-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 16px;
+    flex-wrap: wrap;
+    border-radius: 0 12px 12px 0;
+  }
+
+  /* 色テーマ */
+  .l-user   .layer-label { background: #6B7280; }
+  .l-user   .layer-body  { background: #F3F4F6; }
+
+  .l-front  .layer-label { background: #F59E0B; }
+  .l-front  .layer-body  { background: #FFFBEB; }
+
+  .l-back   .layer-label { background: #3B82F6; }
+  .l-back   .layer-body  { background: #EFF6FF; }
+
+  .l-data   .layer-label { background: #10B981; }
+  .l-data   .layer-body  { background: #ECFDF5; }
+
+  .l-mail   .layer-label { background: #8B5CF6; }
+  .l-mail   .layer-body  { background: #F5F3FF; }
+
+  .l-sns    .layer-label { background: #EC4899; }
+  .l-sns    .layer-body  { background: #FDF2F8; }
+
+  /* ── ノード ── */
+  .node {
+    background: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    min-width: 130px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1.5px solid rgba(0,0,0,0.08);
+    position: relative;
+  }
+
+  .node.main {
+    border-width: 2.5px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    min-width: 180px;
+  }
+
+  .node-icon { font-size: 24px; margin-bottom: 4px; }
+  .node-name { font-size: 13px; font-weight: 700; }
+  .node-desc { font-size: 10px; opacity: 0.5; margin-top: 2px; line-height: 1.4; }
+
+  .node.lp    { border-color: #F59E0B; }
+  .node.gas   { border-color: #3B82F6; }
+  .node.sheet { border-color: #10B981; }
+  .node.stripe{ border-color: #6366F1; }
+  .node.meta  { border-color: #1877F2; }
+  .node.x     { border-color: #1a1a1a; }
+
+  /* ── 矢印レーン ── */
+  .arrow-lane {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 44px;
+    gap: 32px;
+    position: relative;
+  }
+
+  .arrow-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 120px;
+  }
+
+  .arrow-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #6B7280;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .arr { font-size: 14px; }
+  .arr.down  { color: #3B82F6; }
+  .arr.up    { color: #10B981; }
+  .arr.both  { color: #F59E0B; }
+  .arr.pink  { color: #EC4899; }
+
+  /* ── バッジ ── */
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 100px;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .badge.done    { background: #D1FAE5; color: #065F46; }
+  .badge.planned { background: #FEF3C7; color: #92400E; }
+  .badge.future  { background: #F3E8FF; color: #5B21B6; }
+
+  /* ── 凡例 ── */
+  .legend {
+    max-width: 960px;
+    margin: 24px auto 0;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #6B7280;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ── 大きいSNSグリッド ── */
+  .sns-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sns-node {
+    background: white;
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+    min-width: 100px;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .sns-node .node-icon { font-size: 20px; }
+  .sns-node .node-name { font-size: 11px; }
+
+  .divider {
+    text-align: center;
+    font-size: 11px;
+    color: #9CA3AF;
+    padding: 8px 0 4px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── 注記 ── */
+  .note {
+    max-width: 960px;
+    margin: 20px auto 0;
+    background: #FFF7ED;
+    border: 1.5px solid #FED7AA;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #92400E;
+  }
+  .note strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>🗺 富士見文化室 — システム構成図</h1>
+
+<div class="diagram">
+
+  <!-- ① ユーザー -->
+  <div class="layer l-user">
+    <div class="layer-label">ユーザー</div>
+    <div class="layer-body">
+      <div class="node">
+        <div class="node-icon">🧑‍🎨</div>
+        <div class="node-name">来場者 / 鑑賞者</div>
+        <div class="node-desc">名前をつけたい人<br>問い合わせたい人</div>
+      </div>
+      <div class="node">
+        <div class="node-icon">📱</div>
+        <div class="node-name">SNSフォロワー</div>
+        <div class="node-desc">Instagram / X / Threads<br>Facebook</div>
+      </div>
+      <div class="node">
+        <div class="node-icon">🎭</div>
+        <div class="node-name">匿名アーティスト</div>
+        <div class="node-desc">名前を選ぶ側<br>作品を提供</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 矢印 -->
+  <div class="arrow-lane">
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr both">↕</span> アクセス / 閲覧</div>
+    </div>
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr pink">←</span> SNS投稿 → 流入</div>
+    </div>
+  </div>
+
+  <!-- ② フロントエンド -->
+  <div class="layer l-front">
+    <div class="layer-label">フロント</div>
+    <div class="layer-body">
+      <div class="node lp main">
+        <div class="node-icon">🌐</div>
+        <div class="node-name">LP（ランディングページ）</div>
+        <div class="node-desc">GitHub Pages でホスティング<br>shikine.github.io/fujimi-bunka-shitsu</div>
+        <span class="badge done">✅ 稼働中</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="node">
+          <div class="node-icon">🎨</div>
+          <div class="node-name">A/B/Cデザインパターン</div>
+          <div class="node-desc">トンマナ・フォント切替</div>
+          <span class="badge done">✅ 実装済</span>
+        </div>
+        <div class="node">
+          <div class="node-icon">🏷</div>
+          <div class="node-name">名前申込モーダル</div>
+          <div class="node-desc">SP対応ボトムシート</div>
+          <span class="badge done">✅ 実装済</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 矢印 -->
+  <div class="arrow-lane">
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr down">↓</span> フォーム送信（POST）</div>
+    </div>
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr up">↑</span> ニュース取得（GET）</div>
+    </div>
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr down">↓</span> Stripe決済へリダイレクト</div>
+    </div>
+  </div>
+
+  <!-- ③ バックエンド -->
+  <div class="layer l-back">
+    <div class="layer-label">バックエンド</div>
+    <div class="layer-body">
+      <div class="node gas main">
+        <div class="node-icon">⚙️</div>
+        <div class="node-name">Google Apps Script</div>
+        <div class="node-desc">
+          saveNaming / saveContact<br>
+          Stripe Checkout生成<br>
+          Webhook受信 / メール送信
+        </div>
+        <span class="badge done">✅ 稼働中</span>
+      </div>
+      <div class="node stripe">
+        <div class="node-icon">💳</div>
+        <div class="node-name">Stripe</div>
+        <div class="node-desc">
+          Checkout Session<br>
+          500円 決済処理<br>
+          Webhook → GAS
+        </div>
+        <span class="badge done">✅ 設定済</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 矢印 -->
+  <div class="arrow-lane">
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr down">↓</span> 読み書き</div>
+    </div>
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr down">↓</span> メール送信</div>
+    </div>
+    <div class="arrow-group">
+      <div class="arrow-line"><span class="arr planned">↓</span> 自動投稿（予定）</div>
+    </div>
+  </div>
+
+  <!-- ④ データ -->
+  <div class="layer l-data">
+    <div class="layer-label">データ</div>
+    <div class="layer-body">
+      <div class="node sheet main">
+        <div class="node-icon">📊</div>
+        <div class="node-name">Google スプレッドシート</div>
+        <div class="node-desc" style="text-align:left; padding: 4px 0;">
+          📋 <b>namings</b>　名前申込・支払状況<br>
+          📋 <b>contacts</b>　問い合わせ管理<br>
+          📋 <b>news</b>　　　お知らせ投稿
+        </div>
+        <span class="badge done">✅ 稼働中</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ メール -->
+  <div class="layer l-mail">
+    <div class="layer-label">メール</div>
+    <div class="layer-body">
+      <div class="node">
+        <div class="node-icon">📨</div>
+        <div class="node-name">管理者通知メール</div>
+        <div class="node-desc">申込・支払完了・<br>問い合わせを通知</div>
+        <span class="badge done">✅ 設定済</span>
+      </div>
+      <div class="node">
+        <div class="node-icon">💌</div>
+        <div class="node-name">申込者サンクスメール</div>
+        <div class="node-desc">受付確認・内容の控え<br>名前申込 / 問い合わせ</div>
+        <span class="badge done">✅ 実装済</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ SNS -->
+  <div class="arrow-lane">
+    <div class="divider">── SNS 連携（構築予定）──</div>
+  </div>
+
+  <div class="layer l-sns">
+    <div class="layer-label">SNS</div>
+    <div class="layer-body" style="flex-direction:column; gap:12px;">
+
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center;">
+        <div class="node meta">
+          <div class="node-icon">🏢</div>
+          <div class="node-name">Meta Business Suite</div>
+          <div class="node-desc">FB / IG / Threads<br>まとめて管理</div>
+          <span class="badge planned">🔧 アカウント作成予定</span>
+        </div>
+        <div class="node x">
+          <div class="node-icon">𝕏</div>
+          <div class="node-name">X (Twitter)</div>
+          <div class="node-desc">X API v2<br>月1500投稿（無料）</div>
+          <span class="badge planned">🔧 アカウント作成予定</span>
+        </div>
+      </div>
+
+      <div class="sns-grid">
+        <div class="sns-node">
+          <div class="node-icon">📘</div>
+          <div class="node-name">Facebook</div>
+          <span class="badge planned">ページ必要</span>
+        </div>
+        <div class="sns-node">
+          <div class="node-icon">📸</div>
+          <div class="node-name">Instagram</div>
+          <span class="badge planned">ビジネスアカウント</span>
+        </div>
+        <div class="sns-node">
+          <div class="node-icon">🧵</div>
+          <div class="node-name">Threads</div>
+          <span class="badge planned">IG連携必須</span>
+        </div>
+        <div class="sns-node">
+          <div class="node-icon">𝕏</div>
+          <div class="node-name">X</div>
+          <span class="badge planned">API申請必要</span>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center;">
+        <div class="node" style="border-color:#EC4899;">
+          <div class="node-icon">🤖</div>
+          <div class="node-name">自動投稿エンジン</div>
+          <div class="node-desc">GAS → 各API or Buffer<br>スケジュール / トリガー投稿</div>
+          <span class="badge future">💡 設計中</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 凡例 -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#D1FAE5;border:1px solid #6EE7B7;"></div> 実装・稼働済</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FEF3C7;border:1px solid #FCD34D;"></div> 設定・構築予定</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F3E8FF;border:1px solid #C4B5FD;"></div> 設計中・今後検討</div>
+</div>
+
+<!-- 注記 -->
+<div class="note">
+  <strong>📌 SNS自動投稿の次のステップ</strong><br>
+  ① Meta Business Suite でFacebook ページ作成 → Instagramをビジネスアカウントに切替 → Threads連携<br>
+  ② X アカウント作成 → 開発者ポータルでAPIキー申請<br>
+  ③ GASに各APIの投稿関数を追加（または Buffer / n8n 経由で一元管理）<br>
+  ④ 投稿トリガーを決定（手動ボタン / スケジュール / 申込連動）
+</div>
+
+</body>
+</html>
