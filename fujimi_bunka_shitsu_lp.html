@@ -2092,7 +2092,6 @@ function submitNaming() {
   var comment = (document.getElementById('f-comment').value || '').trim();
   if (!title || !person || !email) return;
 
-  // 送信ボタンをローディングに
   var submitBtn = document.querySelector('#naming-form .btn-main');
   if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中…'; }
 
@@ -2108,8 +2107,8 @@ function submitNaming() {
   };
 
   if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
-    // GAS 未設定時はデモ表示
-    showPayPayScreen('DEMO_ORDER', 'https://qr.paypay.ne.jp/demo', null);
+    // GAS 未設定時はデモ（Stripe テストページへ）
+    showStripeRedirect('https://buy.stripe.com/test_demo');
     return;
   }
 
@@ -2120,8 +2119,8 @@ function submitNaming() {
   })
   .then(function(r) { return r.json(); })
   .then(function(res) {
-    if (res.success && res.payUrl) {
-      showPayPayScreen(res.orderId, res.payUrl, res.deeplink);
+    if (res.success && res.checkoutUrl) {
+      showStripeRedirect(res.checkoutUrl);
     } else {
       alert('エラーが発生しました。もう一度お試しください。\n' + (res.error || ''));
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '申し込む →'; }
@@ -2133,46 +2132,46 @@ function submitNaming() {
   });
 }
 
-// PayPay 支払い画面を表示
-function showPayPayScreen(orderId, payUrl, deeplink) {
-  var form    = document.getElementById('naming-form');
+// Stripe へのリダイレクト中画面を表示してから遷移
+function showStripeRedirect(checkoutUrl) {
+  var form      = document.getElementById('naming-form');
   var payScreen = document.getElementById('naming-paypay');
   if (form)      form.style.display = 'none';
-  if (!payScreen) return;
-  payScreen.style.display = 'block';
+  if (payScreen) payScreen.style.display = 'block';
 
-  // PayPay アプリで開くボタン
-  var btnApp = document.getElementById('pp-btn-app');
-  var btnWeb = document.getElementById('pp-btn-web');
-  if (btnApp) btnApp.onclick = function() { window.location.href = deeplink || payUrl; };
-  if (btnWeb) btnWeb.onclick = function() { window.open(payUrl, '_blank'); };
-
-  // 支払い確認ポーリング（3秒ごと）
-  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') return;
-  var pollCount = 0;
-  var poll = setInterval(function() {
-    pollCount++;
-    if (pollCount > 100) { clearInterval(poll); return; } // 5分で停止
-    fetch(APPS_SCRIPT_URL + '?type=payStatus&orderId=' + encodeURIComponent(orderId))
-      .then(function(r) { return r.json(); })
-      .then(function(res) {
-        if (res.status === 'paid') {
-          clearInterval(poll);
-          showNamingSuccess();
-        }
-      })
-      .catch(function() {});
-  }, 3000);
+  // 1.5秒後に Stripe へ遷移
+  setTimeout(function() {
+    window.location.href = checkoutUrl;
+  }, 1500);
 }
 
 function showNamingSuccess() {
+  var overlay = document.getElementById('naming-modal');
+  if (overlay) overlay.style.display = 'flex';
+  var form      = document.getElementById('naming-form');
   var payScreen = document.getElementById('naming-paypay');
   var success   = document.getElementById('naming-success');
+  if (form)      form.style.display      = 'none';
   if (payScreen) payScreen.style.display = 'none';
-  if (success)   success.style.display = 'block';
+  if (success)   success.style.display   = 'block';
 }
 
-// ドットアニメーション
+// ページ読み込み時: Stripe からの戻りを検出
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('payment') === 'success') {
+    // URLパラメータをクリアしてから完了画面を表示
+    history.replaceState({}, '', window.location.pathname);
+    window.addEventListener('DOMContentLoaded', function() {
+      showNamingSuccess();
+    });
+  }
+  if (params.get('payment') === 'cancel') {
+    history.replaceState({}, '', window.location.pathname);
+  }
+})();
+
+// ドットアニメーション（リダイレクト中表示用）
 (function() {
   var dots = ['●○○','○●○','○○●'];
   var i = 0;
@@ -2429,23 +2428,17 @@ var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
       <button type="submit" class="form-submit">申請する →</button>
     </form>
 
-    <!-- PayPay 支払い画面 -->
-    <div id="naming-paypay" style="display:none; text-align:center; padding:8px 0;">
-      <div style="font-size:44px; margin-bottom:12px;">📱</div>
-      <h4 style="font-size:20px; font-weight:900; margin-bottom:6px;">PayPayで支払う</h4>
+    <!-- Stripe リダイレクト中画面 -->
+    <div id="naming-paypay" style="display:none; text-align:center; padding:24px 0;">
+      <div style="font-size:44px; margin-bottom:16px;">💳</div>
+      <h4 style="font-size:20px; font-weight:900; margin-bottom:8px;">決済ページへ移動中…</h4>
       <p style="font-size:28px; font-weight:900; color:var(--pink); margin:12px 0;">¥500</p>
-      <p style="font-size:13px; opacity:0.6; line-height:1.8; margin-bottom:24px;">
-        支払いが完了するとこの画面が自動で切り替わります。<br>
-        ブラウザを閉じないでください。
+      <p style="font-size:13px; opacity:0.6; line-height:1.8;">
+        Stripeの安全な決済ページへ移動します。<br>
+        カード・Apple Pay・Google Pay が使えます。
       </p>
-      <button id="pp-btn-app" class="btn-main" style="width:100%; margin-bottom:12px; background:#e00; border-color:#e00; color:white; box-shadow:none;">
-        PayPayアプリで支払う
-      </button>
-      <button id="pp-btn-web" class="btn-main" style="width:100%; background:white; color:var(--dark); border-color:var(--dark); box-shadow:none; font-size:14px;">
-        ブラウザで支払う
-      </button>
-      <p style="font-size:11px; opacity:0.4; margin-top:20px;">
-        支払い確認中… <span id="pp-dots">●○○</span>
+      <p style="font-size:12px; opacity:0.35; margin-top:24px;">
+        <span id="pp-dots">●○○</span> しばらくお待ちください
       </p>
     </div>
 
