@@ -293,38 +293,29 @@
   .who-title {
     font-size: clamp(20px, 5vw, 34px);
     font-weight: 900;
-    margin-bottom: 36px;
+    margin-bottom: 16px;
     color: var(--dark);
   }
 
-  .who-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .who-card {
-    background: white;
+  .who-illust-wrap {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    border-radius: 20px;
+    overflow: hidden;
     border: 2.5px solid var(--dark);
-    border-radius: 16px;
-    padding: 18px 24px;
-    text-align: center;
-    min-width: 130px;
-    box-shadow: 4px 4px 0 var(--dark);
-    transition: transform 0.15s, box-shadow 0.15s;
-    cursor: default;
-  }
-
-  .who-card:hover {
-    transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 var(--dark);
+    line-height: 0;
   }
 
-  .who-icon { font-size: 32px; margin-bottom: 6px; }
-  .who-label { font-size: 14px; font-weight: 700; }
+  .who-illust-wrap svg { width: 100%; height: auto; display: block; }
+
+  .who-desc {
+    font-size: 15px;
+    line-height: 2;
+    max-width: 500px;
+    margin: 0 auto;
+    opacity: 0.8;
+  }
 
   /* ===== SNS TEASER ===== */
   .sns {
@@ -1959,41 +1950,209 @@
 <!-- WHO -->
 <section class="who">
   <p class="section-label" style="color:var(--dark); opacity:0.5;">Who</p>
-  <h2 class="who-title">みんな大歓迎！</h2>
-  <div class="who-grid">
-    <div class="who-card">
-      <div class="who-icon">👶</div>
-      <div class="who-label">子ども</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">🧑</div>
-      <div class="who-label">若者</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">👩</div>
-      <div class="who-label">大人</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">👴</div>
-      <div class="who-label">お年寄り</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">🎨</div>
-      <div class="who-label">アーティスト</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">🌱</div>
-      <div class="who-label">アート初心者</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">🗾</div>
-      <div class="who-label">地元の方</div>
-    </div>
-    <div class="who-card">
-      <div class="who-icon">✈️</div>
-      <div class="who-label">旅行者</div>
-    </div>
+  <div class="who-illust-wrap">
+    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="who-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFF5CC"/>
+          <stop offset="100%" stop-color="#FFE8A0"/>
+        </linearGradient>
+      </defs>
+      <!-- 背景 -->
+      <rect width="720" height="280" fill="url(#who-sky)"/>
+      <!-- 太陽 -->
+      <circle cx="660" cy="52" r="38" fill="#FFE135" opacity="0.75"/>
+      <!-- 雲 -->
+      <g fill="white" opacity="0.82">
+        <ellipse cx="130" cy="50" rx="52" ry="22"/><ellipse cx="155" cy="40" rx="36" ry="20"/><ellipse cx="105" cy="46" rx="28" ry="16"/>
+      </g>
+      <g fill="white" opacity="0.65">
+        <ellipse cx="510" cy="62" rx="40" ry="17"/><ellipse cx="538" cy="53" rx="28" ry="15"/>
+      </g>
+      <!-- 地面 -->
+      <rect x="0" y="248" width="720" height="32" fill="#6BCB77"/>
+      <path d="M0,248 Q180,240 360,248 Q540,256 720,248" fill="#5AB866"/>
+      <!-- 草 -->
+      <g stroke="#48A055" stroke-width="2.5" fill="none" stroke-linecap="round">
+        <path d="M42,248 Q46,236 50,248"/><path d="M52,248 Q56,238 60,248"/>
+        <path d="M320,248 Q324,236 328,248"/><path d="M332,248 Q336,240 340,248"/>
+        <path d="M665,248 Q669,237 673,248"/><path d="M677,248 Q681,239 685,248"/>
+      </g>
+      <!-- 花 -->
+      <circle cx="72" cy="248" r="5" fill="#FF6B9D"/><circle cx="70" cy="243" r="3" fill="#FFE135"/>
+      <circle cx="418" cy="248" r="5" fill="#4ECDC4"/><circle cx="416" cy="243" r="3" fill="white"/>
+      <circle cx="645" cy="248" r="5" fill="#A855F7"/><circle cx="643" cy="243" r="3" fill="white"/>
+
+      <!-- ===== 子ども (x=88) ===== -->
+      <g transform="translate(88,248)">
+        <rect x="-12" y="-36" width="11" height="36" rx="5" fill="#4ECDC4"/>
+        <rect x="1" y="-36" width="11" height="36" rx="5" fill="#4ECDC4"/>
+        <ellipse cx="-6" cy="-1" rx="10" ry="4.5" fill="#333"/>
+        <ellipse cx="7" cy="-1" rx="10" ry="4.5" fill="#333"/>
+        <rect x="-18" y="-84" width="36" height="48" rx="11" fill="#FF8C42"/>
+        <!-- 両手バンザイ -->
+        <rect x="-38" y="-86" width="22" height="10" rx="5" fill="#FF8C42" transform="rotate(-45,-27,-81)"/>
+        <rect x="16" y="-86" width="22" height="10" rx="5" fill="#FF8C42" transform="rotate(45,27,-81)"/>
+        <circle cx="0" cy="-104" r="21" fill="#FFCBA4"/>
+        <!-- ふわふわ黄色い髪 -->
+        <circle cx="0" cy="-122" r="14" fill="#FFE135"/>
+        <circle cx="-13" cy="-117" r="8" fill="#FFE135"/>
+        <circle cx="13" cy="-117" r="8" fill="#FFE135"/>
+        <circle cx="-6" cy="-125" r="7" fill="#FFE135"/>
+        <circle cx="6" cy="-125" r="7" fill="#FFE135"/>
+        <circle cx="-7" cy="-106" r="3" fill="#333"/>
+        <circle cx="7" cy="-106" r="3" fill="#333"/>
+        <circle cx="-6" cy="-108" r="1" fill="white"/>
+        <circle cx="8" cy="-108" r="1" fill="white"/>
+        <path d="M-7,-97 Q0,-91 7,-97" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="-12" cy="-101" r="5" fill="#FFB7B7" opacity="0.55"/>
+        <circle cx="12" cy="-101" r="5" fill="#FFB7B7" opacity="0.55"/>
+      </g>
+
+      <!-- ===== お年寄り (x=195) ===== -->
+      <g transform="translate(195,248)">
+        <line x1="24" y1="0" x2="20" y2="-88" stroke="#8B6914" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="24" cy="-2" rx="7" ry="4" fill="#8B6914"/>
+        <rect x="-14" y="-44" width="12" height="44" rx="6" fill="#8B7355"/>
+        <rect x="2" y="-44" width="12" height="44" rx="6" fill="#8B7355"/>
+        <ellipse cx="-8" cy="-1" rx="11" ry="5" fill="#333"/>
+        <ellipse cx="8" cy="-1" rx="11" ry="5" fill="#333"/>
+        <rect x="-22" y="-100" width="44" height="56" rx="12" fill="#A0875A"/>
+        <rect x="-44" y="-90" width="24" height="12" rx="6" fill="#A0875A"/>
+        <rect x="20" y="-90" width="28" height="12" rx="6" fill="#A0875A"/>
+        <circle cx="0" cy="-122" r="22" fill="#FFCBA4"/>
+        <!-- 白髪 -->
+        <ellipse cx="0" cy="-140" rx="19" ry="11" fill="#E0E0E0"/>
+        <ellipse cx="-15" cy="-133" rx="7" ry="9" fill="#E0E0E0"/>
+        <ellipse cx="15" cy="-133" rx="7" ry="9" fill="#E0E0E0"/>
+        <path d="M-10,-122 Q-7,-119 -4,-122" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M4,-122 Q7,-119 10,-122" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M-7,-113 Q0,-107 7,-113" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- ===== 若い女性 (x=308) ===== -->
+      <g transform="translate(308,248)">
+        <path d="M-22,-44 L-30,0 L30,0 L22,-44 Z" fill="#FF6B9D"/>
+        <ellipse cx="-14" cy="-1" rx="10" ry="5" fill="#333"/>
+        <ellipse cx="14" cy="-1" rx="10" ry="5" fill="#333"/>
+        <rect x="-22" y="-100" width="44" height="56" rx="12" fill="#FF6B9D"/>
+        <rect x="-44" y="-92" width="24" height="12" rx="6" fill="#FFCBA4"/>
+        <!-- 手を振る右腕 -->
+        <rect x="22" y="-100" width="12" height="32" rx="6" fill="#FF6B9D" transform="rotate(-30,28,-84)"/>
+        <circle cx="44" cy="-108" r="9" fill="#FFCBA4"/>
+        <circle cx="0" cy="-122" r="22" fill="#FFCBA4"/>
+        <!-- ピンクのボブヘア -->
+        <ellipse cx="0" cy="-140" rx="20" ry="12" fill="#FF6B9D"/>
+        <ellipse cx="-18" cy="-132" rx="8" ry="12" fill="#FF6B9D"/>
+        <ellipse cx="18" cy="-132" rx="8" ry="12" fill="#FF6B9D"/>
+        <circle cx="-7" cy="-124" r="3.5" fill="#333"/>
+        <circle cx="7" cy="-124" r="3.5" fill="#333"/>
+        <circle cx="-6" cy="-126" r="1.2" fill="white"/>
+        <circle cx="8" cy="-126" r="1.2" fill="white"/>
+        <path d="M-7,-115 Q0,-109 7,-115" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="-12" cy="-118" r="5" fill="#FFB7B7" opacity="0.55"/>
+        <circle cx="12" cy="-118" r="5" fill="#FFB7B7" opacity="0.55"/>
+      </g>
+
+      <!-- ===== アーティスト (x=418, 中央) ===== -->
+      <g transform="translate(418,248)">
+        <rect x="-14" y="-44" width="12" height="44" rx="6" fill="#1a1a1a"/>
+        <rect x="2" y="-44" width="12" height="44" rx="6" fill="#1a1a1a"/>
+        <ellipse cx="-8" cy="-1" rx="12" ry="5" fill="#1a1a1a"/>
+        <ellipse cx="8" cy="-1" rx="12" ry="5" fill="#1a1a1a"/>
+        <rect x="-22" y="-100" width="44" height="56" rx="12" fill="#A855F7"/>
+        <!-- エプロン -->
+        <path d="M-15,-100 L-17,-44 L17,-44 L15,-100 Z" fill="#F0E8D0" opacity="0.88"/>
+        <!-- 絵の具スプラッター -->
+        <circle cx="-5" cy="-68" r="3.5" fill="#FF6B9D" opacity="0.9"/>
+        <circle cx="6" cy="-55" r="2.5" fill="#4ECDC4" opacity="0.9"/>
+        <circle cx="-1" cy="-50" r="3" fill="#FFE135" opacity="0.9"/>
+        <circle cx="8" cy="-73" r="2" fill="#A855F7" opacity="0.9"/>
+        <!-- パレットを持つ左腕 -->
+        <rect x="-46" y="-92" width="26" height="12" rx="6" fill="#A855F7"/>
+        <ellipse cx="-54" cy="-90" rx="16" ry="12" fill="#F5E6C8"/>
+        <circle cx="-58" cy="-96" r="4" fill="#FF6B9D"/>
+        <circle cx="-48" cy="-98" r="3.5" fill="#FFE135"/>
+        <circle cx="-42" cy="-93" r="3.5" fill="#4ECDC4"/>
+        <circle cx="-46" cy="-84" r="3" fill="#A855F7"/>
+        <circle cx="-57" cy="-84" r="3" fill="#FF8C42"/>
+        <!-- 筆を持つ右腕 -->
+        <rect x="22" y="-96" width="12" height="34" rx="6" fill="#A855F7" transform="rotate(25,28,-79)"/>
+        <ellipse cx="38" cy="-70" rx="4" ry="8" fill="#1a1a1a"/>
+        <circle cx="0" cy="-122" r="22" fill="#FFCBA4"/>
+        <!-- ベレー帽 -->
+        <ellipse cx="0" cy="-140" rx="21" ry="9" fill="#9040E0"/>
+        <ellipse cx="8" cy="-138" rx="22" ry="7" fill="#A855F7"/>
+        <circle cx="12" cy="-142" r="4" fill="#9040E0"/>
+        <circle cx="-7" cy="-123" r="3.5" fill="#333"/>
+        <circle cx="7" cy="-123" r="3.5" fill="#333"/>
+        <circle cx="-6" cy="-125" r="1.2" fill="white"/>
+        <circle cx="8" cy="-125" r="1.2" fill="white"/>
+        <path d="M-5,-113 Q0,-108 5,-113" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- ===== 若い男性 (x=525) ===== -->
+      <g transform="translate(525,248)">
+        <rect x="-14" y="-44" width="12" height="44" rx="6" fill="#3A6EA5"/>
+        <rect x="2" y="-44" width="12" height="44" rx="6" fill="#3A6EA5"/>
+        <ellipse cx="-8" cy="-1" rx="12" ry="5" fill="#333"/>
+        <ellipse cx="8" cy="-1" rx="12" ry="5" fill="#333"/>
+        <rect x="-22" y="-100" width="44" height="56" rx="12" fill="#4ECDC4"/>
+        <path d="M-6,-100 L0,-72 L6,-100" fill="white" opacity="0.5"/>
+        <rect x="-46" y="-92" width="26" height="12" rx="6" fill="#4ECDC4"/>
+        <rect x="22" y="-92" width="12" height="32" rx="6" fill="#4ECDC4"/>
+        <circle cx="0" cy="-122" r="22" fill="#FFCBA4"/>
+        <!-- ボサボサ黒髪 -->
+        <ellipse cx="0" cy="-140" rx="20" ry="11" fill="#2A1A0A"/>
+        <ellipse cx="-15" cy="-133" rx="7" ry="10" fill="#2A1A0A"/>
+        <ellipse cx="15" cy="-133" rx="7" ry="10" fill="#2A1A0A"/>
+        <ellipse cx="-4" cy="-143" rx="8" ry="6" fill="#2A1A0A" transform="rotate(-20,-4,-143)"/>
+        <ellipse cx="8" cy="-142" rx="7" ry="5" fill="#2A1A0A" transform="rotate(15,8,-142)"/>
+        <circle cx="-7" cy="-123" r="3" fill="#333"/>
+        <circle cx="7" cy="-123" r="3" fill="#333"/>
+        <circle cx="-6" cy="-125" r="1" fill="white"/>
+        <circle cx="8" cy="-125" r="1" fill="white"/>
+        <path d="M-6,-113 Q0,-108 6,-113" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- ===== 旅行者 (x=630) ===== -->
+      <g transform="translate(630,248)">
+        <!-- リュック -->
+        <rect x="16" y="-98" width="26" height="42" rx="8" fill="#FF8C42"/>
+        <rect x="19" y="-90" width="20" height="28" rx="4" fill="#E07030" opacity="0.65"/>
+        <path d="M16,-95 Q10,-86 15,-44" stroke="#E07030" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <rect x="-14" y="-44" width="12" height="44" rx="6" fill="#8B6914"/>
+        <rect x="2" y="-44" width="12" height="44" rx="6" fill="#8B6914"/>
+        <ellipse cx="-8" cy="-1" rx="12" ry="5" fill="#555"/>
+        <ellipse cx="8" cy="-1" rx="12" ry="5" fill="#555"/>
+        <rect x="-22" y="-100" width="44" height="56" rx="12" fill="#FFE135"/>
+        <rect x="-46" y="-92" width="26" height="12" rx="6" fill="#FFCBA4"/>
+        <rect x="22" y="-92" width="26" height="12" rx="6" fill="#FFCBA4"/>
+        <!-- カメラ -->
+        <rect x="46" y="-94" width="18" height="14" rx="4" fill="#333"/>
+        <circle cx="55" cy="-88" r="4" fill="#888"/>
+        <circle cx="55" cy="-88" r="2" fill="#333"/>
+        <circle cx="0" cy="-122" r="22" fill="#FFCBA4"/>
+        <!-- 麦わら帽子 -->
+        <rect x="-26" y="-140" width="52" height="10" rx="5" fill="#C8A020"/>
+        <ellipse cx="0" cy="-142" rx="18" ry="14" fill="#D4A830"/>
+        <rect x="-18" y="-140" width="36" height="5" fill="#8B4513" opacity="0.65"/>
+        <circle cx="-7" cy="-123" r="3.5" fill="#333"/>
+        <circle cx="7" cy="-123" r="3.5" fill="#333"/>
+        <circle cx="-6" cy="-125" r="1.2" fill="white"/>
+        <circle cx="8" cy="-125" r="1.2" fill="white"/>
+        <path d="M-8,-113 Q0,-106 8,-113" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="-12" cy="-117" r="5" fill="#FFB7B7" opacity="0.55"/>
+        <circle cx="12" cy="-117" r="5" fill="#FFB7B7" opacity="0.55"/>
+      </g>
+    </svg>
   </div>
+  <h2 class="who-title">みんな大歓迎！</h2>
+  <p class="who-desc">
+    子どもも、お年寄りも、アーティストも初心者も、地元の方も旅行者も。<br>
+    アートを「見るだけ」でも、名前をつけても。<br>
+    <strong>ここには、全員のための席があります。</strong>
+  </p>
 </section>
 
 <!-- ARTISTS -->
