@@ -3219,6 +3219,11 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
     if (child.id === 'tone-panel' || child.id === 'ab-switcher' || child.id === 'font-row' || child.id === 'recruit-banner') break;
     toneWrapper.appendChild(child);
   }
+  // position:fixed 要素は filter の影響を受けないよう body 直下に戻す
+  ['site-header', 'nav-drawer', 'naming-modal'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.parentNode === toneWrapper) document.body.appendChild(el);
+  });
 
   function applyTone() {
     var sat = document.getElementById('sl-sat').value;
@@ -3229,7 +3234,8 @@ var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrltgZ4A0cG6AqxI
     document.getElementById('val-bri').textContent = bri + '%';
     document.getElementById('val-con').textContent = con + '%';
     document.getElementById('val-hue').textContent = (hue > 0 ? '+' : '') + hue + '°';
-    toneWrapper.style.filter =
+    var isDefault = sat==100 && bri==100 && con==100 && hue==0;
+    toneWrapper.style.filter = isDefault ? 'none' :
       'saturate(' + sat + '%) brightness(' + bri + '%) contrast(' + con + '%) hue-rotate(' + hue + 'deg)';
     localStorage.setItem('tone', JSON.stringify({sat:sat, bri:bri, con:con, hue:hue}));
   }
