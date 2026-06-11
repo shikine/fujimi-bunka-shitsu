@@ -1219,6 +1219,133 @@
     .site-nav { display: none; }
     .nav-burger { display: flex; }
   }
+
+  /* =============================================
+     SP レスポンシブ調整 (max-width: 480px)
+  ============================================= */
+  @media (max-width: 480px) {
+
+    /* ── HERO ── */
+    .hero {
+      padding: 88px 16px 56px;
+      min-height: 100svh;
+    }
+    .hero-tag { font-size: 10px; padding: 5px 12px; margin-bottom: 18px; }
+    .hero-sub { font-size: 14px; margin-top: 16px; }
+    .hero-badges {
+      gap: 6px;
+      margin-top: 20px;
+    }
+    .badge { font-size: 11px; padding: 6px 12px; }
+    .hero-cta { margin-top: 28px; }
+    .btn-main { font-size: 15px; padding: 14px 28px; }
+
+    /* ── CONCEPT ── */
+    .concept { padding: 56px 16px; }
+    .concept-body { font-size: 14px; margin-top: 20px; }
+
+    /* ── MYSTERY (アーティスト) ── */
+    .mystery { padding: 56px 16px; }
+    .mystery-inner { max-width: 100%; }
+    .artist-card { padding: 16px 16px; gap: 12px; }
+    .artist-num { font-size: 10px; min-width: 32px; }
+    .artist-body h3 { font-size: 14px; }
+    .artist-body p { font-size: 13px; }
+    .artist-hint { font-size: 11px; }
+
+    /* ── NAMING ── */
+    .naming { padding: 56px 16px; }
+    .naming-inner { max-width: 100%; }
+    .naming-sub { font-size: 14px; }
+    .step { padding: 16px 14px; gap: 12px; }
+    .step-num { font-size: 28px; min-width: 36px; }
+    .step-content h3 { font-size: 15px; }
+    .step-content p { font-size: 13px; }
+
+    /* ── WHO ── */
+    .who { padding: 56px 16px; }
+    .who-illust-wrap { border-radius: 14px; box-shadow: 4px 4px 0 var(--dark); }
+    .who-desc { font-size: 14px; }
+
+    /* ── SNS ── */
+    .sns { padding: 56px 16px; }
+    .sns-body { font-size: 14px; }
+    .sns-icons { gap: 10px; }
+    .sns-btn { font-size: 13px; padding: 10px 18px; }
+
+    /* ── ARTISTS ── */
+    .artists { padding: 56px 16px 40px; }
+    .artists-inner { max-width: 100%; }
+    .artists-tabs { gap: 6px; flex-wrap: wrap; }
+    .tab-btn { font-size: 12px; padding: 6px 12px; }
+    .artists-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .artist-card { padding: 14px 12px; }
+    .artist-avatar { width: 44px; height: 44px; font-size: 20px; }
+    .artist-name { font-size: 13px; }
+    .artist-note { font-size: 12px; }
+
+    /* ── WORKS ── */
+    .works { padding: 0 0 40px; }
+    .works-header { padding: 40px 16px 16px; }
+    .works-sub { font-size: 14px; }
+    .work-card { width: 220px; }
+    .work-thumb { height: 160px; }
+    .work-info { padding: 12px 12px 14px; }
+    .work-no-name { font-size: 11px; }
+    .work-btn { font-size: 12px; padding: 9px 14px; }
+
+    /* ── NEWS ── */
+    .news { padding: 56px 16px; }
+    .news-inner { max-width: 100%; }
+    .news-item { padding: 14px 0; }
+    .news-text { font-size: 14px; }
+
+    /* ── VENUE ── */
+    .venue { padding: 56px 16px; }
+    .venue-inner { max-width: 100%; }
+    .venue-card { padding: 20px 16px; }
+    .venue-map { margin: 16px 0; border-radius: 10px; }
+    .venue-map iframe { height: 200px; }
+
+    /* ── INFO ── */
+    .info { padding: 56px 16px; }
+    .info-inner { max-width: 100%; }
+    .info-table td { padding: 12px 8px; font-size: 14px; }
+    .info-table td:first-child { width: 80px; font-size: 13px; }
+
+    /* ── CONTACT ── */
+    .contact { padding: 56px 16px 72px; }
+    .contact-inner { max-width: 100%; }
+    .contact-card { padding: 20px 16px; border-radius: 16px; }
+    .contact-sub { font-size: 14px; }
+    .contact-textarea { min-height: 100px; }
+    .contact-submit { font-size: 15px; padding: 14px; }
+
+    /* ── FOOTER ── */
+    footer { padding: 36px 16px; }
+    footer .footer-name { font-size: 18px; }
+
+    /* ── FLOATING UI ── */
+    #font-row {
+      bottom: 52px;
+      right: 12px;
+      padding: 5px 8px;
+    }
+    .font-btn { font-size: 10px; padding: 3px 7px; }
+    #ab-switcher { bottom: 12px; right: 12px; padding: 5px 7px; font-size: 9px; }
+    .ab-btn { font-size: 11px; padding: 3px 9px; }
+    #recruit-banner { bottom: 106px; right: 12px; }
+    .recruit-inner { padding: 8px 12px 8px 10px; gap: 6px; border-radius: 12px; }
+    .recruit-icon { font-size: 16px; }
+    .recruit-title { font-size: 12px; }
+    .recruit-label { font-size: 8px; }
+
+    /* ── 各セクションラベル ── */
+    .section-label { font-size: 10px; }
+  }
   /* ページ先頭へのオフセット補正 */
   .hero, section[id] {
     scroll-margin-top: 56px;
